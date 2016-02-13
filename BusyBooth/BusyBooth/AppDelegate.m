@@ -10,7 +10,6 @@
 #import "LoginViewController.h"
 #import "MasterTableViewController.h"
 #import "MainViewController.h"
-#import "SWRevealViewController.h"
 #import "SignUpViewController.h"
 
 @interface AppDelegate ()

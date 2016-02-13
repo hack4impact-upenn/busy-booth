@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6B7DF8851C6F77A100D43104 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B7DF8841C6F77A100D43104 /* Constants.m */; };
+		6B7DF8891C6FAA0400D43104 /* PollingPlaceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B7DF8881C6FAA0400D43104 /* PollingPlaceViewController.m */; };
 		6B8DAC391C68792700AA6ED3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B8DAC381C68792700AA6ED3 /* main.m */; };
 		6B8DAC3C1C68792700AA6ED3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B8DAC3B1C68792700AA6ED3 /* AppDelegate.m */; };
 		6B8DAC441C68792700AA6ED3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6B8DAC431C68792700AA6ED3 /* Assets.xcassets */; };
@@ -25,6 +26,8 @@
 		6B7DF8831C6F77A100D43104 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		6B7DF8841C6F77A100D43104 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		6B7DF8861C6F7CF100D43104 /* BusyBooth-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BusyBooth-Prefix.pch"; sourceTree = "<group>"; };
+		6B7DF8871C6FAA0400D43104 /* PollingPlaceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PollingPlaceViewController.h; sourceTree = "<group>"; };
+		6B7DF8881C6FAA0400D43104 /* PollingPlaceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PollingPlaceViewController.m; sourceTree = "<group>"; };
 		6B8DAC341C68792700AA6ED3 /* BusyBooth.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BusyBooth.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B8DAC381C68792700AA6ED3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6B8DAC3A1C68792700AA6ED3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -92,12 +95,14 @@
 				6B8DAC3B1C68792700AA6ED3 /* AppDelegate.m */,
 				6B8DAC511C6879A400AA6ED3 /* LoginViewController.h */,
 				6B8DAC521C6879A400AA6ED3 /* LoginViewController.m */,
-				6B8DAC531C6879A400AA6ED3 /* MainViewController.h */,
-				6B8DAC541C6879A400AA6ED3 /* MainViewController.m */,
-				6B8DAC551C6879A400AA6ED3 /* MasterTableViewController.h */,
-				6B8DAC561C6879A400AA6ED3 /* MasterTableViewController.m */,
 				6B8DAC571C6879A400AA6ED3 /* SignUpViewController.h */,
 				6B8DAC581C6879A500AA6ED3 /* SignUpViewController.m */,
+				6B8DAC551C6879A400AA6ED3 /* MasterTableViewController.h */,
+				6B8DAC561C6879A400AA6ED3 /* MasterTableViewController.m */,
+				6B8DAC531C6879A400AA6ED3 /* MainViewController.h */,
+				6B8DAC541C6879A400AA6ED3 /* MainViewController.m */,
+				6B7DF8871C6FAA0400D43104 /* PollingPlaceViewController.h */,
+				6B7DF8881C6FAA0400D43104 /* PollingPlaceViewController.m */,
 				6B8DAC431C68792700AA6ED3 /* Assets.xcassets */,
 				6B8DAC481C68792700AA6ED3 /* Info.plist */,
 				6B8DAC371C68792700AA6ED3 /* Supporting Files */,
@@ -254,6 +259,7 @@
 				6B8DAC501C68798F00AA6ED3 /* SWRevealViewController.m in Sources */,
 				6B8DAC5B1C6879A500AA6ED3 /* MasterTableViewController.m in Sources */,
 				6B8DAC5C1C6879A500AA6ED3 /* SignUpViewController.m in Sources */,
+				6B7DF8891C6FAA0400D43104 /* PollingPlaceViewController.m in Sources */,
 				6B8DAC591C6879A500AA6ED3 /* LoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

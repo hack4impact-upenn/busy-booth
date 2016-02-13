@@ -17,4 +17,5 @@
     #import "Constants.h"
     #import "Parse/Parse.h"
     #import "SVProgressHUD/SVProgressHUD.h"
+    #import "SWRevealViewController.h"
 #endif
