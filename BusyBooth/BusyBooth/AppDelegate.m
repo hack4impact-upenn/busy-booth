@@ -59,7 +59,7 @@
 - (void)presentLoginViewController {
     
     LoginViewController *loginVC = [[LoginViewController alloc] init];
-    [self.navController pushViewController:loginVC animated:NO];
+    [self.navController pushViewController:loginVC animated:YES];
 }
 
 - (void)presentSignUpViewController {

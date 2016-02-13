@@ -24,13 +24,13 @@
     CGFloat width = self.view.frame.size.width;
     CGFloat height = self.view.frame.size.height;
     
-    UIButton *loginButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [loginButton setFrame:CGRectMake(0, 0, 50, 30)];
-    [loginButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [loginButton setTitle:@"Login" forState:UIControlStateNormal];
-    [loginButton setCenter:CGPointMake(width/2 - 30, height*5/7)];
-    [loginButton addTarget:self action:@selector(login) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:loginButton];
+    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [backButton setFrame:CGRectMake(0, 0, 50, 30)];
+    [backButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [backButton setTitle:@"Back" forState:UIControlStateNormal];
+    [backButton setCenter:CGPointMake(width/2 - 30, height*5/7)];
+    [backButton addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:backButton];
     
     UIButton *signUpButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [signUpButton setFrame:CGRectMake(0, 0, 50, 30)];
@@ -43,21 +43,25 @@
     self.usernameField = [[UITextField alloc] init];
     [self.usernameField setFrame:CGRectMake(0, 0, 240, 30)];
     [self.usernameField setPlaceholder:@"Username"];
-    [self.usernameField setCenter:CGPointMake(width/2, height*4/7)];
+    [self.usernameField setCenter:CGPointMake(width/2, height*2/7)];
     [self.usernameField setBorderStyle:UITextBorderStyleRoundedRect];
     [self.view addSubview:self.usernameField];
     
     self.passwordField = [[UITextField alloc] init];
     [self.passwordField setFrame:CGRectMake(0, 0, 240, 30)];
     [self.passwordField setPlaceholder:@"Password"];
-    [self.passwordField setCenter:CGPointMake(width/2, height*9/14)];
+    [self.passwordField setCenter:CGPointMake(width/2, height*5/14)];
     [self.passwordField setBorderStyle:UITextBorderStyleRoundedRect];
     [self.passwordField setSecureTextEntry:YES];
     [self.view addSubview:self.passwordField];
 
 }
 
-- (IBAction)signupPressed:(id)sender {
+- (void) back {
+        [(AppDelegate *)[[UIApplication sharedApplication] delegate] presentLoginViewController];
+}
+
+- (void)signup {
     
     PFUser *user = [PFUser user];
     user.username = self.usernameField.text;
