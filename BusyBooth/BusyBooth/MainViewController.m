@@ -9,8 +9,6 @@
 #import "MainViewController.h"
 #import "SWRevealViewController.h"
 
-#import <Parse/Parse.h>
-
 @interface MainViewController ()
 
 @end
@@ -30,6 +28,7 @@
                                                                         target:revealController
                                                                         action:@selector(revealToggle:)];
     self.navigationItem.leftBarButtonItem = revealButtonItem;
+    self.navigationController.navigationBar.backgroundColor = mainColor;
 }
 
 

@@ -13,8 +13,6 @@
 #import "SWRevealViewController.h"
 #import "SignUpViewController.h"
 
-#import <Parse/Parse.h>
-
 @interface AppDelegate ()
 
 @property (nonatomic, strong) UINavigationController *navController;
@@ -67,7 +65,7 @@
 - (void)presentSignUpViewController {
     
     SignUpViewController *signupVC = [[SignUpViewController alloc] init];
-    [self.navController pushViewController:signupVC animated:NO];
+    [self.navController pushViewController:signupVC animated:YES];
 }
 
 - (void) logOut {
