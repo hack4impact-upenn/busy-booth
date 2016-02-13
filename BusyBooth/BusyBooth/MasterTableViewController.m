@@ -11,12 +11,14 @@
 
 #import "MainViewController.h"
 #import "PollingPlaceViewController.h"
+#import "PastPollingViewController.h"
 
 @interface MasterTableViewController () 
 
 typedef NS_ENUM (NSUInteger, MasterTableViewRowType) {
     MasterTableViewRowTypeHome,
     MasterTableViewPollingPlace,
+    MasterTableViewPastPolling,
     MasterTableViewRowTypeLogOut,
     MasterTableViewRowTypeCount,
 };
@@ -54,8 +56,9 @@ typedef NS_ENUM (NSUInteger, MasterTableViewRowType) {
     
     MainViewController *mainVC = [[MainViewController alloc] init];
     PollingPlaceViewController *pollVC = [[PollingPlaceViewController alloc] init];
+    PastPollingViewController *pastVC = [[PastPollingViewController alloc] init];
     
-    self.viewControllerArray = @[mainVC, pollVC];
+    self.viewControllerArray = @[mainVC, pollVC, pastVC];
     
 //    self.iconArray = @[@"Micro-25.png", @"Folder-25.png", @"Search-25.png", @"Settings-25.png", @"Exit-25.png"];
     
