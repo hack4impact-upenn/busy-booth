@@ -39,6 +39,10 @@
     [Parse setApplicationId:@"kkDmU3bzswvfLcOd1GI0lVUtZxKXOfWxblkTFLuB"
                   clientKey:@"mXkHvFn6lUv23MBNgoBQTDyXn9lpAoseEQjThRKu"];
     
+    if([[[NSUserDefaults standardUserDefaults] objectForKey:@"loggedin"] isEqualToString:@"true"]) {
+        [self presentSWController];
+    }
+    
     return YES;
 }
 
@@ -69,6 +73,7 @@
 
 - (void) logOut {
     [self presentLoginViewController];
+    [[NSUserDefaults standardUserDefaults] setObject:@"false" forKey:@"loggedin"];
 }
 
 @end
