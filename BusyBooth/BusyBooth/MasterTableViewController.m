@@ -7,17 +7,18 @@
 //
 
 #import "MasterTableViewController.h"
-#import "SWRevealViewController.h"
-
 #import "AppDelegate.h"
+
+#import "MainViewController.h"
+#import "PollingPlaceViewController.h"
+#import "PastPollingViewController.h"
 
 @interface MasterTableViewController () 
 
 typedef NS_ENUM (NSUInteger, MasterTableViewRowType) {
     MasterTableViewRowTypeHome,
-    MasterTableViewRowTypeRecents,
-    MasterTableViewRowTypeSearch,
-    MasterTableViewRowTypeSettings,
+    MasterTableViewPollingPlace,
+    MasterTableViewPastPolling,
     MasterTableViewRowTypeLogOut,
     MasterTableViewRowTypeCount,
 };
@@ -50,13 +51,15 @@ typedef NS_ENUM (NSUInteger, MasterTableViewRowType) {
     self.tableView.tableFooterView = [UIView new];
     
     self.tableView.bounces = NO;
-//    
-//    MicrophoneViewController *microphoneVC = [[MicrophoneViewController alloc] init];
-//    PastResultsTableViewController *pastResultsVC = [[PastResultsTableViewController alloc] init];
-//    SettingsTableViewController *settingsVC = [[SettingsTableViewController alloc] init];
-//    FileSearchTableViewController *searchVC = [[FileSearchTableViewController alloc] init];
     
-//    self.viewControllerArray = @[microphoneVC, pastResultsVC, searchVC, settingsVC];
+    self.navigationController.navigationBar.barTintColor = mainColor;
+    
+    MainViewController *mainVC = [[MainViewController alloc] init];
+    PollingPlaceViewController *pollVC = [[PollingPlaceViewController alloc] init];
+    PastPollingViewController *pastVC = [[PastPollingViewController alloc] init];
+    
+    self.viewControllerArray = @[mainVC, pollVC, pastVC];
+    
 //    self.iconArray = @[@"Micro-25.png", @"Folder-25.png", @"Search-25.png", @"Settings-25.png", @"Exit-25.png"];
     
 }

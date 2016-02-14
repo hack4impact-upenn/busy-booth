@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6B7DF8851C6F77A100D43104 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B7DF8841C6F77A100D43104 /* Constants.m */; };
+		6B7DF8891C6FAA0400D43104 /* PollingPlaceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B7DF8881C6FAA0400D43104 /* PollingPlaceViewController.m */; };
+		6B7DF88C1C6FAD2700D43104 /* PastPollingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B7DF88B1C6FAD2700D43104 /* PastPollingViewController.m */; };
 		6B8DAC391C68792700AA6ED3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B8DAC381C68792700AA6ED3 /* main.m */; };
 		6B8DAC3C1C68792700AA6ED3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B8DAC3B1C68792700AA6ED3 /* AppDelegate.m */; };
 		6B8DAC441C68792700AA6ED3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6B8DAC431C68792700AA6ED3 /* Assets.xcassets */; };
@@ -21,6 +24,13 @@
 
 /* Begin PBXFileReference section */
 		55C56609687A10C7677EDD8C /* Pods-BusyBooth.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BusyBooth.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BusyBooth/Pods-BusyBooth.debug.xcconfig"; sourceTree = "<group>"; };
+		6B7DF8831C6F77A100D43104 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		6B7DF8841C6F77A100D43104 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
+		6B7DF8861C6F7CF100D43104 /* BusyBooth-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BusyBooth-Prefix.pch"; sourceTree = "<group>"; };
+		6B7DF8871C6FAA0400D43104 /* PollingPlaceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PollingPlaceViewController.h; sourceTree = "<group>"; };
+		6B7DF8881C6FAA0400D43104 /* PollingPlaceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PollingPlaceViewController.m; sourceTree = "<group>"; };
+		6B7DF88A1C6FAD2700D43104 /* PastPollingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PastPollingViewController.h; sourceTree = "<group>"; };
+		6B7DF88B1C6FAD2700D43104 /* PastPollingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PastPollingViewController.m; sourceTree = "<group>"; };
 		6B8DAC341C68792700AA6ED3 /* BusyBooth.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BusyBooth.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B8DAC381C68792700AA6ED3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6B8DAC3A1C68792700AA6ED3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -62,6 +72,32 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		6B7DF88D1C6FAD3500D43104 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				6B8DAC511C6879A400AA6ED3 /* LoginViewController.h */,
+				6B8DAC521C6879A400AA6ED3 /* LoginViewController.m */,
+				6B8DAC571C6879A400AA6ED3 /* SignUpViewController.h */,
+				6B8DAC581C6879A500AA6ED3 /* SignUpViewController.m */,
+			);
+			name = Auth;
+			sourceTree = "<group>";
+		};
+		6B7DF88E1C6FAD4800D43104 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				6B8DAC551C6879A400AA6ED3 /* MasterTableViewController.h */,
+				6B8DAC561C6879A400AA6ED3 /* MasterTableViewController.m */,
+				6B8DAC531C6879A400AA6ED3 /* MainViewController.h */,
+				6B8DAC541C6879A400AA6ED3 /* MainViewController.m */,
+				6B7DF88A1C6FAD2700D43104 /* PastPollingViewController.h */,
+				6B7DF88B1C6FAD2700D43104 /* PastPollingViewController.m */,
+				6B7DF8871C6FAA0400D43104 /* PollingPlaceViewController.h */,
+				6B7DF8881C6FAA0400D43104 /* PollingPlaceViewController.m */,
+			);
+			name = Main;
+			sourceTree = "<group>";
+		};
 		6B8DAC2B1C68792700AA6ED3 = {
 			isa = PBXGroup;
 			children = (
@@ -86,14 +122,8 @@
 			children = (
 				6B8DAC3A1C68792700AA6ED3 /* AppDelegate.h */,
 				6B8DAC3B1C68792700AA6ED3 /* AppDelegate.m */,
-				6B8DAC511C6879A400AA6ED3 /* LoginViewController.h */,
-				6B8DAC521C6879A400AA6ED3 /* LoginViewController.m */,
-				6B8DAC531C6879A400AA6ED3 /* MainViewController.h */,
-				6B8DAC541C6879A400AA6ED3 /* MainViewController.m */,
-				6B8DAC551C6879A400AA6ED3 /* MasterTableViewController.h */,
-				6B8DAC561C6879A400AA6ED3 /* MasterTableViewController.m */,
-				6B8DAC571C6879A400AA6ED3 /* SignUpViewController.h */,
-				6B8DAC581C6879A500AA6ED3 /* SignUpViewController.m */,
+				6B7DF88D1C6FAD3500D43104 /* Auth */,
+				6B7DF88E1C6FAD4800D43104 /* Main */,
 				6B8DAC431C68792700AA6ED3 /* Assets.xcassets */,
 				6B8DAC481C68792700AA6ED3 /* Info.plist */,
 				6B8DAC371C68792700AA6ED3 /* Supporting Files */,
@@ -104,6 +134,9 @@
 		6B8DAC371C68792700AA6ED3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				6B7DF8861C6F7CF100D43104 /* BusyBooth-Prefix.pch */,
+				6B7DF8831C6F77A100D43104 /* Constants.h */,
+				6B7DF8841C6F77A100D43104 /* Constants.m */,
 				6B8DAC381C68792700AA6ED3 /* main.m */,
 				6B8DAC4E1C68798F00AA6ED3 /* SWRevealViewController.h */,
 				6B8DAC4F1C68798F00AA6ED3 /* SWRevealViewController.m */,
@@ -242,10 +275,13 @@
 			files = (
 				6B8DAC5A1C6879A500AA6ED3 /* MainViewController.m in Sources */,
 				6B8DAC3C1C68792700AA6ED3 /* AppDelegate.m in Sources */,
+				6B7DF88C1C6FAD2700D43104 /* PastPollingViewController.m in Sources */,
 				6B8DAC391C68792700AA6ED3 /* main.m in Sources */,
+				6B7DF8851C6F77A100D43104 /* Constants.m in Sources */,
 				6B8DAC501C68798F00AA6ED3 /* SWRevealViewController.m in Sources */,
 				6B8DAC5B1C6879A500AA6ED3 /* MasterTableViewController.m in Sources */,
 				6B8DAC5C1C6879A500AA6ED3 /* SignUpViewController.m in Sources */,
+				6B7DF8891C6FAA0400D43104 /* PollingPlaceViewController.m in Sources */,
 				6B8DAC591C6879A500AA6ED3 /* LoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -338,6 +374,7 @@
 			baseConfigurationReference = 55C56609687A10C7677EDD8C /* Pods-BusyBooth.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/BusyBooth/BusyBooth-Prefix.pch";
 				INFOPLIST_FILE = BusyBooth/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kbhara.BusyBooth;
@@ -350,6 +387,7 @@
 			baseConfigurationReference = CEB09FD9F71038E172829AC5 /* Pods-BusyBooth.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/BusyBooth/BusyBooth-Prefix.pch";
 				INFOPLIST_FILE = BusyBooth/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kbhara.BusyBooth;

@@ -10,6 +10,4 @@
 
 @interface SignUpViewController : UIViewController
 
-- (IBAction)signupPressed:(id)sender;
-
 @end

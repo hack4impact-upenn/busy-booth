@@ -10,10 +10,7 @@
 #import "LoginViewController.h"
 #import "MasterTableViewController.h"
 #import "MainViewController.h"
-#import "SWRevealViewController.h"
 #import "SignUpViewController.h"
-
-#import <Parse/Parse.h>
 
 @interface AppDelegate ()
 
@@ -61,13 +58,13 @@
 - (void)presentLoginViewController {
     
     LoginViewController *loginVC = [[LoginViewController alloc] init];
-    [self.navController pushViewController:loginVC animated:NO];
+    [self.navController pushViewController:loginVC animated:YES];
 }
 
 - (void)presentSignUpViewController {
     
     SignUpViewController *signupVC = [[SignUpViewController alloc] init];
-    [self.navController pushViewController:signupVC animated:NO];
+    [self.navController pushViewController:signupVC animated:YES];
 }
 
 - (void) logOut {

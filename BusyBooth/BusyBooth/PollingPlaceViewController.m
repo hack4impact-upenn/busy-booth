@@ -1,29 +1,30 @@
 //
-//  MainViewController.m
+//  PollingPlaceViewController.m
 //  BusyBooth
 //
-//  Created by Krishna Bharathala on 12/7/15.
-//  Copyright © 2015 Krishna Bharathala. All rights reserved.
+//  Created by Krishna Bharathala on 2/13/16.
+//  Copyright © 2016 Krishna Bharathala. All rights reserved.
 //
 
-#import "MainViewController.h"
+#import "PollingPlaceViewController.h"
 
-@interface MainViewController ()
+@interface PollingPlaceViewController ()
 
 @end
 
-@implementation MainViewController
+@implementation PollingPlaceViewController
 
 -(id) init {
     self = [super init];
     if (self) {
-        self.title = @"Busy Booth";
+        self.title = @"My Polling Place";
     }
     return self;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationController.navigationBar
      setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
@@ -40,6 +41,5 @@
     self.navigationItem.leftBarButtonItem.tintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.barTintColor = mainColor;
 }
-
 
 @end
