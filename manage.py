@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import os
 from app import create_app, db
-from app.models import User, Role
+from app.models import WaitTime, PollingBooth
 from flask.ext.script import Manager, Shell
 from flask.ext.migrate import Migrate, MigrateCommand
 
@@ -46,34 +46,6 @@ def recreate_db():
     db.session.commit()
 
 
-@manager.option('-n',
-                '--number-users',
-                default=10,
-                type=int,
-                help='Number of each model type to create',
-                dest='number_users')
-def add_fake_data(number_users):
-    """
-    Adds fake data to the database.
-    """
-    User.generate_fake(count=number_users)
-
-
-@manager.command
-def setup_dev():
-    """Runs the set-up needed for local development."""
-    setup_general()
-
-
-@manager.command
-def setup_prod():
-    """Runs the set-up needed for production."""
-    setup_general()
-
-
-def setup_general():
-    """Runs the set-up needed for both local development and production."""
-    Role.insert_roles()
 
 if __name__ == '__main__':
     manager.run()
