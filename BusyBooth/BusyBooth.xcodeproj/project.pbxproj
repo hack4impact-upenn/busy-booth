@@ -10,6 +10,8 @@
 		6B7DF8851C6F77A100D43104 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B7DF8841C6F77A100D43104 /* Constants.m */; };
 		6B7DF8891C6FAA0400D43104 /* PollingPlaceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B7DF8881C6FAA0400D43104 /* PollingPlaceViewController.m */; };
 		6B7DF88C1C6FAD2700D43104 /* PastPollingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B7DF88B1C6FAD2700D43104 /* PastPollingViewController.m */; };
+		6B8AE3581C7829C6003E51BC /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B8AE3571C7829C6003E51BC /* SettingsTableViewController.m */; };
+		6B8AE35C1C7832A8003E51BC /* MyAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B8AE35B1C7832A8003E51BC /* MyAccountViewController.m */; };
 		6B8DAC391C68792700AA6ED3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B8DAC381C68792700AA6ED3 /* main.m */; };
 		6B8DAC3C1C68792700AA6ED3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B8DAC3B1C68792700AA6ED3 /* AppDelegate.m */; };
 		6B8DAC441C68792700AA6ED3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6B8DAC431C68792700AA6ED3 /* Assets.xcassets */; };
@@ -31,6 +33,10 @@
 		6B7DF8881C6FAA0400D43104 /* PollingPlaceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PollingPlaceViewController.m; sourceTree = "<group>"; };
 		6B7DF88A1C6FAD2700D43104 /* PastPollingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PastPollingViewController.h; sourceTree = "<group>"; };
 		6B7DF88B1C6FAD2700D43104 /* PastPollingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PastPollingViewController.m; sourceTree = "<group>"; };
+		6B8AE3561C7829C6003E51BC /* SettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsTableViewController.h; sourceTree = "<group>"; };
+		6B8AE3571C7829C6003E51BC /* SettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsTableViewController.m; sourceTree = "<group>"; };
+		6B8AE35A1C7832A8003E51BC /* MyAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAccountViewController.h; sourceTree = "<group>"; };
+		6B8AE35B1C7832A8003E51BC /* MyAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAccountViewController.m; sourceTree = "<group>"; };
 		6B8DAC341C68792700AA6ED3 /* BusyBooth.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BusyBooth.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B8DAC381C68792700AA6ED3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6B8DAC3A1C68792700AA6ED3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -94,8 +100,20 @@
 				6B7DF88B1C6FAD2700D43104 /* PastPollingViewController.m */,
 				6B7DF8871C6FAA0400D43104 /* PollingPlaceViewController.h */,
 				6B7DF8881C6FAA0400D43104 /* PollingPlaceViewController.m */,
+				6B8AE3591C782A14003E51BC /* Settings */,
 			);
 			name = Main;
+			sourceTree = "<group>";
+		};
+		6B8AE3591C782A14003E51BC /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				6B8AE3561C7829C6003E51BC /* SettingsTableViewController.h */,
+				6B8AE3571C7829C6003E51BC /* SettingsTableViewController.m */,
+				6B8AE35A1C7832A8003E51BC /* MyAccountViewController.h */,
+				6B8AE35B1C7832A8003E51BC /* MyAccountViewController.m */,
+			);
+			name = Settings;
 			sourceTree = "<group>";
 		};
 		6B8DAC2B1C68792700AA6ED3 = {
@@ -275,6 +293,7 @@
 			files = (
 				6B8DAC5A1C6879A500AA6ED3 /* MainViewController.m in Sources */,
 				6B8DAC3C1C68792700AA6ED3 /* AppDelegate.m in Sources */,
+				6B8AE35C1C7832A8003E51BC /* MyAccountViewController.m in Sources */,
 				6B7DF88C1C6FAD2700D43104 /* PastPollingViewController.m in Sources */,
 				6B8DAC391C68792700AA6ED3 /* main.m in Sources */,
 				6B7DF8851C6F77A100D43104 /* Constants.m in Sources */,
@@ -282,6 +301,7 @@
 				6B8DAC5B1C6879A500AA6ED3 /* MasterTableViewController.m in Sources */,
 				6B8DAC5C1C6879A500AA6ED3 /* SignUpViewController.m in Sources */,
 				6B7DF8891C6FAA0400D43104 /* PollingPlaceViewController.m in Sources */,
+				6B8AE3581C7829C6003E51BC /* SettingsTableViewController.m in Sources */,
 				6B8DAC591C6879A500AA6ED3 /* LoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

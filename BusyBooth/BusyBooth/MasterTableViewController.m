@@ -12,6 +12,7 @@
 #import "MainViewController.h"
 #import "PollingPlaceViewController.h"
 #import "PastPollingViewController.h"
+#import "SettingsTableViewController.h"
 
 @interface MasterTableViewController () 
 
@@ -19,7 +20,7 @@ typedef NS_ENUM (NSUInteger, MasterTableViewRowType) {
     MasterTableViewRowTypeHome,
     MasterTableViewPollingPlace,
     MasterTableViewPastPolling,
-    MasterTableViewRowTypeLogOut,
+    MasterTableViewSetting,
     MasterTableViewRowTypeCount,
 };
 
@@ -57,8 +58,9 @@ typedef NS_ENUM (NSUInteger, MasterTableViewRowType) {
     MainViewController *mainVC = [[MainViewController alloc] init];
     PollingPlaceViewController *pollVC = [[PollingPlaceViewController alloc] init];
     PastPollingViewController *pastVC = [[PastPollingViewController alloc] init];
+    SettingsTableViewController *settingsVC = [[SettingsTableViewController alloc] init];
     
-    self.viewControllerArray = @[mainVC, pollVC, pastVC];
+    self.viewControllerArray = @[mainVC, pollVC, pastVC, settingsVC];
     
 //    self.iconArray = @[@"Micro-25.png", @"Folder-25.png", @"Search-25.png", @"Settings-25.png", @"Exit-25.png"];
     
@@ -99,21 +101,18 @@ typedef NS_ENUM (NSUInteger, MasterTableViewRowType) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
     }
     
-    if(indexPath.row == MasterTableViewRowTypeLogOut) {
-        cell.textLabel.text = @"Log Out";
-    } else if(indexPath.row < MasterTableViewRowTypeCount) {
+    if(indexPath.row < MasterTableViewRowTypeCount) {
         UIViewController *currViewController = [self.viewControllerArray objectAtIndex:indexPath.row];
         cell.textLabel.text = currViewController.title;
     }
     cell.backgroundColor = [UIColor clearColor];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    cell.imageView.image = [UIImage imageNamed:[self.iconArray objectAtIndex:indexPath.row]];
+    // cell.imageView.image = [UIImage imageNamed:[self.iconArray objectAtIndex:indexPath.row]];
     
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     SWRevealViewController *revealController = self.revealViewController;
     
     if (indexPath.row == self.currRow) {
@@ -123,9 +122,7 @@ typedef NS_ENUM (NSUInteger, MasterTableViewRowType) {
     
     UIViewController *newFrontController = nil;
     
-    if(indexPath.row == MasterTableViewRowTypeLogOut) {
-        [APPDELEGATE logOut];
-    } else if(indexPath.row < MasterTableViewRowTypeCount) {
+    if(indexPath.row < MasterTableViewRowTypeCount) {
         newFrontController = [self.viewControllerArray objectAtIndex:indexPath.row];
         
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newFrontController];
