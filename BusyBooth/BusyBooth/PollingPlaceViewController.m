@@ -25,6 +25,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    NSLog(@"%@", self.parentViewController);
+    
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationController.navigationBar
      setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
