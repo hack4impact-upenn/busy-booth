@@ -22,10 +22,8 @@
     return self;
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    NSLog(@"%@", self.parentViewController);
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationController.navigationBar
