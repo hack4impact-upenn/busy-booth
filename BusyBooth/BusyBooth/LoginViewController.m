@@ -26,6 +26,12 @@
     CGFloat width = self.view.frame.size.width;
     CGFloat height = self.view.frame.size.height;
     
+    UIImageView *logoImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Oset_Logo2.png"]];
+    [logoImage setFrame:CGRectMake(0, 0, 150, 150)];
+    [logoImage setCenter:CGPointMake(width/2, height*2/7)];
+    [logoImage setBackgroundColor:[UIColor clearColor]];
+    [self.view addSubview:logoImage];
+    
     UIButton *loginButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [loginButton setFrame:CGRectMake(0, 0, 50, 30)];
     [loginButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];

@@ -30,8 +30,8 @@ typedef NS_ENUM (NSUInteger, SettingsTableViewRowType) {
     return self;
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
+- (void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     
     self.tableView.tableFooterView = [UIView new];
     self.tableView.bounces = NO;
@@ -51,6 +51,7 @@ typedef NS_ENUM (NSUInteger, SettingsTableViewRowType) {
     self.navigationItem.leftBarButtonItem = revealButtonItem;
     self.navigationItem.leftBarButtonItem.tintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.barTintColor = mainColor;
+    
 }
 
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
