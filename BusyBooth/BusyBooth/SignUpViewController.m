@@ -58,7 +58,7 @@
 }
 
 - (void) back {
-        [(AppDelegate *)[[UIApplication sharedApplication] delegate] presentLoginViewController];
+        [APPDELEGATE presentLoginViewController];
 }
 
 - (void)signup {
@@ -73,8 +73,8 @@
     
     [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (!error) {
-            [(AppDelegate *)[[UIApplication sharedApplication] delegate] presentSWController];
-            [[NSUserDefaults standardUserDefaults] setObject:@"true" forKey:@"loggedin"];
+            [APPDELEGATE presentSWController];
+            [[NSUserDefaults standardUserDefaults] setObject:@"true" forKey:IsLoggedIn];
         } else {
             NSString *errorString = [error userInfo][@"error"];   // Show the errorString somewhere and let the user try again.
             [SVProgressHUD showErrorWithStatus:[NSString stringWithFormat: @"%@", errorString]];

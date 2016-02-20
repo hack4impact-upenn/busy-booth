@@ -39,7 +39,7 @@
     [Parse setApplicationId:@"kkDmU3bzswvfLcOd1GI0lVUtZxKXOfWxblkTFLuB"
                   clientKey:@"mXkHvFn6lUv23MBNgoBQTDyXn9lpAoseEQjThRKu"];
     
-    if([[[NSUserDefaults standardUserDefaults] objectForKey:@"loggedin"] isEqualToString:@"true"]) {
+    if([[[NSUserDefaults standardUserDefaults] objectForKey:IsLoggedIn] isEqualToString:@"true"]) {
         [self presentSWController];
     }
     
@@ -71,9 +71,9 @@
     [self.navController pushViewController:signupVC animated:YES];
 }
 
-- (void) logOut {
+- (void)logOut {
     [self presentLoginViewController];
-    [[NSUserDefaults standardUserDefaults] setObject:@"false" forKey:@"loggedin"];
+    [[NSUserDefaults standardUserDefaults] setObject:@"false" forKey:IsLoggedIn];
 }
 
 @end

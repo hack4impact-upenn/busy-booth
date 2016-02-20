@@ -40,7 +40,7 @@
     [nologinButton setTitle:@"Continue without login" forState:UIControlStateNormal];
     [nologinButton sizeToFit];
     [nologinButton setCenter:CGPointMake(width/2, height*25/28)];
-    [nologinButton addTarget:self action:@selector(nologin) forControlEvents:UIControlEventTouchUpInside];
+    [nologinButton addTarget:self action:@selector(noLogin) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:nologinButton];
     
     UIButton *signUpButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
@@ -72,20 +72,20 @@
     [PFUser logInWithUsernameInBackground:self.usernameField.text password:self.passwordField.text
                                     block:^(PFUser *user, NSError *error) {
                                         if (user) {
-                                            [(AppDelegate *)[[UIApplication sharedApplication] delegate] presentSWController];
-                                            [[NSUserDefaults standardUserDefaults] setObject:@"true" forKey:@"loggedin"];
+                                            [APPDELEGATE presentSWController];
+                                            [[NSUserDefaults standardUserDefaults] setObject:@"true" forKey:IsLoggedIn];
                                         } else {
                                             [SVProgressHUD showErrorWithStatus:@"Password Incorrect"];
                                         }
                                     }];
 }
 
-- (void)nologin {
-    [(AppDelegate *)[[UIApplication sharedApplication] delegate] presentSWController];
+- (void)noLogin {
+    [APPDELEGATE presentSWController];
 }
 
 - (void)signup {
-    [(AppDelegate *)[[UIApplication sharedApplication] delegate] presentSignUpViewController];
+    [APPDELEGATE presentSignUpViewController];
 }
 
 @end

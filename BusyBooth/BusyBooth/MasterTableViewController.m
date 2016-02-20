@@ -124,7 +124,7 @@ typedef NS_ENUM (NSUInteger, MasterTableViewRowType) {
     UIViewController *newFrontController = nil;
     
     if(indexPath.row == MasterTableViewRowTypeLogOut) {
-        [(AppDelegate *)[[UIApplication sharedApplication] delegate] logOut];
+        [APPDELEGATE logOut];
     } else if(indexPath.row < MasterTableViewRowTypeCount) {
         newFrontController = [self.viewControllerArray objectAtIndex:indexPath.row];
         
