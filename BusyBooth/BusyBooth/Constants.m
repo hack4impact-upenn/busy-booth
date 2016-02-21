@@ -10,4 +10,6 @@
 
 @implementation Constants
 
+NSString *const IsLoggedIn = @"loggedIn";
+
 @end

@@ -22,8 +22,9 @@
     return self;
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationController.navigationBar
      setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];

@@ -11,6 +11,9 @@
 
 @interface Constants : NSObject
 
-#define mainColor [UIColor colorWithRed:3.0/256 green:137.0/256 blue:206.0/256 alpha:1.0]
+#define mainColor [UIColor colorWithRed:0.0/256 green:130.0/256 blue:203.0/256 alpha:1.0]
+#define APPDELEGATE (AppDelegate *)[[UIApplication sharedApplication] delegate]
+
+FOUNDATION_EXPORT NSString *const IsLoggedIn;
 
 @end
