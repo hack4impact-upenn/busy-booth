@@ -57,6 +57,7 @@ typedef NS_ENUM (NSUInteger, MasterTableViewRowType) {
     
     MainViewController *mainVC = [[MainViewController alloc] init];
     PollingPlaceViewController *pollVC = [[PollingPlaceViewController alloc] init];
+    pollVC.delegate = self;
     PastPollingViewController *pastVC = [[PastPollingViewController alloc] init];
     SettingsTableViewController *settingsVC = [[SettingsTableViewController alloc] init];
     
@@ -135,6 +136,22 @@ typedef NS_ENUM (NSUInteger, MasterTableViewRowType) {
         
         self.currRow = indexPath.row;
     }
+}
+
+- (void) presentTimes {
+    
+    UIViewController *newFrontController = [self.viewControllerArray objectAtIndex:MasterTableViewPastPolling];
+    
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newFrontController];
+    SWRevealViewController *revealController = self.revealViewController;
+    [revealController pushFrontViewController:navigationController animated:YES];
+    
+    NSIndexPath *path = [NSIndexPath indexPathForRow:self.currRow inSection:0];
+    NSIndexPath *tempIndexPath = [NSIndexPath indexPathForRow:MasterTableViewPastPolling inSection:1];
+    [self.tableView cellForRowAtIndexPath:path].backgroundColor = [UIColor clearColor];
+    [self.tableView cellForRowAtIndexPath:tempIndexPath].backgroundColor = [UIColor grayColor];
+    
+    self.currRow = MasterTableViewPastPolling;
 }
 
 @end
