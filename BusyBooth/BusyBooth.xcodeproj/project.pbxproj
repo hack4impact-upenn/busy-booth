@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		6B7DF8851C6F77A100D43104 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B7DF8841C6F77A100D43104 /* Constants.m */; };
 		6B7DF8891C6FAA0400D43104 /* PollingPlaceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B7DF8881C6FAA0400D43104 /* PollingPlaceViewController.m */; };
-		6B7DF88C1C6FAD2700D43104 /* PastPollingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B7DF88B1C6FAD2700D43104 /* PastPollingViewController.m */; };
 		6B8AE3581C7829C6003E51BC /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B8AE3571C7829C6003E51BC /* SettingsTableViewController.m */; };
 		6B8AE35C1C7832A8003E51BC /* MyAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B8AE35B1C7832A8003E51BC /* MyAccountViewController.m */; };
 		6B8DAC391C68792700AA6ED3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B8DAC381C68792700AA6ED3 /* main.m */; };
@@ -21,6 +20,8 @@
 		6B8DAC5B1C6879A500AA6ED3 /* MasterTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B8DAC561C6879A400AA6ED3 /* MasterTableViewController.m */; };
 		6B8DAC5C1C6879A500AA6ED3 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B8DAC581C6879A500AA6ED3 /* SignUpViewController.m */; };
 		6B8DAC5E1C687A9F00AA6ED3 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B8DAC5D1C687A9F00AA6ED3 /* Default-568h@2x.png */; };
+		6BC770E71C7A4CAC004CC8D6 /* PastPollingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BC770E61C7A4CAC004CC8D6 /* PastPollingTableViewController.m */; };
+		6BC770F41C7A55DC004CC8D6 /* WaitTimeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BC770F31C7A55DC004CC8D6 /* WaitTimeTableViewCell.m */; };
 		8A6AF71E6732C053F602ED41 /* libPods-BusyBooth.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 820B57C80CBC0E32C6083A61 /* libPods-BusyBooth.a */; };
 /* End PBXBuildFile section */
 
@@ -31,8 +32,6 @@
 		6B7DF8861C6F7CF100D43104 /* BusyBooth-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BusyBooth-Prefix.pch"; sourceTree = "<group>"; };
 		6B7DF8871C6FAA0400D43104 /* PollingPlaceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PollingPlaceViewController.h; sourceTree = "<group>"; };
 		6B7DF8881C6FAA0400D43104 /* PollingPlaceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PollingPlaceViewController.m; sourceTree = "<group>"; };
-		6B7DF88A1C6FAD2700D43104 /* PastPollingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PastPollingViewController.h; sourceTree = "<group>"; };
-		6B7DF88B1C6FAD2700D43104 /* PastPollingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PastPollingViewController.m; sourceTree = "<group>"; };
 		6B8AE3561C7829C6003E51BC /* SettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsTableViewController.h; sourceTree = "<group>"; };
 		6B8AE3571C7829C6003E51BC /* SettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsTableViewController.m; sourceTree = "<group>"; };
 		6B8AE35A1C7832A8003E51BC /* MyAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAccountViewController.h; sourceTree = "<group>"; };
@@ -54,6 +53,10 @@
 		6B8DAC571C6879A400AA6ED3 /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
 		6B8DAC581C6879A500AA6ED3 /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
 		6B8DAC5D1C687A9F00AA6ED3 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		6BC770E51C7A4CAC004CC8D6 /* PastPollingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PastPollingTableViewController.h; sourceTree = "<group>"; };
+		6BC770E61C7A4CAC004CC8D6 /* PastPollingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PastPollingTableViewController.m; sourceTree = "<group>"; };
+		6BC770F21C7A55DC004CC8D6 /* WaitTimeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaitTimeTableViewCell.h; sourceTree = "<group>"; };
+		6BC770F31C7A55DC004CC8D6 /* WaitTimeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaitTimeTableViewCell.m; sourceTree = "<group>"; };
 		820B57C80CBC0E32C6083A61 /* libPods-BusyBooth.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BusyBooth.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEB09FD9F71038E172829AC5 /* Pods-BusyBooth.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BusyBooth.release.xcconfig"; path = "Pods/Target Support Files/Pods-BusyBooth/Pods-BusyBooth.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -96,10 +99,9 @@
 				6B8DAC561C6879A400AA6ED3 /* MasterTableViewController.m */,
 				6B8DAC531C6879A400AA6ED3 /* MainViewController.h */,
 				6B8DAC541C6879A400AA6ED3 /* MainViewController.m */,
-				6B7DF88A1C6FAD2700D43104 /* PastPollingViewController.h */,
-				6B7DF88B1C6FAD2700D43104 /* PastPollingViewController.m */,
 				6B7DF8871C6FAA0400D43104 /* PollingPlaceViewController.h */,
 				6B7DF8881C6FAA0400D43104 /* PollingPlaceViewController.m */,
+				6BC770E81C7A551A004CC8D6 /* PastPollingViews */,
 				6B8AE3591C782A14003E51BC /* Settings */,
 			);
 			name = Main;
@@ -160,6 +162,17 @@
 				6B8DAC4F1C68798F00AA6ED3 /* SWRevealViewController.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6BC770E81C7A551A004CC8D6 /* PastPollingViews */ = {
+			isa = PBXGroup;
+			children = (
+				6BC770F21C7A55DC004CC8D6 /* WaitTimeTableViewCell.h */,
+				6BC770F31C7A55DC004CC8D6 /* WaitTimeTableViewCell.m */,
+				6BC770E51C7A4CAC004CC8D6 /* PastPollingTableViewController.h */,
+				6BC770E61C7A4CAC004CC8D6 /* PastPollingTableViewController.m */,
+			);
+			name = PastPollingViews;
 			sourceTree = "<group>";
 		};
 		E0AC6CE6336D66AC410D0E5C /* Pods */ = {
@@ -294,7 +307,6 @@
 				6B8DAC5A1C6879A500AA6ED3 /* MainViewController.m in Sources */,
 				6B8DAC3C1C68792700AA6ED3 /* AppDelegate.m in Sources */,
 				6B8AE35C1C7832A8003E51BC /* MyAccountViewController.m in Sources */,
-				6B7DF88C1C6FAD2700D43104 /* PastPollingViewController.m in Sources */,
 				6B8DAC391C68792700AA6ED3 /* main.m in Sources */,
 				6B7DF8851C6F77A100D43104 /* Constants.m in Sources */,
 				6B8DAC501C68798F00AA6ED3 /* SWRevealViewController.m in Sources */,
@@ -302,7 +314,9 @@
 				6B8DAC5C1C6879A500AA6ED3 /* SignUpViewController.m in Sources */,
 				6B7DF8891C6FAA0400D43104 /* PollingPlaceViewController.m in Sources */,
 				6B8AE3581C7829C6003E51BC /* SettingsTableViewController.m in Sources */,
+				6BC770E71C7A4CAC004CC8D6 /* PastPollingTableViewController.m in Sources */,
 				6B8DAC591C6879A500AA6ED3 /* LoginViewController.m in Sources */,
+				6BC770F41C7A55DC004CC8D6 /* WaitTimeTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
