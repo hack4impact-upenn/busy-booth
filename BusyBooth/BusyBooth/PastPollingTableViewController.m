@@ -8,6 +8,8 @@
 
 #import "PastPollingTableViewController.h"
 
+#import "WaitTimeTableViewCell.h"
+
 @interface PastPollingTableViewController ()
 
 @end
@@ -30,6 +32,7 @@
      setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
     
     self.tableView.tableFooterView = [UIView new];
+    [self.tableView setUserInteractionEnabled: NO];
     
     SWRevealViewController *revealController = [self revealViewController];
     [revealController panGestureRecognizer];
@@ -42,6 +45,8 @@
     self.navigationItem.leftBarButtonItem = revealButtonItem;
     self.navigationItem.leftBarButtonItem.tintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.barTintColor = mainColor;
+    
+    
 }
 
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -71,23 +76,60 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *cellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];\
-    }
     
     if(indexPath.row == 0) {
+        static NSString *cellIdentifier = @"Cell";
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        
+        if (!cell) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];\
+        }
+        
         cell.backgroundColor = [UIColor redColor];
         cell.textLabel.text = @"The approximate wait time to vote is";
         cell.textLabel.textColor = [UIColor whiteColor];
-    } else {
+        cell.textLabel.font = [UIFont fontWithName:@"Arial" size:12.0f];
+        cell.textLabel.textAlignment = NSTextAlignmentCenter;
+        cell.textLabel.center = cell.center;
+        
+        return cell;
+        
+    } else if(indexPath.row == 1) {
+        static NSString *cellIdentifier = @"Cell";
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        
+        if (!cell) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];\
+        }
+        
         cell.textLabel.text = @"Sanjay";
         
+        return cell;
+        
+    } else {
+        static NSString *cellIdentifier = @"Cell";
+        WaitTimeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        
+        if (!cell) {
+            cell = [[WaitTimeTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
+        }
+        
+        cell.descriptionLabel.text = @"12:00 PM";
+        cell.timeLabel.text = @"70";
+        
+        return cell;
+
+    }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(indexPath.row == 1) {
+        return 200;
+    } else {
+        return 44;
     }
     
-    return cell;
 }
 
 @end

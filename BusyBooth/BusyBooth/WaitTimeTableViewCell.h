@@ -10,4 +10,8 @@
 
 @interface WaitTimeTableViewCell : UITableViewCell
 
+@property (nonatomic, strong) UILabel *descriptionLabel;
+@property (nonatomic, strong) UILabel *minutesLabel;
+@property (nonatomic, strong) UILabel *timeLabel;
+
 @end
