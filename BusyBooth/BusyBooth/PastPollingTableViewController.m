@@ -82,7 +82,7 @@
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
         
         if (!cell) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];\
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
         }
         
         cell.backgroundColor = [UIColor redColor];
