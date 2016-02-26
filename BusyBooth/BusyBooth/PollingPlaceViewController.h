@@ -11,6 +11,6 @@
 
 @interface PollingPlaceViewController : UIViewController
 
-@property (nonatomic, weak) MasterTableViewController delegate;
+@property (nonatomic, weak) MasterTableViewController* delegate;
 
 @end
