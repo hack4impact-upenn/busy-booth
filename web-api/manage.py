@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 import os
 from app import create_app, db
-from app.models import WaitTime, PollingBooth
+from app.models import WaitTime, PollingBooth, User
 from flask.ext.script import Manager, Shell
 from flask.ext.migrate import Migrate, MigrateCommand
+from config import TestingConfig
 
 # Import settings from .env file. Must define FLASK_CONFIG
 if os.path.exists('.env'):
@@ -43,6 +44,22 @@ def recreate_db():
     """
     db.drop_all()
     db.create_all()
+    db.session.commit()
+    setup_initial_user()
+
+
+@manager.command
+def setup_initial_user():
+
+    tc = TestingConfig()
+
+    user = User(
+        first_name = "Cathy",
+        last_name = "Chen",
+        phone = "+19178213080",
+        address = "4044 Sansom Street"
+        )
+    db.session.add(user)
     db.session.commit()
 
 

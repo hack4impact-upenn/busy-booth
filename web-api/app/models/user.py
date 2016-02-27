@@ -8,13 +8,17 @@ from .. import db, login_manager
 class User(UserMixin, db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
-    confirmed = db.Column(db.Boolean, default=False)
     first_name = db.Column(db.String(64), index=True)
     last_name = db.Column(db.String(64), index=True)
-    email = db.Column(db.String(64), unique=True, index=True)
-    password_hash = db.Column(db.String(128))
+    # password_hash = db.Column(db.String(128))
+    phone = db.Column(db.String(16), unique=True)
     address = db.Column(db.String(128), index=True)
-    polling_booth = db.relationship('PollingBooth', backref='user', lazy='dynamic')
+
+    polling_booth = db.Column(db.Integer, db.ForeignKey('pollingbooth.id'))
+
+    waittime_id = db.Column(db.Integer, db.ForeignKey('waittime.id'))
+    waittime = db.relationship('WaitTime', backref='users')
+
 
     def __init__(self, **kwargs):
         super(User, self).__init__(**kwargs)
@@ -33,17 +37,6 @@ class User(UserMixin, db.Model):
     def verify_password(self, password):
         return check_password_hash(self.password_hash, password)
 
-    def generate_confirmation_token(self, expiration=604800):
-        """Generate a confirmation token to email a new user."""
-
-        s = Serializer(current_app.config['SECRET_KEY'], expiration)
-        return s.dumps({'confirm': self.id})
-
-    def generate_email_change_token(self, new_email, expiration=3600):
-        """Generate an email change token to email an existing user."""
-        s = Serializer(current_app.config['SECRET_KEY'], expiration)
-        return s.dumps({'change_email': self.id, 'new_email': new_email})
-
     def generate_password_reset_token(self, expiration=3600):
         """
         Generate a password reset change token to email to an existing user.
@@ -51,49 +44,6 @@ class User(UserMixin, db.Model):
         s = Serializer(current_app.config['SECRET_KEY'], expiration)
         return s.dumps({'reset': self.id})
 
-    def confirm_account(self, token):
-        """Verify that the provided token is for this user's id."""
-        s = Serializer(current_app.config['SECRET_KEY'])
-        try:
-            data = s.loads(token)
-        except (BadSignature, SignatureExpired):
-            return False
-        if data.get('confirm') != self.id:
-            return False
-        self.confirmed = True
-        db.session.add(self)
-        return True
-
-    def change_email(self, token):
-        """Verify the new email for this user."""
-        s = Serializer(current_app.config['SECRET_KEY'])
-        try:
-            data = s.loads(token)
-        except (BadSignature, SignatureExpired):
-            return False
-        if data.get('change_email') != self.id:
-            return False
-        new_email = data.get('new_email')
-        if new_email is None:
-            return False
-        if self.query.filter_by(email=new_email).first() is not None:
-            return False
-        self.email = new_email
-        db.session.add(self)
-        return True
-
-    def reset_password(self, token, new_password):
-        """Verify the new password for this user."""
-        s = Serializer(current_app.config['SECRET_KEY'])
-        try:
-            data = s.loads(token)
-        except (BadSignature, SignatureExpired):
-            return False
-        if data.get('reset') != self.id:
-            return False
-        self.password = new_password
-        db.session.add(self)
-        return True
 
     @staticmethod
     def generate_fake(count=100, **kwargs):
@@ -109,9 +59,7 @@ class User(UserMixin, db.Model):
             u = User(
                 first_name=fake.first_name(),
                 last_name=fake.last_name(),
-                email=fake.email(),
                 password=fake.password(),
-                confirmed=True,
                 **kwargs
             )
             db.session.add(u)
