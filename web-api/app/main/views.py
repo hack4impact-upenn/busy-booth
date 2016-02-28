@@ -1,15 +1,12 @@
 from . import main
 from flask.ext.login import login_required, current_user, login_user, logout_user
-from flask import request
+from flask import request, jsonify
 import re
 from ..models import User, WaitTime, PollingBooth
 import json
 import datetime
 
 
-@main.route('/')
-def index():
-    return "Running."
 
 
 # Testing URL - ignore
@@ -39,6 +36,24 @@ def phone_format(number):
     return digits
 
 
+"""
+ROUTES
+
+Return format: {"code": X, "data": Y}
+
+---------------------
+X - 0, 1, 2
+0: all is well
+1: user does not exist (redirect to create account)
+2: other error
+
+"""
+
+@main.route('/')
+def index():
+    return jsonify({"code": 0, "data": "Running"})
+
+
 @main.route('/create_account', methods=['GET', 'POST'])
 def create_account():
 
@@ -66,12 +81,10 @@ def create_account():
 
             db.session.add(new_user)
             db.session.commit()
-            return "Logged in %s." % first_name
-
-
+            return jsonify({"code": 0, "data": "Logged in %s." % first_name})
 
         else:
-            return "User exists."
+            return jsonify({"code": 2, "data": "User exists."})
 
 
 @main.route('/av_wait/<int:booth_id>')
@@ -99,12 +112,10 @@ def av_wait(booth_id):
                 count += 1.0
                 elapsed_sum += time.elapsed
 
-        return json.dumps(elapsed_sum/count)
+        return jsonify({"code": 0, "data": elapsed_sum/count})
 
     else:
-        return "Polling booth does not exist."
-
-
+        return jsonify({"code": 2, "data": "Polling booth does not exist."})
 
 
 @main.route('/start_time/<phone>', methods=['GET', 'POST'])
@@ -121,16 +132,16 @@ def start_time(phone):
     user = User.query.filter_by(phone=phone_format(phone)).first()
 
     if user == None:
-        return "User account does not exist"
+        return jsonify({"code": 1, "data": "User account does not exist."})
 
     if user.waittime == None:
         wait_time = WaitTime()
         user.waittime = wait_time
         db.session.add(wait_time)
         db.session.commit()
-        return "Wait time started."
+        return jsonify({"code": 0, "data": "Wait time started."})
     else:
-        return "Wait time already exists."
+        return jsonify({"code": 2, "data": "Wait time already exists."})
 
 
 @main.route('/end_time/<phone>', methods=['GET', 'POST'])
@@ -147,15 +158,14 @@ def end_time(phone):
     user = User.query.filter_by(phone=phone_format(phone)).first()
 
     if user == None:
-        return "User account does not exist"
+        return jsonify({"code": 1, "data": "User account does not exist."})
 
     if user.waittime:
         wait_time = user.waittime
         wait_time.finished()
-        return "Wait time ended."
+        return jsonify({"code": 0, "data": "Wait time ended."})
     else:
-        return "Wait time doesn't exist."
-
+        return jsonify({"code": 2, "data": "Wait time doesn't exist."})
 
 
 @main.route('/polling_places')
@@ -165,9 +175,9 @@ def polling_places():
     Get all polling places.
 
     """
-    
+
     polling_places = PollingBooth.query.all()
-    return json.dumps([(x.id, x.name, x.address, x.zip_code) for x in polling_places])
+    return jsonify([(x.id, x.name, x.address, x.zip_code) for x in polling_places])
 
 
 
