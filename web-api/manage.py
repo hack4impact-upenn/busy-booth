@@ -90,6 +90,7 @@ def setup_waitingtimes():
     user2 = User.query.filter_by(first_name="Krishna").first()
 
     print "after user search"
+    print User.query.all()
 
     time1 = WaitTime()
     time2 = WaitTime()
