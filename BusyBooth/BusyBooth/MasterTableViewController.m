@@ -147,7 +147,7 @@ typedef NS_ENUM (NSUInteger, MasterTableViewRowType) {
     [revealController pushFrontViewController:navigationController animated:YES];
     
     NSIndexPath *path = [NSIndexPath indexPathForRow:self.currRow inSection:0];
-    NSIndexPath *tempIndexPath = [NSIndexPath indexPathForRow:MasterTableViewPastPolling inSection:1];
+    NSIndexPath *tempIndexPath = [NSIndexPath indexPathForRow:MasterTableViewPastPolling inSection:0];
     [self.tableView cellForRowAtIndexPath:path].backgroundColor = [UIColor clearColor];
     [self.tableView cellForRowAtIndexPath:tempIndexPath].backgroundColor = [UIColor grayColor];
     
