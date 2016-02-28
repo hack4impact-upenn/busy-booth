@@ -179,7 +179,7 @@ def polling_places():
     """
 
     polling_places = PollingBooth.query.all()
-    return jsonify([(x.id, x.name, x.address, x.zip_code) for x in polling_places])
+    return jsonify({"code": 0, "data":[{"id":x.id, "name":x.name, "address":x.address, "zipcode":x.zip_code} for x in polling_places]})
 
 
 
