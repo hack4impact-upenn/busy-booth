@@ -110,7 +110,61 @@ def av_wait(booth_id):
                 count += 1.0
                 elapsed_sum += time.elapsed
 
-        return jsonify({"code": 0, "data": elapsed_sum/count})
+        if (count != 0.0):
+            return jsonify({"code": 0, "data": elapsed_sum/count})
+        else:
+            return jsonify({"code": 2, "data": "Insufficient data."})
+
+    else:
+        return jsonify({"code": 2, "data": "Polling booth does not exist."})
+
+
+@main.route('/history_wait/<int:booth_id>')
+def history_wait(booth_id):
+
+    """
+    Get list of hourly average wait times for a polling booth (6 hours).
+
+    Keyword arguments:
+    booth_id -- integer id of polling booth
+
+    """
+
+    polling_place = PollingBooth.query.filter_by(id=booth_id).first()
+
+    if polling_place:
+
+        # calculate start of hourly increments of time
+        now = datetime.datetime.now().replace(minute=0, second=0, microsecond=0)
+        past_hours = []
+        for i in xrange(6):
+            past_hours.append(now - datetime.timedelta(hours=i+1))
+
+        # get hourly wait time averages of past six hours
+        counts = [0.0]*6
+        elapsed_sums = [0]*6
+
+        for time in polling_place.wait_times:
+            if time.finished:
+                if time.start_time > now:
+                    pass
+                else:
+                    for i in xrange(6):
+                        if time.start_time > past_hours[i]:
+                            counts[i] += 1
+                            elapsed_sums[i] += time.elapsed
+                            break
+
+        averages = []
+        for i in xrange(6):
+
+            # if no data for that hour set average as -1
+            if counts[i] == 0.0:
+                averages.append({"hour_start": past_hours[i],"time":-1})
+            else:
+                averages.append({"hour_start": past_hours[i],"time":elapsed_sums[i]/counts[i]})
+
+        return jsonify({"code": 0, "data": averages})
 
     else:
         return jsonify({"code": 2, "data": "Polling booth does not exist."})
