@@ -1,5 +1,4 @@
 from . import main
-from flask.ext.login import login_required, current_user, login_user, logout_user
 from flask import request, jsonify
 import re
 from ..models import User, WaitTime, PollingBooth
