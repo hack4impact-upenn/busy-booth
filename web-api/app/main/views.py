@@ -7,8 +7,6 @@ import json
 import datetime
 
 
-
-
 # Testing URL - ignore
 @main.route('/loggedin')
 def loggedin():
@@ -77,7 +75,8 @@ def create_account():
                 address = address
                 )
 
-            # How to set polling booth?
+            # How to set polling booth? TO DO
+            PollingBooth.query.filter_by(id=1).first().people.append(new_user)
 
             db.session.add(new_user)
             db.session.commit()
@@ -137,6 +136,10 @@ def start_time(phone):
     if user.waittime == None:
         wait_time = WaitTime()
         user.waittime = wait_time
+
+        polling_place = PollingBooth.query.filter_by(id=user.polling_booth).first()
+        polling_place.wait_times.append(wait_time)
+
         db.session.add(wait_time)
         db.session.commit()
         return jsonify({"code": 0, "data": "Wait time started."})
