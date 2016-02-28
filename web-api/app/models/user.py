@@ -15,9 +15,7 @@ class User(UserMixin, db.Model):
     address = db.Column(db.String(128), index=True)
 
     polling_booth = db.Column(db.Integer, db.ForeignKey('pollingbooth.id'))
-
-    waittime_id = db.Column(db.Integer, db.ForeignKey('waittime.id'))
-    waittime = db.relationship('WaitTime', backref='users')
+    waittime = db.relationship('WaitTime', uselist=False, backref='users')
 
 
     def __init__(self, **kwargs):

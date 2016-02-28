@@ -3,7 +3,8 @@ from . import main
 from flask.ext.login import login_required, current_user, login_user, logout_user
 from flask import request
 import re
-from ..models import User
+from ..models import User, WaitTime, PollingBooth
+import json
 
 
 @main.route('/')
@@ -81,20 +82,25 @@ def av_wait():
 
 
 @main.route('/start_time', methods=['GET', 'POST'])
-@login_required
 def start_time():
-	return "START TIME"
+	wait_time = WaitTime(person=current_user)
+	db.session.add(wait_time)
+	db.session.commit()
+	return True
 
 
 @main.route('/end_time', methods=['GET', 'POST'])
-@login_required
 def end_time():
-	return "END TIME"
+	wait_time = current_user.waittime
+	wait_time.finished()
+
+	
 
 
 @main.route('/polling_places')
 def polling_places():
-	return "PLACES"
+	polling_places = PollingBooth.query.all()
+	return json.dumps([(x.name, [y.first_name for y in x.people]) for x in polling_places])
 
 
 

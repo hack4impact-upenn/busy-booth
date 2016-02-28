@@ -4,17 +4,16 @@ import datetime
 class WaitTime(db.Model):
     __tablename__ = 'waittime'
     id = db.Column(db.Integer, primary_key=True)
-    # person = db.relationship('User', backref='waittime', lazy='dynamic')
     elapsed = db.Column(db.Integer)
     start_time = db.Column(db.DateTime)
     end_time = db.Column(db.DateTime)
     finished = db.Column(db.Boolean)
     pollingbooth_id = db.Column(db.Integer, db.ForeignKey('pollingbooth.id'))
+    person = db.Column(db.Integer, db.ForeignKey('users.id'))
 
 
-    def __init__(self, person):
+    def __init__(self):
         self.start_time = datetime.datetime.now()
-        self.person = person
         finished = False
 
     def finished(self):
