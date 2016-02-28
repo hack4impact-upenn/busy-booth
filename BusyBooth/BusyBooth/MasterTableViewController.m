@@ -154,4 +154,19 @@ typedef NS_ENUM (NSUInteger, MasterTableViewRowType) {
     self.currRow = MasterTableViewPastPolling;
 }
 
+- (void) presentMapView {
+    UIViewController *newFrontController = [self.viewControllerArray objectAtIndex:MasterTableViewRowTypeHome];
+    
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newFrontController];
+    SWRevealViewController *revealController = self.revealViewController;
+    [revealController pushFrontViewController:navigationController animated:YES];
+    
+    NSIndexPath *path = [NSIndexPath indexPathForRow:self.currRow inSection:0];
+    NSIndexPath *tempIndexPath = [NSIndexPath indexPathForRow:MasterTableViewRowTypeHome inSection:0];
+    [self.tableView cellForRowAtIndexPath:path].backgroundColor = [UIColor clearColor];
+    [self.tableView cellForRowAtIndexPath:tempIndexPath].backgroundColor = [UIColor grayColor];
+    
+    self.currRow = MasterTableViewRowTypeHome;
+}
+
 @end

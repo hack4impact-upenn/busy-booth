@@ -13,5 +13,6 @@
 @property (nonatomic, retain) UITableView *rearTableView;
 
 - (void) presentTimes;
+- (void) presentMapView;
 
 @end

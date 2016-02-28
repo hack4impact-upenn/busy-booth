@@ -28,9 +28,8 @@
     [self.delegate presentTimes];
 }
 
-- (void) logDrivingDirections {
-    NSLog(@"Show driving directions");
-    
+- (void) getDrivingDirections {
+    [self.delegate presentMapView];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -96,7 +95,7 @@
     [viewDrivingDirectionsButton setBackgroundColor: [UIColor whiteColor]];
     [viewDrivingDirectionsButton setTitle:@"Get Driving Directions" forState:UIControlStateNormal];
     [viewDrivingDirectionsButton setCenter:CGPointMake(width/2, height*6/7 + 0.6*height/7)];
-    [viewDrivingDirectionsButton addTarget:self action:@selector(logDrivingDirections) forControlEvents:UIControlEventTouchUpInside];
+    [viewDrivingDirectionsButton addTarget:self action:@selector(getDrivingDirections) forControlEvents:UIControlEventTouchUpInside];
     viewDrivingDirectionsButton.layer.cornerRadius = 8;
     [self.view addSubview:viewDrivingDirectionsButton];
 
