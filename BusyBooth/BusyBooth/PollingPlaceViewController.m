@@ -69,13 +69,9 @@
     addressLabel.text = text;
     addressLabel.font = customFont;
     addressLabel.numberOfLines = 1;
-    //addressLabel.baselineAdjustment = UIBaselineAdjustmentAlignBaselines; // or UIBaselineAdjustmentAlignCenters, or UIBaselineAdjustmentNone
     addressLabel.adjustsFontSizeToFitWidth = YES;
-    addressLabel.adjustsLetterSpacingToFitWidth = YES;
     addressLabel.minimumScaleFactor = 10.0f/12.0f;
     addressLabel.clipsToBounds = YES;
-    //addressLabel.backgroundColor = [UIColor clearColor];
-    addressLabel.textColor = [UIColor blackColor];
     addressLabel.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:addressLabel];
     
