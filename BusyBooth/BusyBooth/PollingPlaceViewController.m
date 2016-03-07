@@ -24,14 +24,6 @@
     return self;
 }
 
-- (void) presentPollTimes {
-    [self.delegate presentTimes];
-}
-
-- (void) getDrivingDirections {
-    [self.delegate presentMapView];
-}
-
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
@@ -95,6 +87,16 @@
     viewDrivingDirectionsButton.layer.cornerRadius = 8;
     [self.view addSubview:viewDrivingDirectionsButton];
 
+}
+
+- (void) presentPollTimes {
+    [self.revealController revealToggle:self.revealController];
+    [self.masterVC presentTimes];
+}
+
+- (void) getDrivingDirections {
+    [self.revealController revealToggle:self.revealController];
+    [self.masterVC presentMapView];
 }
 
 @end
