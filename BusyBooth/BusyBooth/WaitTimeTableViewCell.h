@@ -10,8 +10,10 @@
 
 @interface WaitTimeTableViewCell : UITableViewCell
 
-@property (nonatomic, strong) UILabel *descriptionLabel;
-@property (nonatomic, strong) UILabel *minutesLabel;
-@property (nonatomic, strong) UILabel *timeLabel;
+@property (nonatomic) int time;
+@property (nonatomic) int wait;
+@property (nonatomic, strong) NSString *timeString;
+
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier time:(int)time wait:(int) wait;
 
 @end

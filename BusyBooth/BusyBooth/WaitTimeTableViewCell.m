@@ -14,28 +14,36 @@
     // Initialization code
 }
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier time:(int)time wait:(int) wait {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self) {
-        // configure control(s)
-        self.descriptionLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 10, 300, 30)];
-        self.descriptionLabel.center = CGPointMake(self.center.x, self.center.y);
-        self.descriptionLabel.textColor = [UIColor blackColor];
-        self.descriptionLabel.font = [UIFont fontWithName:@"Arial" size:14.0f];
-        [self addSubview:self.descriptionLabel];
-        
-        self.timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.frame.size.width - 55, 0, 50, 30)];
-        self.timeLabel.textColor = [UIColor blackColor];
-        self.timeLabel.font = [UIFont fontWithName:@"Arial" size:30.0f];
-        [self addSubview:self.timeLabel];
-        
-        self.minutesLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.frame.size.width - 60, 20, 50, 30)];
-        self.minutesLabel.text = @"Minutes";
-        self.minutesLabel.textColor = [UIColor blackColor];
-        self.minutesLabel.font = [UIFont fontWithName:@"Arial" size:12.0f];
-        [self addSubview:self.minutesLabel];
     
+    if (self) {
+        self.time = time;
+        self.wait = wait;
+        
+        int minutes = time % 60;
+        int hours = time / 60;
+        
+        NSString *minuteString = @"00";
+        if(minutes > 0 && minutes < 10) {
+            minuteString = [NSString stringWithFormat:@"0%d", minutes];
+        } else if(minutes >= 10) {
+            minuteString = [NSString stringWithFormat:@"%d", minutes];
+        }
+        
+        if(hours > 12) {
+            hours -= 12;
+            self.timeString = [[NSString alloc] initWithFormat:@"%d:%@pm", hours, minuteString];
+        } else if(hours == 12) {
+            self.timeString = [[NSString alloc] initWithFormat:@"%d:%@pm", hours, minuteString];
+        } else if(hours == 0) {
+            hours = 12;
+            self.timeString = [[NSString alloc] initWithFormat:@"%d:%@am", hours, minuteString];
+        } else {
+            self.timeString = [[NSString alloc] initWithFormat:@"%d:%@am", hours, minuteString];
+        }
     }
+    
     return self;
 }
 
