@@ -14,6 +14,8 @@
 @property (nonatomic) int wait;
 @property (nonatomic, strong) NSString *timeString;
 
+@property (nonatomic, strong) UIColor *foregroundColor;
+
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier time:(int)time wait:(int) wait;
 
 @end

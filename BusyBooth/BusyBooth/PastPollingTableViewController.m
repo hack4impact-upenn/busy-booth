@@ -100,7 +100,7 @@
         LargeWaitTime *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
         
         if (!cell) {
-            cell = [[LargeWaitTime alloc] initWithReuseIdentifier:cellIdentifier time:735 wait:70];
+            cell = [[LargeWaitTime alloc] initWithReuseIdentifier:cellIdentifier time:735 wait:20];
         }
 
         return cell;
@@ -110,7 +110,7 @@
         SmallWaitTime *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
         
         if (!cell) {
-            cell = [[SmallWaitTime alloc] initWithReuseIdentifier:cellIdentifier time:735 wait:70];
+            cell = [[SmallWaitTime alloc] initWithReuseIdentifier:cellIdentifier time:735 wait:40];
         }
         
         

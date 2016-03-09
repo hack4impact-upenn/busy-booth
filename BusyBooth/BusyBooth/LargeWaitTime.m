@@ -27,11 +27,13 @@
         
         self.textLabel.font = [UIFont fontWithName:@"Arial" size:60.0f];
         self.textLabel.textAlignment = NSTextAlignmentCenter;
+        self.textLabel.textColor = [self foregroundColor];
         
         self.detailTextLabel.font = [UIFont fontWithName:@"Arial" size:11.0f];
         self.detailTextLabel.textAlignment = NSTextAlignmentCenter;
         self.detailTextLabel.numberOfLines = 2;
         self.detailTextLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        self.detailTextLabel.textColor = [self foregroundColor];
         
         self.textLabel.text = [NSString stringWithFormat:@"%d", self.wait];
         self.detailTextLabel.text = [NSString stringWithFormat:@"Minutes\nLast Updated: %@", self.timeString];
