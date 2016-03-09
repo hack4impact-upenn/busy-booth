@@ -71,6 +71,9 @@ int const LONG_WAIT_THRESHOLD = 50;
             self.backgroundColor = RED_BACKGROUND;
             self.foregroundColor = RED_FOREGROUND;
         }
+        
+        [self.contentView.layer setBorderColor:[UIColor whiteColor].CGColor];
+        [self.contentView.layer setBorderWidth:1.0f];
     }
     
     return self;

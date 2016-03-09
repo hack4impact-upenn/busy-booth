@@ -21,18 +21,17 @@
     self = [super initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:reuseIdentifier time:time wait:wait];
     if (self) {
         // configure control(s)
-        self.descriptionLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 10, 300, 30)];
-        self.descriptionLabel.center = CGPointMake(self.center.x, self.center.y);
+        self.descriptionLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 15, 300, 30)];
         self.descriptionLabel.textColor = [self foregroundColor];
         self.descriptionLabel.font = [UIFont fontWithName:@"Arial" size:14.0f];
         [self addSubview:self.descriptionLabel];
         
-        self.timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.frame.size.width - 55, 0, 50, 30)];
+        self.timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.frame.size.width - 55, 7, 50, 30)];
         self.timeLabel.textColor = [self foregroundColor];
         self.timeLabel.font = [UIFont fontWithName:@"Arial" size:30.0f];
         [self addSubview:self.timeLabel];
         
-        self.minutesLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.frame.size.width - 60, 20, 50, 30)];
+        self.minutesLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.frame.size.width - 60, 27, 50, 30)];
         self.minutesLabel.text = @"Minutes";
         self.minutesLabel.textColor = [self foregroundColor];
         self.minutesLabel.font = [UIFont fontWithName:@"Arial" size:12.0f];

@@ -18,25 +18,34 @@
 }
 */
 - (id)initWithReuseIdentifier:(NSString *)reuseIdentifier time:(int)time wait:(int)wait {
-    self = [super initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseIdentifier time:time wait:wait];
+    self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier time:time wait:wait];
     
     if (self) {
         // configure control(s)
-        self.textLabel.frame = CGRectMake(0, self.textLabel.frame.origin.y, 10000, self.textLabel.frame.size.height);
-        self.detailTextLabel.frame = CGRectMake(0, self.detailTextLabel.frame.origin.y, self.frame.size.width, self.detailTextLabel.frame.size.height);
+        float mainSize = 70.0f;
+        float subSize = 11.0f;
+        float padding = 0.0f;
         
-        self.textLabel.font = [UIFont fontWithName:@"Arial" size:60.0f];
-        self.textLabel.textAlignment = NSTextAlignmentCenter;
-        self.textLabel.textColor = [self foregroundColor];
+        float height = 200.0f;
         
-        self.detailTextLabel.font = [UIFont fontWithName:@"Arial" size:11.0f];
-        self.detailTextLabel.textAlignment = NSTextAlignmentCenter;
-        self.detailTextLabel.numberOfLines = 2;
-        self.detailTextLabel.lineBreakMode = NSLineBreakByWordWrapping;
-        self.detailTextLabel.textColor = [self foregroundColor];
+        float mainPosition = (height - (mainSize + subSize * 3))/2.0f;
         
-        self.textLabel.text = [NSString stringWithFormat:@"%d", self.wait];
-        self.detailTextLabel.text = [NSString stringWithFormat:@"Minutes\nLast Updated: %@", self.timeString];
+        self.mainTextLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, mainPosition, self.frame.size.width, mainSize)];
+        self.mainTextLabel.font = [UIFont fontWithName:@"Arial" size:mainSize];
+        self.mainTextLabel.textAlignment = NSTextAlignmentCenter;
+        self.mainTextLabel.textColor = [self foregroundColor];
+        [self addSubview:self.mainTextLabel];
+        
+        self.subtitleTextLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, mainPosition + mainSize + padding, self.frame.size.width, subSize * 3)];
+        self.subtitleTextLabel.font = [UIFont fontWithName:@"Arial" size:subSize];
+        self.subtitleTextLabel.textAlignment = NSTextAlignmentCenter;
+        self.subtitleTextLabel.numberOfLines = 2;
+        self.subtitleTextLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        self.subtitleTextLabel.textColor = [self foregroundColor];
+        [self addSubview:self.subtitleTextLabel];
+        
+        self.mainTextLabel.text = [NSString stringWithFormat:@"%d", self.wait];
+        self.subtitleTextLabel.text = [NSString stringWithFormat:@"Minutes\nLast Updated: %@", self.timeString];
     }
     
     return self;

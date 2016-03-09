@@ -10,6 +10,9 @@
 
 @interface LargeWaitTime : WaitTimeTableViewCell
 
+@property (nonatomic, strong) UILabel *subtitleTextLabel;
+@property (nonatomic, strong) UILabel *mainTextLabel;
+
 - (id)initWithReuseIdentifier:(NSString *)reuseIdentifier time:(int)time wait:(int)wait;
 
 @end

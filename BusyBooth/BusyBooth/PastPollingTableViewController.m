@@ -22,6 +22,7 @@
     self = [super init];
     if (self) {
         self.title = @"Past Poll Times";
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
     return self;
 }
