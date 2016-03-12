@@ -57,7 +57,7 @@ typedef NS_ENUM (NSUInteger, MasterTableViewRowType) {
     
     MainViewController *mainVC = [[MainViewController alloc] init];
     PollingPlaceViewController *pollVC = [[PollingPlaceViewController alloc] init];
-    pollVC.delegate = self;
+    pollVC.masterVC = self;
     PastPollingViewController *pastVC = [[PastPollingViewController alloc] init];
     SettingsTableViewController *settingsVC = [[SettingsTableViewController alloc] init];
     
@@ -106,8 +106,8 @@ typedef NS_ENUM (NSUInteger, MasterTableViewRowType) {
         UIViewController *currViewController = [self.viewControllerArray objectAtIndex:indexPath.row];
         cell.textLabel.text = currViewController.title;
     }
-    cell.backgroundColor = [UIColor clearColor];
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    cell.contentView.backgroundColor = [UIColor whiteColor];
+    // cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     // cell.imageView.image = [UIImage imageNamed:[self.iconArray objectAtIndex:indexPath.row]];
     
     return cell;
@@ -121,18 +121,15 @@ typedef NS_ENUM (NSUInteger, MasterTableViewRowType) {
         return;
     }
     
-    UIViewController *newFrontController = nil;
-    
     if(indexPath.row < MasterTableViewRowTypeCount) {
-        newFrontController = [self.viewControllerArray objectAtIndex:indexPath.row];
+        UIViewController *newFrontController = [self.viewControllerArray objectAtIndex:indexPath.row];
         
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newFrontController];
         [revealController pushFrontViewController:navigationController animated:YES];
         
         NSIndexPath *path = [NSIndexPath indexPathForRow:self.currRow inSection:0];
-        [tableView cellForRowAtIndexPath:path].backgroundColor = [UIColor clearColor];
-        
-        [tableView cellForRowAtIndexPath:indexPath].backgroundColor = [UIColor grayColor];
+        [tableView cellForRowAtIndexPath:path].contentView.backgroundColor = [UIColor clearColor];
+        [tableView cellForRowAtIndexPath:indexPath].contentView.backgroundColor = [UIColor lightGrayColor];
         
         self.currRow = indexPath.row;
     }
@@ -140,33 +137,32 @@ typedef NS_ENUM (NSUInteger, MasterTableViewRowType) {
 
 - (void) presentTimes {
     
-    UIViewController *newFrontController = [self.viewControllerArray objectAtIndex:MasterTableViewPastPolling];
-    
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newFrontController];
-    SWRevealViewController *revealController = self.revealViewController;
-    [revealController pushFrontViewController:navigationController animated:YES];
-    
     NSIndexPath *path = [NSIndexPath indexPathForRow:self.currRow inSection:0];
+    [self.tableView cellForRowAtIndexPath:path].contentView.backgroundColor = [UIColor whiteColor];
     NSIndexPath *tempIndexPath = [NSIndexPath indexPathForRow:MasterTableViewPastPolling inSection:0];
-    [self.tableView cellForRowAtIndexPath:path].backgroundColor = [UIColor clearColor];
-    [self.tableView cellForRowAtIndexPath:tempIndexPath].backgroundColor = [UIColor grayColor];
+    [self.tableView cellForRowAtIndexPath:tempIndexPath].contentView.backgroundColor = [UIColor lightGrayColor];
     
     self.currRow = MasterTableViewPastPolling;
+    
+    UIViewController *newFrontController = [self.viewControllerArray objectAtIndex:MasterTableViewPastPolling];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newFrontController];
+    [self.revealViewController pushFrontViewController:navigationController animated:YES];
+    
 }
 
 - (void) presentMapView {
-    UIViewController *newFrontController = [self.viewControllerArray objectAtIndex:MasterTableViewRowTypeHome];
-    
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newFrontController];
-    SWRevealViewController *revealController = self.revealViewController;
-    [revealController pushFrontViewController:navigationController animated:YES];
     
     NSIndexPath *path = [NSIndexPath indexPathForRow:self.currRow inSection:0];
+    [self.tableView cellForRowAtIndexPath:path].contentView.backgroundColor = [UIColor whiteColor];
     NSIndexPath *tempIndexPath = [NSIndexPath indexPathForRow:MasterTableViewRowTypeHome inSection:0];
-    [self.tableView cellForRowAtIndexPath:path].backgroundColor = [UIColor clearColor];
-    [self.tableView cellForRowAtIndexPath:tempIndexPath].backgroundColor = [UIColor grayColor];
+    [self.tableView cellForRowAtIndexPath:tempIndexPath].contentView.backgroundColor = [UIColor lightGrayColor];
     
     self.currRow = MasterTableViewRowTypeHome;
+    
+    UIViewController *newFrontController = [self.viewControllerArray objectAtIndex:MasterTableViewRowTypeHome];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newFrontController];
+    [self.revealViewController pushFrontViewController:navigationController animated:YES];
+    
 }
 
 @end

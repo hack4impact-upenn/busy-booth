@@ -24,14 +24,6 @@
     return self;
 }
 
-- (void) presentPollTimes {
-    [self.delegate presentTimes];
-}
-
-- (void) getDrivingDirections {
-    [self.delegate presentMapView];
-}
-
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
@@ -77,7 +69,6 @@
     addressLabel.font = customFont;
     addressLabel.numberOfLines = 6;
     addressLabel.adjustsFontSizeToFitWidth = YES;
-    addressLabel.adjustsLetterSpacingToFitWidth = YES;
     addressLabel.minimumScaleFactor = 10.0f/12.0f;
     addressLabel.clipsToBounds = YES;
     addressLabel.textColor = [UIColor blackColor];
@@ -104,6 +95,16 @@
     viewDrivingDirectionsButton.layer.cornerRadius = 8;
     [self.view addSubview:viewDrivingDirectionsButton];
 
+}
+
+- (void) presentPollTimes {
+    [self.revealController revealToggle:self.revealController];
+    [self.masterVC presentTimes];
+}
+
+- (void) getDrivingDirections {
+    [self.revealController revealToggle:self.revealController];
+    [self.masterVC presentMapView];
 }
 
 @end
