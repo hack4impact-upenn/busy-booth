@@ -62,19 +62,24 @@
     [pollingPlaceImage setBackgroundColor:[UIColor clearColor]];
     [self.view addSubview:pollingPlaceImage];
     
-    UIFont * customFont = [UIFont fontWithName:@"TimesNewRoman-BoldMT" size:12]; //custom font
-    NSString * text = @"Insert Polling Place Address";
+    NSDictionary * attrs = @{
+                             NSFontAttributeName: [UIFont boldSystemFontOfSize:12],
+                             NSForegroundColorAttributeName:[UIColor blackColor]
+                             };
+    NSMutableAttributedString * line1 = [[NSMutableAttributedString alloc] initWithString: @"Your Polling Place is\n"];
+    NSMutableAttributedString * line2 = [[NSMutableAttributedString alloc] initWithString: @"POLLING_PLACE_NAME\n" attributes: attrs];
+    NSMutableAttributedString * line3 = [[NSMutableAttributedString alloc] initWithString: @"Polling Place Address Line 1"];
+    NSMutableAttributedString * line4 = [[NSMutableAttributedString alloc] initWithString: @"Polling Place Address Line 2"];
+    NSMutableAttributedString * line5 = [[NSMutableAttributedString alloc] initWithString: @"Polling Place Address Line 3"];
     
     UILabel *addressLabel = [[UILabel alloc] initWithFrame:CGRectMake(width/5, height*2.5/7, 200, 200)];
-    addressLabel.text = text;
+    addressLabel.text = line1;
     addressLabel.font = customFont;
-    addressLabel.numberOfLines = 1;
-    //addressLabel.baselineAdjustment = UIBaselineAdjustmentAlignBaselines; // or UIBaselineAdjustmentAlignCenters, or UIBaselineAdjustmentNone
+    addressLabel.numberOfLines = 6;
     addressLabel.adjustsFontSizeToFitWidth = YES;
     addressLabel.adjustsLetterSpacingToFitWidth = YES;
     addressLabel.minimumScaleFactor = 10.0f/12.0f;
     addressLabel.clipsToBounds = YES;
-    //addressLabel.backgroundColor = [UIColor clearColor];
     addressLabel.textColor = [UIColor blackColor];
     addressLabel.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:addressLabel];
