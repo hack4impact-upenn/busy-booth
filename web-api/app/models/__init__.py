@@ -5,3 +5,4 @@ module (as opposed to just their python files)
 
 from waittime import *
 from pollingbooth import *
+from user import *

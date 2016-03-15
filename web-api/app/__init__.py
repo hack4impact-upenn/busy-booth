@@ -12,7 +12,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 mail = Mail()
 db = SQLAlchemy()
-csrf = CsrfProtect()
+# csrf = CsrfProtect()
 compress = Compress()
 
 # Set up Flask-Login
@@ -30,7 +30,7 @@ def create_app(config_name):
     mail.init_app(app)
     db.init_app(app)
     login_manager.init_app(app)
-    csrf.init_app(app)
+    # csrf.init_app(app)
     compress.init_app(app)
 
     # Configure SSL if platform supports it

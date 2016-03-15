@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MasterTableViewController.h"
 
 @interface PollingPlaceViewController : UIViewController
+
+@property (nonatomic, weak) MasterTableViewController* masterVC;
 
 @end

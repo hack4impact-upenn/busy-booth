@@ -62,6 +62,10 @@
     [self.usernameField setPlaceholder:@"Username"];
     [self.usernameField setCenter:CGPointMake(width/2, height*4/7)];
     [self.usernameField setBorderStyle:UITextBorderStyleRoundedRect];
+    [self.usernameField setDelegate:self];
+    self.usernameField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    self.usernameField.autocorrectionType = UITextAutocorrectionTypeNo;
+    self.usernameField.keyboardType = UIKeyboardTypeASCIICapable;
     [self.view addSubview:self.usernameField];
     
     self.passwordField = [[UITextField alloc] init];
@@ -70,8 +74,46 @@
     [self.passwordField setCenter:CGPointMake(width/2, height*9/14)];
     [self.passwordField setBorderStyle:UITextBorderStyleRoundedRect];
     [self.passwordField setSecureTextEntry:YES];
+    [self.passwordField setDelegate:self];
     [self.view addSubview:self.passwordField];
     
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(dismissKeyboard)];
+    
+    [self.view addGestureRecognizer:tap];
+    
+}
+
+-(void)dismissKeyboard {
+    [self.passwordField resignFirstResponder];
+    [self.usernameField resignFirstResponder];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    [self animateTextField: textField up: YES];
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    [self animateTextField: textField up: NO];
+}
+
+- (void) animateTextField: (UITextField*) textField up: (BOOL) up {
+    const int movementDistance = 80; // tweak as needed
+    const float movementDuration = 0.3f; // tweak as needed
+    
+    int movement = (up ? -movementDistance : movementDistance);
+    
+    [UIView beginAnimations: @"anim" context: nil];
+    [UIView setAnimationBeginsFromCurrentState: YES];
+    [UIView setAnimationDuration: movementDuration];
+    self.view.frame = CGRectOffset(self.view.frame, 0, movement);
+    [UIView commitAnimations];
 }
 
 - (void)login {
