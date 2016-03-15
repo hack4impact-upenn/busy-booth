@@ -11,7 +11,7 @@
 
 #import "MainViewController.h"
 #import "PollingPlaceViewController.h"
-#import "PastPollingViewController.h"
+#import "PastPollingTableViewController.h"
 #import "SettingsTableViewController.h"
 
 @interface MasterTableViewController () 
@@ -57,9 +57,10 @@ typedef NS_ENUM (NSUInteger, MasterTableViewRowType) {
     
     MainViewController *mainVC = [[MainViewController alloc] init];
     PollingPlaceViewController *pollVC = [[PollingPlaceViewController alloc] init];
-    pollVC.masterVC = self;
-    PastPollingViewController *pastVC = [[PastPollingViewController alloc] init];
+    PastPollingTableViewController *pastVC = [[PastPollingTableViewController alloc] init];
     SettingsTableViewController *settingsVC = [[SettingsTableViewController alloc] init];
+    
+    pollVC.masterVC = self;
     
     self.viewControllerArray = @[mainVC, pollVC, pastVC, settingsVC];
     
