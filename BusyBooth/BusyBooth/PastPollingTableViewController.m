@@ -9,6 +9,8 @@
 #import "PastPollingTableViewController.h"
 
 #import "WaitTimeTableViewCell.h"
+#import "SmallWaitTime.h"
+#import "LargeWaitTime.h"
 
 @interface PastPollingTableViewController ()
 
@@ -20,6 +22,7 @@
     self = [super init];
     if (self) {
         self.title = @"Past Poll Times";
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
     return self;
 }
@@ -78,11 +81,11 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if(indexPath.row == 0) {
-        static NSString *cellIdentifier = @"Cell";
+        static NSString *cellIdentifier = @"HeaderCell";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
         
         if (!cell) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         }
         
         cell.backgroundColor = [UIColor redColor];
@@ -90,44 +93,41 @@
         cell.textLabel.textColor = [UIColor whiteColor];
         cell.textLabel.font = [UIFont fontWithName:@"Arial" size:12.0f];
         cell.textLabel.textAlignment = NSTextAlignmentCenter;
-        cell.textLabel.center = cell.center;
         
         return cell;
         
     } else if(indexPath.row == 1) {
-        static NSString *cellIdentifier = @"Cell";
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        static NSString *cellIdentifier = @"MainCell";
+        LargeWaitTime *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
         
         if (!cell) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];\
+            cell = [[LargeWaitTime alloc] initWithReuseIdentifier:cellIdentifier time:735 wait:20];
         }
-        
-        cell.textLabel.text = @"Sanjay";
-        
+
         return cell;
         
     } else {
-        static NSString *cellIdentifier = @"Cell";
-        WaitTimeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        static NSString *cellIdentifier = @"WaitTimeCell";
+        SmallWaitTime *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
         
         if (!cell) {
-            cell = [[WaitTimeTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
+            cell = [[SmallWaitTime alloc] initWithReuseIdentifier:cellIdentifier time:735 wait:40];
         }
         
-        cell.descriptionLabel.text = @"12:00 PM";
-        cell.timeLabel.text = @"70";
         
         return cell;
-
     }
 }
 
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(indexPath.row == 1) {
+    if(indexPath.row == 0) {
+        return 44;
+    } else if(indexPath.row == 1) {
         return 200;
     } else {
-        return 44;
+        return 60;
     }
     
 }

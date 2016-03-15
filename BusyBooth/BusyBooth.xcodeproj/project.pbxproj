@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5A64A5A51C909E92001629F0 /* SmallWaitTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A64A5A41C909E92001629F0 /* SmallWaitTime.m */; };
+		5A64A5A81C90A047001629F0 /* LargeWaitTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A64A5A71C90A047001629F0 /* LargeWaitTime.m */; };
 		6B7DF8851C6F77A100D43104 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B7DF8841C6F77A100D43104 /* Constants.m */; };
 		6B7DF8891C6FAA0400D43104 /* PollingPlaceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B7DF8881C6FAA0400D43104 /* PollingPlaceViewController.m */; };
 		6B8AE3581C7829C6003E51BC /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B8AE3571C7829C6003E51BC /* SettingsTableViewController.m */; };
@@ -27,6 +29,10 @@
 
 /* Begin PBXFileReference section */
 		55C56609687A10C7677EDD8C /* Pods-BusyBooth.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BusyBooth.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BusyBooth/Pods-BusyBooth.debug.xcconfig"; sourceTree = "<group>"; };
+		5A64A5A31C909E92001629F0 /* SmallWaitTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmallWaitTime.h; sourceTree = "<group>"; };
+		5A64A5A41C909E92001629F0 /* SmallWaitTime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SmallWaitTime.m; sourceTree = "<group>"; };
+		5A64A5A61C90A047001629F0 /* LargeWaitTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LargeWaitTime.h; sourceTree = "<group>"; };
+		5A64A5A71C90A047001629F0 /* LargeWaitTime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LargeWaitTime.m; sourceTree = "<group>"; };
 		6B7DF8831C6F77A100D43104 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		6B7DF8841C6F77A100D43104 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		6B7DF8861C6F7CF100D43104 /* BusyBooth-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BusyBooth-Prefix.pch"; sourceTree = "<group>"; };
@@ -171,6 +177,10 @@
 				6BC770F31C7A55DC004CC8D6 /* WaitTimeTableViewCell.m */,
 				6BC770E51C7A4CAC004CC8D6 /* PastPollingTableViewController.h */,
 				6BC770E61C7A4CAC004CC8D6 /* PastPollingTableViewController.m */,
+				5A64A5A31C909E92001629F0 /* SmallWaitTime.h */,
+				5A64A5A41C909E92001629F0 /* SmallWaitTime.m */,
+				5A64A5A61C90A047001629F0 /* LargeWaitTime.h */,
+				5A64A5A71C90A047001629F0 /* LargeWaitTime.m */,
 			);
 			name = PastPollingViews;
 			sourceTree = "<group>";
@@ -315,8 +325,10 @@
 				6B7DF8891C6FAA0400D43104 /* PollingPlaceViewController.m in Sources */,
 				6B8AE3581C7829C6003E51BC /* SettingsTableViewController.m in Sources */,
 				6BC770E71C7A4CAC004CC8D6 /* PastPollingTableViewController.m in Sources */,
+				5A64A5A81C90A047001629F0 /* LargeWaitTime.m in Sources */,
 				6B8DAC591C6879A500AA6ED3 /* LoginViewController.m in Sources */,
 				6BC770F41C7A55DC004CC8D6 /* WaitTimeTableViewCell.m in Sources */,
+				5A64A5A51C909E92001629F0 /* SmallWaitTime.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
