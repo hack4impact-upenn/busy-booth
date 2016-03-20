@@ -5,8 +5,8 @@
 
 target 'BusyBooth' do
 
-pod 'Parse'
 pod 'SVProgressHUD'
+pod 'AFNetworking'
 
 end
 
