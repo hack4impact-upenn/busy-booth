@@ -6,7 +6,6 @@
 target 'BusyBooth' do
 
 pod 'SVProgressHUD'
-pod 'AFNetworking'
 
 end
 
