@@ -12,6 +12,8 @@
 
 @property (nonatomic, strong) UILabel *subtitleTextLabel;
 @property (nonatomic, strong) UILabel *mainTextLabel;
+@property (nonatomic, strong) UILabel *minutesTextLabel;
+@property (nonatomic, strong) CAShapeLayer *triangleLayer;
 
 - (id)initWithReuseIdentifier:(NSString *)reuseIdentifier time:(int)time wait:(int)wait;
 
