@@ -7,6 +7,7 @@
 //
 
 #import "MainViewController.h"
+#import <MapKit/MapKit.h>
 
 @interface MainViewController ()
 
@@ -40,6 +41,11 @@
     self.navigationItem.leftBarButtonItem = revealButtonItem;
     self.navigationItem.leftBarButtonItem.tintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.barTintColor = mainColor;
+    
+    MKMapView *mapView = [[MKMapView alloc] initWithFrame:self.view.frame];
+    [self.view addSubview:mapView];
+    
+    
 }
 
 
