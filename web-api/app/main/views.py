@@ -4,6 +4,7 @@ import re
 from ..models import User, WaitTime, PollingBooth
 import json
 import datetime
+from ..import db
 
 
 # Testing URL - ignore
@@ -79,6 +80,7 @@ def create_account():
 
             db.session.add(new_user)
             db.session.commit()
+
             return jsonify({"code": 0, "data": "Logged in %s." % first_name})
 
         else:
