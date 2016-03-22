@@ -48,22 +48,47 @@
     CGFloat width = self.view.frame.size.width;
     CGFloat height = self.view.frame.size.height;
     
-    UIImageView *pollingPlaceImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Oset_Logo2.png"]];
-    [pollingPlaceImage setFrame:CGRectMake(0, 0, 150, 150)];
-    [pollingPlaceImage setCenter:CGPointMake(width/2, height*2/7)];
+    UIImageView *pollingPlaceImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"GardnerPhoto.png"]];
+    [pollingPlaceImage setFrame:CGRectMake(0, 0, 320, 181)];
+    [pollingPlaceImage setCenter:CGPointMake(width/2, height*1.9/7)];
     [pollingPlaceImage setBackgroundColor:[UIColor clearColor]];
     [self.view addSubview:pollingPlaceImage];
     
-    UIFont * customFont = [UIFont fontWithName:@"TimesNewRoman-BoldMT" size:12]; //custom font
-    NSString * text = @"Insert Polling Place Address";
+    NSDictionary* attrs1 = @{
+                             NSFontAttributeName: [UIFont fontWithName:@"Helvetica-Bold" size:11.0f],
+                             NSForegroundColorAttributeName:[UIColor blackColor]
+                             };
+    NSDictionary* attrs2 = @{
+                             NSFontAttributeName: [UIFont fontWithName:@"Helvetica-Bold" size:15.0f],
+                             NSForegroundColorAttributeName: [UIColor blackColor]
+                             };
+    NSDictionary* attrs3 = @{
+                             NSFontAttributeName: [UIFont fontWithName:@"Helvetica" size:12.0f],
+                             NSForegroundColorAttributeName: [UIColor grayColor]
+                             };
+    NSMutableAttributedString * line1 = [[NSMutableAttributedString alloc] initWithString: @"Your Polling Place is\n" attributes:attrs1];
+    NSMutableAttributedString * line2 = [[NSMutableAttributedString alloc] initWithString: @"POLLING_PLACE_NAME\n" attributes:attrs2];
+    NSMutableAttributedString * line3 = [[NSMutableAttributedString alloc] initWithString: @"Polling Place Address Line 1\n" attributes:attrs3];
+    NSMutableAttributedString * line4 = [[NSMutableAttributedString alloc] initWithString: @"Polling Place Address Line 2\n" attributes:attrs3];
+    NSMutableAttributedString * line5 = [[NSMutableAttributedString alloc] initWithString: @"Polling Place Address Line 3\n" attributes:attrs3];
+    NSMutableAttributedString* line6 = [[NSMutableAttributedString alloc] initWithString: @"Polling Place Address Line 4" attributes:attrs3];
+    
+    NSMutableAttributedString* allLines = [[NSMutableAttributedString alloc] init];
+    [allLines appendAttributedString: line1];
+    [allLines appendAttributedString: line2];
+    [allLines appendAttributedString: line3];
+    [allLines appendAttributedString: line4];
+    [allLines appendAttributedString: line5];
+    [allLines appendAttributedString: line6];
     
     UILabel *addressLabel = [[UILabel alloc] initWithFrame:CGRectMake(width/5, height*2.5/7, 200, 200)];
-    addressLabel.text = text;
-    addressLabel.font = customFont;
-    addressLabel.numberOfLines = 1;
+    addressLabel.attributedText = allLines;
+    //addressLabel.font = customFont;
+    addressLabel.numberOfLines = 6;
     addressLabel.adjustsFontSizeToFitWidth = YES;
     addressLabel.minimumScaleFactor = 10.0f/12.0f;
     addressLabel.clipsToBounds = YES;
+    addressLabel.textColor = [UIColor blackColor];
     addressLabel.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:addressLabel];
     
