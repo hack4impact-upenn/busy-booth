@@ -75,7 +75,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 4;
+    return 6;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -113,7 +113,6 @@
         if (!cell) {
             cell = [[SmallWaitTime alloc] initWithReuseIdentifier:cellIdentifier time:735 wait:10];
         }
-        
         
         return cell;
     }
