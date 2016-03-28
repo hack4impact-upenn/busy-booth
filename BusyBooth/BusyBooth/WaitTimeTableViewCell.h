@@ -16,6 +16,8 @@
 
 @property (nonatomic, strong) UIColor *foregroundColor;
 
+@property (nonatomic, strong) UIImage *gaugeImage;
+
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier time:(int)time wait:(int) wait;
 
 @end
