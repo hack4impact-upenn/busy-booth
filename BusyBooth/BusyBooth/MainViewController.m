@@ -7,6 +7,7 @@
 //
 
 #import "MainViewController.h"
+#import "CheckIns.h"
 
 @interface MainViewController ()
 
@@ -40,6 +41,8 @@
     self.navigationItem.leftBarButtonItem = revealButtonItem;
     self.navigationItem.leftBarButtonItem.tintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.barTintColor = mainColor;
+    
+    [CheckIns checkingOutWithController:self];
 }
 
 
