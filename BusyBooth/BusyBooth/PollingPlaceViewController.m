@@ -12,6 +12,10 @@
 
 @property (nonatomic, strong) SWRevealViewController *revealController;
 
+@property (nonatomic, strong) CLLocationManager *locationManager;
+@property (nonatomic) int loops;
+@property (nonatomic) int heading;
+
 @end
 
 @implementation PollingPlaceViewController
