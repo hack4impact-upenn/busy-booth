@@ -75,7 +75,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 4;
+    return 6;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -88,7 +88,7 @@
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         }
         
-        cell.backgroundColor = [UIColor redColor];
+        cell.backgroundColor = [UIColor colorWithRed:229.0/255.0 green:22.0/255.0 blue:47.0/255.0 alpha:1.0];
         cell.textLabel.text = @"The approximate wait time to vote is";
         cell.textLabel.textColor = [UIColor whiteColor];
         cell.textLabel.font = [UIFont fontWithName:@"Arial" size:12.0f];
@@ -111,9 +111,8 @@
         SmallWaitTime *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
         
         if (!cell) {
-            cell = [[SmallWaitTime alloc] initWithReuseIdentifier:cellIdentifier time:735 wait:40];
+            cell = [[SmallWaitTime alloc] initWithReuseIdentifier:cellIdentifier time:735 wait:10];
         }
-        
         
         return cell;
     }
@@ -123,11 +122,11 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if(indexPath.row == 0) {
-        return 44;
+        return 57;
     } else if(indexPath.row == 1) {
-        return 200;
+        return 214;
     } else {
-        return 60;
+        return 42;
     }
     
 }

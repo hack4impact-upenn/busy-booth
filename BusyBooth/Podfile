@@ -5,7 +5,6 @@
 
 target 'BusyBooth' do
 
-pod 'Parse'
 pod 'SVProgressHUD'
 
 end
