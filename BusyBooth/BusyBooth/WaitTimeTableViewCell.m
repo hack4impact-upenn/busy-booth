@@ -52,24 +52,28 @@ int const LONG_WAIT_THRESHOLD = 50;
         // finally, color self
         
         // the background colors
-        UIColor   *GREEN_BACKGROUND = [UIColor colorWithRed:0.20 green:0.95 blue:0.20 alpha:0.2];
-        UIColor     *RED_BACKGROUND = [UIColor colorWithRed:0.80 green:0.20 blue:0.20 alpha:0.2];
-        UIColor  *YELLOW_BACKGROUND = [UIColor colorWithRed:1.00 green:1.00 blue:0.20 alpha:0.1];
+        UIColor   *GREEN_BACKGROUND = [UIColor colorWithRed:231.0/255.0 green:245.0/255.0 blue:237.0/255.0 alpha:1.0];
+        UIColor     *RED_BACKGROUND = [UIColor colorWithRed:252.0/255.0 green:233.0/255.0 blue:234.0/255.0 alpha:1.0];
+        UIColor  *YELLOW_BACKGROUND = [UIColor colorWithRed:253.0/255.0 green:250.0/255.0 blue:233.0/255.0 alpha:1.0];
         
         // the text colors
-        UIColor   *GREEN_FOREGROUND = [UIColor colorWithRed:0.20 green:0.80 blue:0.20 alpha:1.0];
-        UIColor     *RED_FOREGROUND = [UIColor colorWithRed:0.80 green:0.20 blue:0.20 alpha:1.0];
-        UIColor  *YELLOW_FOREGROUND = [UIColor colorWithRed:0.80 green:0.80 blue:0.20 alpha:1.0];
+        UIColor   *GREEN_FOREGROUND = [UIColor colorWithRed:37.0/255.0 green:149.0/255.0 blue:69.0/255.0 alpha:1.0];
+        UIColor     *RED_FOREGROUND = [UIColor colorWithRed:229.0/255.0 green:22.0/255.0 blue:47.0/255.0 alpha:1.0];
+        UIColor  *YELLOW_FOREGROUND = [UIColor colorWithRed:239.0/255.0 green:214.0/255.0 blue:46.0/255.0 alpha:1.0];
         
         if(wait < MEDIUM_WAIT_THRESHOLD) {
             self.backgroundColor = GREEN_BACKGROUND;
             self.foregroundColor = GREEN_FOREGROUND;
+            self.gaugeImage = [UIImage imageNamed:@"LowGauge.svg"];
         } else if(wait < LONG_WAIT_THRESHOLD) {
             self.backgroundColor = YELLOW_BACKGROUND;
             self.foregroundColor = YELLOW_FOREGROUND;
+            self.gaugeImage = [UIImage imageNamed:@"MediumGauge.png"];
+
         } else {
             self.backgroundColor = RED_BACKGROUND;
             self.foregroundColor = RED_FOREGROUND;
+            self.gaugeImage = [UIImage imageNamed:@"HighGauge.svg"];
         }
         
         [self.contentView.layer setBorderColor:[UIColor whiteColor].CGColor];

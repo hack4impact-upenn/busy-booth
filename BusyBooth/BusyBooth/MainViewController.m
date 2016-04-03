@@ -8,6 +8,7 @@
 
 #import "MainViewController.h"
 #import <MapKit/MapKit.h>
+#import "CheckIns.h"
 
 @interface MainViewController ()
 
@@ -57,8 +58,8 @@
     
     mapView.showsUserLocation = YES;
     
-    
-    
+
+    [CheckIns checkingOutWithController:self];
 }
 
 

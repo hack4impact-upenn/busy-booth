@@ -36,9 +36,6 @@
     self.window.rootViewController = self.navController;
     [self.window makeKeyAndVisible];
     
-    [Parse setApplicationId:@"kkDmU3bzswvfLcOd1GI0lVUtZxKXOfWxblkTFLuB"
-                  clientKey:@"mXkHvFn6lUv23MBNgoBQTDyXn9lpAoseEQjThRKu"];
-    
     if([[[NSUserDefaults standardUserDefaults] objectForKey:IsLoggedIn] isEqualToString:@"true"]) {
         [self presentSWController];
     }
