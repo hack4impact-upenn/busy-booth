@@ -10,6 +10,11 @@
 
 @interface MyAccountViewController ()
 
+@property (nonatomic, strong) UITextField* usernameField;
+@property (nonatomic, strong) UITextField* passwordField;
+@property (nonatomic, strong) UITextField* phoneField;
+@property (nonatomic, strong) UITextField* zipField;
+
 @end
 
 @implementation MyAccountViewController
@@ -30,6 +35,11 @@
     UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleDone target:self action:@selector(back)];
     self.navigationItem.leftBarButtonItem = backButtonItem;
     self.navigationItem.leftBarButtonItem.tintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.barTintColor = mainColor;
+    
+    UIBarButtonItem *saveButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Save" style:UIBarButtonItemStyleDone target:self action:@selector(save)];
+    self.navigationItem.rightBarButtonItem = saveButtonItem;
+    self.navigationItem.rightBarButtonItem.tintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.barTintColor = mainColor;
     
     NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
@@ -68,55 +78,62 @@
     
     UIColor *borderColor = [UIColor colorWithRed:240.0/256 green:240.0/256 blue:242.0/256 alpha:1.0];
     
-    UITextField *usernameField = [[UITextField alloc] initWithFrame:CGRectMake(0.7*width/2, 1.25*height/7, 200, 40)];
-    usernameField.font = [UIFont fontWithName:@"Helvetica" size:15.0f];
-    usernameField.backgroundColor = [UIColor whiteColor];
+    self.usernameField = [[UITextField alloc] initWithFrame:CGRectMake(0.7*width/2, 1.25*height/7, 200, 40)];
+    self.usernameField.font = [UIFont fontWithName:@"Helvetica" size:15.0f];
+    self.usernameField.backgroundColor = [UIColor whiteColor];
     //usernameField.layer.borderColor = (__bridge CGColorRef _Nullable)borderColor;
-    usernameField.layer.borderColor = [borderColor CGColor];
-    usernameField.layer.borderWidth = 1.0f;
-    usernameField.layer.cornerRadius = 8.0f;
-    usernameField.text = @"Username";
-    usernameField.textAlignment = UITextAlignmentCenter;
-    [self.view addSubview:usernameField];
+    self.usernameField.layer.borderColor = [borderColor CGColor];
+    self.usernameField.layer.borderWidth = 1.0f;
+    self.usernameField.layer.cornerRadius = 8.0f;
+    self.usernameField.text = @"Username";
+    self.usernameField.textAlignment = UITextAlignmentCenter;
+    [self.view addSubview:self.usernameField];
     
-    UITextField *passwordField = [[UITextField alloc] initWithFrame:CGRectMake(0.7*width/2, 1.85*height/7, 200, 40)];
-    passwordField.font = [UIFont fontWithName:@"Helvetica" size:15.0f];
-    passwordField.backgroundColor = [UIColor whiteColor];
+    self.passwordField = [[UITextField alloc] initWithFrame:CGRectMake(0.7*width/2, 1.85*height/7, 200, 40)];
+    self.passwordField.font = [UIFont fontWithName:@"Helvetica" size:15.0f];
+    self.passwordField.backgroundColor = [UIColor whiteColor];
     //usernameField.layer.borderColor = (__bridge CGColorRef _Nullable)borderColor;
-    passwordField.layer.borderColor = [borderColor CGColor];
-    passwordField.layer.borderWidth = 1.0f;
-    passwordField.layer.cornerRadius = 8.0f;
-    passwordField.text = @"Password";
-    passwordField.textAlignment = UITextAlignmentCenter;
-    [self.view addSubview:passwordField];
+    self.passwordField.layer.borderColor = [borderColor CGColor];
+    self.passwordField.layer.borderWidth = 1.0f;
+    self.passwordField.layer.cornerRadius = 8.0f;
+    self.passwordField.text = @"Password";
+    self.passwordField.textAlignment = UITextAlignmentCenter;
+    [self.view addSubview:self.passwordField];
     
-    UITextField *phoneField = [[UITextField alloc] initWithFrame:CGRectMake(0.7*width/2, 2.45*height/7, 200, 40)];
-    phoneField.font = [UIFont fontWithName:@"Helvetica" size:15.0f];
-    phoneField.backgroundColor = [UIColor whiteColor];
+    self.phoneField = [[UITextField alloc] initWithFrame:CGRectMake(0.7*width/2, 2.45*height/7, 200, 40)];
+    self.phoneField.font = [UIFont fontWithName:@"Helvetica" size:15.0f];
+    self.phoneField.backgroundColor = [UIColor whiteColor];
     //usernameField.layer.borderColor = (__bridge CGColorRef _Nullable)borderColor;
-    phoneField.layer.borderColor = [borderColor CGColor];
-    phoneField.layer.borderWidth = 1.0f;
-    phoneField.layer.cornerRadius = 8.0f;
-    phoneField.text = @"000-000-0000";
-    phoneField.textAlignment = UITextAlignmentCenter;
-    [self.view addSubview:phoneField];
+    self.phoneField.layer.borderColor = [borderColor CGColor];
+    self.phoneField.layer.borderWidth = 1.0f;
+    self.phoneField.layer.cornerRadius = 8.0f;
+    self.phoneField.text = @"000-000-0000";
+    self.phoneField.textAlignment = UITextAlignmentCenter;
+    [self.view addSubview:self.phoneField];
     
-    UITextField *zipField = [[UITextField alloc] initWithFrame:CGRectMake(0.7*width/2, 3.05*height/7, 200, 40)];
-    zipField.font = [UIFont fontWithName:@"Helvetica" size:15.0f];
-    zipField.backgroundColor = [UIColor whiteColor];
+    self.zipField = [[UITextField alloc] initWithFrame:CGRectMake(0.7*width/2, 3.05*height/7, 200, 40)];
+    self.zipField.font = [UIFont fontWithName:@"Helvetica" size:15.0f];
+    self.zipField.backgroundColor = [UIColor whiteColor];
     //usernameField.layer.borderColor = (__bridge CGColorRef _Nullable)borderColor;
-    zipField.layer.borderColor = [borderColor CGColor];
-    zipField.layer.borderWidth = 1.0f;
-    zipField.layer.cornerRadius = 8.0f;
-    zipField.text = @"Zip Code";
-    zipField.textAlignment = UITextAlignmentCenter;
-    [self.view addSubview:zipField];
+    self.zipField.layer.borderColor = [borderColor CGColor];
+    self.zipField.layer.borderWidth = 1.0f;
+    self.zipField.layer.cornerRadius = 8.0f;
+    self.zipField.text = @"Zip Code";
+    self.zipField.textAlignment = UITextAlignmentCenter;
+    [self.view addSubview:self.zipField];
 
     
 }
 
 -(void) back {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(void) save {
+    [self.usernameField resignFirstResponder];
+    [self.passwordField resignFirstResponder];
+    [self.phoneField resignFirstResponder];
+    [self.zipField resignFirstResponder];
 }
 
 @end
