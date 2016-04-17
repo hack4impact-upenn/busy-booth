@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		5A64A5A51C909E92001629F0 /* SmallWaitTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A64A5A41C909E92001629F0 /* SmallWaitTime.m */; };
 		5A64A5A81C90A047001629F0 /* LargeWaitTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A64A5A71C90A047001629F0 /* LargeWaitTime.m */; };
+		6B0F5AE61CB19222002BE2AA /* CheckInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B0F5AE51CB19222002BE2AA /* CheckInViewController.m */; };
 		6B7DF8851C6F77A100D43104 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B7DF8841C6F77A100D43104 /* Constants.m */; };
 		6B7DF8891C6FAA0400D43104 /* PollingPlaceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B7DF8881C6FAA0400D43104 /* PollingPlaceViewController.m */; };
 		6B8AE3581C7829C6003E51BC /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B8AE3571C7829C6003E51BC /* SettingsTableViewController.m */; };
@@ -34,6 +35,8 @@
 		5A64A5A41C909E92001629F0 /* SmallWaitTime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SmallWaitTime.m; sourceTree = "<group>"; };
 		5A64A5A61C90A047001629F0 /* LargeWaitTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LargeWaitTime.h; sourceTree = "<group>"; };
 		5A64A5A71C90A047001629F0 /* LargeWaitTime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LargeWaitTime.m; sourceTree = "<group>"; };
+		6B0F5AE41CB19222002BE2AA /* CheckInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckInViewController.h; sourceTree = "<group>"; };
+		6B0F5AE51CB19222002BE2AA /* CheckInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckInViewController.m; sourceTree = "<group>"; };
 		6B7DF8831C6F77A100D43104 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		6B7DF8841C6F77A100D43104 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		6B7DF8861C6F7CF100D43104 /* BusyBooth-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BusyBooth-Prefix.pch"; sourceTree = "<group>"; };
@@ -112,6 +115,8 @@
 				6B8DAC541C6879A400AA6ED3 /* MainViewController.m */,
 				6B7DF8871C6FAA0400D43104 /* PollingPlaceViewController.h */,
 				6B7DF8881C6FAA0400D43104 /* PollingPlaceViewController.m */,
+				6B0F5AE41CB19222002BE2AA /* CheckInViewController.h */,
+				6B0F5AE51CB19222002BE2AA /* CheckInViewController.m */,
 				6BC770E81C7A551A004CC8D6 /* PastPollingViews */,
 				6B8AE3591C782A14003E51BC /* Settings */,
 			);
@@ -332,6 +337,7 @@
 				6BC770E71C7A4CAC004CC8D6 /* PastPollingTableViewController.m in Sources */,
 				5A64A5A81C90A047001629F0 /* LargeWaitTime.m in Sources */,
 				6B8DAC591C6879A500AA6ED3 /* LoginViewController.m in Sources */,
+				6B0F5AE61CB19222002BE2AA /* CheckInViewController.m in Sources */,
 				6BB063C71CA8B820000EF46C /* CheckIns.m in Sources */,
 				6BC770F41C7A55DC004CC8D6 /* WaitTimeTableViewCell.m in Sources */,
 				5A64A5A51C909E92001629F0 /* SmallWaitTime.m in Sources */,

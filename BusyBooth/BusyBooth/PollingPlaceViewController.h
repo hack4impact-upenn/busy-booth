@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
 #import "MasterTableViewController.h"
 
-@interface PollingPlaceViewController : UIViewController
+@interface PollingPlaceViewController : UIViewController <UINavigationControllerDelegate, CLLocationManagerDelegate>
 
 @property (nonatomic, weak) MasterTableViewController* masterVC;
 

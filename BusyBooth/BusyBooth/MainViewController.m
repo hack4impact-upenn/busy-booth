@@ -42,7 +42,7 @@
     self.navigationItem.leftBarButtonItem.tintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.barTintColor = mainColor;
     
-    [CheckIns checkingOutWithController:self];
+    // [CheckIns checkingOutWithController:self];
 }
 
 

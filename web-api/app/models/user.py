@@ -23,3 +23,12 @@ class User(db.Model):
 
     def __repr__(self):
         return '<User \'%s\'>' % self.full_name()
+
+    def overview(self):
+        return {
+            "code": 0,
+            "first_name": self.first_name,
+            "last_name": self.last_name,
+            "full_name": self.full_name(),
+            "address": self.address
+        }
