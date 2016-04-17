@@ -38,10 +38,16 @@
                                     NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
                                                                                 completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
                                                                       {
-                                                                          NSDictionary *loginSuccessful = [NSJSONSerialization JSONObjectWithData:data
-                                                                                                                                          options:kNilOptions
-                                                                                                                                            error:&error];
-                                                                          NSLog(@"%@", loginSuccessful);
+                                                                          
+                                                                          if(data) {
+                                                                              
+                                                                              NSDictionary *loginSuccessful = [NSJSONSerialization JSONObjectWithData:data
+                                                                                                                                              options:kNilOptions
+                                                                                                                                                error:&error];
+                                                                              NSLog(@"%@", loginSuccessful);
+                                                                          } else {
+                                                                              NSLog(@"hey");
+                                                                          }
                                                                       }];
                                     [dataTask resume];
                                 }];
