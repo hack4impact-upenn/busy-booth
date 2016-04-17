@@ -30,5 +30,6 @@ class User(db.Model):
             "first_name": self.first_name,
             "last_name": self.last_name,
             "full_name": self.full_name(),
-            "address": self.address
+            "address": self.address,
+            "booth_id": self.polling_booth.id
         }

@@ -159,12 +159,13 @@ def history_wait(booth_id):
 
         averages = []
         for i in xrange(6):
+            minute_start = past_hours[i].hour * 60 + past_hours[i].minute
 
             # if no data for that hour set average as -1
             if counts[i] == 0.0:
-                averages.append({"hour_start": past_hours[i],"time":-1})
+                averages.append({"hour_start": past_hours[i], "minute_start": minute_start, "time":-1})
             else:
-                averages.append({"hour_start": past_hours[i],"time":elapsed_sums[i]/counts[i]})
+                averages.append({"hour_start": past_hours[i], "minute_start": minute_start, "time":elapsed_sums[i]/counts[i]})
 
         return jsonify({"code": 0, "data": averages})
 
