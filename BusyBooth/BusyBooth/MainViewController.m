@@ -13,8 +13,6 @@
 @interface MainViewController () <CLLocationManagerDelegate, MKMapViewDelegate>
 @property(nonatomic,strong) CLLocationManager *location;
 @property(nonatomic, strong) MKMapView *mapView;
-@property(nonatomic, strong) MKPolyline *routeLine;
-@property(nonatomic, strong) MKPolylineView *lineView;
 @property(nonatomic, strong) MKRoute *routeDetails;
 @end
 
