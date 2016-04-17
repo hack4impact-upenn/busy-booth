@@ -10,4 +10,8 @@
 
 @interface PastPollingTableViewController : UITableViewController
 
+@property (nonatomic) int boothId;
+@property (nonatomic, strong) NSMutableDictionary* waitTimes;
+@property (nonatomic, strong) NSMutableArray* waitTimesKeys;
+
 @end
