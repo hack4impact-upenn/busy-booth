@@ -169,6 +169,7 @@
                                                   [APPDELEGATE presentSWController];
                                               });
                                               [[NSUserDefaults standardUserDefaults] setObject:@"true" forKey:IsLoggedIn];
+                                              [[NSUserDefaults standardUserDefaults] setObject:self.phoneNumberField.text forKey:@"curr-number"];
                                           } else if([[loginSuccessful objectForKey:@"code"] integerValue] == 2) {
                                               dispatch_async(dispatch_get_main_queue(), ^{
                                                   [SVProgressHUD showErrorWithStatus:@"This phone number is already in use"];

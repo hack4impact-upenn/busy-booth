@@ -170,7 +170,7 @@
 
     [APPDELEGATE presentSWController];
     [[NSUserDefaults standardUserDefaults] setObject:@"true" forKey:IsLoggedIn];
-    [[NSUserDefaults standardUserDefaults] setObject:self.phoneNumberField forKey:@"curr-number"];
+    [[NSUserDefaults standardUserDefaults] setObject:self.phoneNumberField.text forKey:@"curr-number"];
 }
 
 - (void)noLogin {
