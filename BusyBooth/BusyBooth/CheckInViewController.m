@@ -13,6 +13,7 @@
 @property (strong, nonatomic) NSTimer *stopWatchTimer; // Store the timer that fires after a certain time
 @property (strong, nonatomic) NSDate *startDate; // Stores the date of the click on the start button *
 @property (nonatomic, strong) UILabel *stopWatchLabel;
+@property (nonatomic) BOOL stopWatchRunning;
 
 @end
 
@@ -22,6 +23,7 @@
     self = [super init];
     if (self) {
         self.title = @"Check In";
+        self.stopWatchRunning = false;
     }
     return self;
 }
@@ -56,7 +58,7 @@
     UIButton *endButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     endButton.frame = CGRectMake(100, 200, 100, 100);
     [endButton setTitle:@"End" forState:UIControlStateNormal];
-    [startButton addTarget:self action:@selector(onStopPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [endButton addTarget:self action:@selector(onStopPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:endButton];
     
     self.stopWatchLabel = [[UILabel alloc] initWithFrame:CGRectMake(100, 300, 200, 100)];
@@ -84,20 +86,26 @@
 }
 
 - (void)onStartPressed:(id)sender {
-    self.startDate = [NSDate date];
-    
-    // Create the stop watch timer that fires every 10 ms
-    self.stopWatchTimer = [NSTimer scheduledTimerWithTimeInterval:1.0/10.0
-                                                           target:self
-                                                         selector:@selector(updateTimer)
-                                                         userInfo:nil
-                                                          repeats:YES];
+    if(!self.stopWatchRunning) {
+        self.stopWatchRunning = YES;
+        self.startDate = [NSDate date];
+        
+        // Create the stop watch timer that fires every 10 ms
+        self.stopWatchTimer = [NSTimer scheduledTimerWithTimeInterval:1.0/10.0
+                                                               target:self
+                                                             selector:@selector(updateTimer)
+                                                             userInfo:nil
+                                                              repeats:YES];
+    }
 }
 
 - (void)onStopPressed:(id)sender {
-    [self.stopWatchTimer invalidate];
-    self.stopWatchTimer = nil;
-    [self updateTimer];
+    if(self.stopWatchRunning) {
+        self.stopWatchRunning = NO;
+        [self.stopWatchTimer invalidate];
+        self.stopWatchTimer = nil;
+        [self updateTimer];
+    }
 }
 
 @end
