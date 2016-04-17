@@ -10,4 +10,7 @@
 
 @interface CheckInViewController : UIViewController
 
+-(void) stopTimer;
+-(void) startTimer;
+
 @end
