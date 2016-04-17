@@ -47,15 +47,10 @@
     
     self.mapView = [[MKMapView alloc] initWithFrame:self.view.frame];
     self.mapView.delegate = self;
-    
-    
-    
     self.location = [[CLLocationManager alloc]init];
     self.location.delegate = self;
-    
     [self.location requestAlwaysAuthorization];
     [self.location startUpdatingLocation];
-    
     self.mapView.showsUserLocation = YES;
     
     
