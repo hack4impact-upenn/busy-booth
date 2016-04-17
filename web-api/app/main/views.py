@@ -16,7 +16,7 @@ def loggedin():
     else:
         return "Not logged in."
 
- 
+
 def phone_format(number):
 
     """
@@ -238,4 +238,39 @@ def polling_places():
     return jsonify({"code": 0, "data":[{"id":x.id, "name":x.name, "address":x.address, "zipcode":x.zip_code} for x in polling_places]})
 
 
+@main.route('/lookup/<phone>', methods=['GET', 'POST'])
+def lookup(phone):
 
+    """
+    Gets the users information from the phonenumber
+
+    Keyword arguments:
+    phone -- phone number of user (10 digit)
+
+    """
+
+    user = User.query.filter_by(phone=phone_format(phone)).first()
+
+    if user == None:
+        return jsonify({"code": 1, "data": "User account does not exist."})
+
+    return jsonify(user.overview())
+
+@main.route('/login/<phone>', methods=['GET', 'POST'])
+def login(phone):
+
+    """
+    Sees if the phone number exists
+
+    Keyword arguments:
+    phone -- phone number of user (10 digit)
+
+    """
+
+    user = User.query.filter_by(phone=phone_format(phone)).first()
+
+    if user == None:
+        return jsonify({"code": 1, "data": "User account does not exist.",
+                        "logged_in": False})
+
+    return jsonify({"code": 1, "data": "Log in successful.", "logged_in": True})
