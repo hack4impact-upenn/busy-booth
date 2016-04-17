@@ -89,9 +89,18 @@ didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
 -(void)drawRoute:(CLLocation *)source goingTo:(CLLocation *)destination {
     
     
+    // zoom to region
+    MKCoordinateRegion region;
+    region.center.latitude = (source.coordinate.latitude + destination.coordinate.latitude)/2;
+    region.center.longitude = (source.coordinate.longitude + destination.coordinate.longitude)/2;
+    region.span.latitudeDelta = fabs(source.coordinate.latitude - destination.coordinate.latitude)*1.1;
+    region.span.latitudeDelta = (region.span.latitudeDelta < 0.01)? 0.01:region.span.latitudeDelta;
+    region.span.longitudeDelta = fabs(source.coordinate.longitude - destination.coordinate.longitude)*1.1;
+    MKCoordinateRegion scaledRegion = [self.mapView regionThatFits:region];
+    [self.mapView setRegion: scaledRegion animated:YES];
+    
+    // request directions
     MKDirectionsRequest *directionsRequest = [[MKDirectionsRequest alloc] init];
-    
-    
     MKPlacemark *placemarkSource = [[MKPlacemark alloc] initWithCoordinate:CLLocationCoordinate2DMake(source.coordinate.latitude, source.coordinate.longitude) addressDictionary:nil];
     MKPlacemark *placemarkDest = [[MKPlacemark alloc] initWithCoordinate:CLLocationCoordinate2DMake(destination.coordinate.latitude, destination.coordinate.longitude) addressDictionary:nil];
     MKMapItem *sourceItem = [[MKMapItem alloc] initWithPlacemark:placemarkSource];
