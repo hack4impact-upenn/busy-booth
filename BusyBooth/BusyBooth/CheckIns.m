@@ -10,7 +10,7 @@
 
 @implementation CheckIns
 
-+(void) checkingInWithController:(MainViewController *)currController {
++(void) checkingInWithController:(UIViewController *)currController {
     UIAlertController * alert=   [UIAlertController
                                   alertControllerWithTitle:@"Checking In"
                                   message:@"Have you reached the polling booth?"
@@ -23,10 +23,13 @@
                                 {
                                     [[NSUserDefaults standardUserDefaults] setObject:@"true" forKey:@"isCheckedIn"];
                                     
+                                    if([currController isKindOfClass:[CheckInViewController class]]) {
+                                        [(CheckInViewController * )currController startTimer];
+                                    }
+                                    
                                     NSString *post = [NSString stringWithFormat:@"phone=%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"curr-number"]];                                    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
                                     NSString *postLength = [NSString stringWithFormat:@"%lu",(unsigned long)[postData length]];
                                     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-                                    
                                     
                                     [request setURL:[NSURL URLWithString:@"http://localhost:5000/start_time"]];
                                     [request setHTTPMethod:@"POST"];
@@ -65,7 +68,7 @@
     [currController presentViewController:alert animated:YES completion:nil];
 }
 
-+(void) checkingOutWithController:(MainViewController *)currController {
++(void) checkingOutWithController:(UIViewController *)currController {
     UIAlertController * alert=   [UIAlertController
                                   alertControllerWithTitle:@"Checking out"
                                   message:@"Have you finished voting?"
@@ -79,28 +82,32 @@
                                     [[NSUserDefaults standardUserDefaults] setObject:@"true" forKey:@"isCheckedOut"];
                                     [[NSUserDefaults standardUserDefaults] setObject:@"true" forKey:@"finishedVoting"];
                                     
-                                    NSString *post = [NSString stringWithFormat:@"phone=%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"curr-number"]];
-                                    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
-                                    NSString *postLength = [NSString stringWithFormat:@"%lu",(unsigned long)[postData length]];
-                                    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+                                    if([currController isKindOfClass:[CheckInViewController class]]) {
+                                        [(CheckInViewController * )currController stopTimer];
+                                    }
                                     
-                                    
-                                    [request setURL:[NSURL URLWithString:@"http://localhost:5000/end_time"]];
-                                    [request setHTTPMethod:@"POST"];
-                                    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
-                                    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-                                    [request setHTTPBody:postData];
-                                    
-                                    NSURLSession *session = [NSURLSession sharedSession];
-                                    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
-                                                                                completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
-                                                                      {
-                                                                          NSDictionary *loginSuccessful = [NSJSONSerialization JSONObjectWithData:data
-                                                                                                                                          options:kNilOptions
-                                                                                                                                            error:&error];
-                                                                          NSLog(@"%@", loginSuccessful);
-                                                                      }];
-                                    [dataTask resume];
+//                                    NSString *post = [NSString stringWithFormat:@"phone=%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"curr-number"]];
+//                                    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+//                                    NSString *postLength = [NSString stringWithFormat:@"%lu",(unsigned long)[postData length]];
+//                                    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+//                                    
+//                                    
+//                                    [request setURL:[NSURL URLWithString:@"http://localhost:5000/end_time"]];
+//                                    [request setHTTPMethod:@"POST"];
+//                                    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+//                                    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+//                                    [request setHTTPBody:postData];
+//                                    
+//                                    NSURLSession *session = [NSURLSession sharedSession];
+//                                    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+//                                                                                completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
+//                                                                      {
+//                                                                          NSDictionary *loginSuccessful = [NSJSONSerialization JSONObjectWithData:data
+//                                                                                                                                          options:kNilOptions
+//                                                                                                                                            error:&error];
+//                                                                          NSLog(@"%@", loginSuccessful);
+//                                                                      }];
+//                                    [dataTask resume];
 
                                 }];
     
@@ -110,7 +117,6 @@
                                handler:^(UIAlertAction * action)
                                {
                                    [[NSUserDefaults standardUserDefaults] setObject:@"false" forKey:@"isCheckedOut"];
-                                   // MAYBE SET A TIMER HERE.
                                }];
     
     [alert addAction:yesButton];

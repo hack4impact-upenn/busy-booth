@@ -8,10 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import "MainViewController.h"
+#import "CheckInViewController.h"
 
 @interface CheckIns : NSObject <UIAlertViewDelegate>
 
-+(void)checkingInWithController:(MainViewController *)currController;
-+(void)checkingOutWithController:(MainViewController *)currController;
++(void)checkingInWithController:(UIViewController *)currController;
++(void)checkingOutWithController:(UIViewController *)currController;
 
 @end

@@ -46,11 +46,6 @@ typedef NS_ENUM (NSUInteger, MasterTableViewRowType) {
     [self.revealViewController.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
 }
 
--(void) viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    NSLog(@"asdjlhflashuri");
-}
-
 -(void) viewWillDisappear:(BOOL)animated {
     
     [super viewWillDisappear:animated];
@@ -78,7 +73,7 @@ typedef NS_ENUM (NSUInteger, MasterTableViewRowType) {
     
     self.viewControllerArray = @[mainVC, pollVC, pastVC, checkInVC, settingsVC];
     
-////    self.iconArray = @[@"Micro-25.png", @"Folder-25.png", @"Search-25.png", @"Settings-25.png", @"Exit-25.png"];
+//    self.iconArray = @[@"Micro-25.png", @"Folder-25.png", @"Search-25.png", @"Settings-25.png", @"Exit-25.png"];
     
 }
 

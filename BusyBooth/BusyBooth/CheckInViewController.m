@@ -7,6 +7,7 @@
 //
 
 #import "CheckInViewController.h"
+#import "Checkins.h"
 
 @interface CheckInViewController ()
 
@@ -35,6 +36,9 @@
     [self.navigationController.navigationBar
      setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
     
+    float width = self.view.frame.size.width;
+    float height = self.view.frame.size.height;
+    
     SWRevealViewController *revealController = [self revealViewController];
     [revealController panGestureRecognizer];
     [revealController tapGestureRecognizer];
@@ -47,21 +51,31 @@
     self.navigationItem.leftBarButtonItem.tintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.barTintColor = mainColor;
     
-    // [CheckIns checkingOutWithController:self];
+    self.view.backgroundColor = [UIColor colorWithRed:240.0/256 green:240.0/256 blue:242.0/256 alpha:1.0];
     
     UIButton *startButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    startButton.frame = CGRectMake(100, 100, 100, 100);
-    [startButton setTitle:@"Start" forState:UIControlStateNormal];
+    [startButton setFrame:CGRectMake(0, 0, 275, 40)];
+    [startButton setTitleColor: mainColor forState:UIControlStateNormal];
+    [startButton setBackgroundColor: [UIColor whiteColor]];
+    [startButton setTitle:@"Checkin to Polling Place" forState:UIControlStateNormal];
+    [startButton setCenter:CGPointMake(width/2, height*6/7)];
     [startButton addTarget:self action:@selector(onStartPressed:) forControlEvents:UIControlEventTouchUpInside];
+    startButton.layer.cornerRadius = 8;
     [self.view addSubview:startButton];
     
-    UIButton *endButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    endButton.frame = CGRectMake(100, 200, 100, 100);
-    [endButton setTitle:@"End" forState:UIControlStateNormal];
-    [endButton addTarget:self action:@selector(onStopPressed:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:endButton];
+    UIButton *stopButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [stopButton setFrame:CGRectMake(0, 0, 275, 40)];
+    [stopButton setTitleColor: mainColor forState:UIControlStateNormal];
+    [stopButton setBackgroundColor: [UIColor whiteColor]];
+    [stopButton setTitle:@"Checkout of Polling Place" forState:UIControlStateNormal];
+    [stopButton setCenter:CGPointMake(width/2, height*6.6/7)];
+    [stopButton addTarget:self action:@selector(onStopPressed:) forControlEvents:UIControlEventTouchUpInside];
+    stopButton.layer.cornerRadius = 8;
+    [self.view addSubview:stopButton];
     
-    self.stopWatchLabel = [[UILabel alloc] initWithFrame:CGRectMake(100, 300, 200, 100)];
+    
+    self.stopWatchLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 100)];
+    [self.stopWatchLabel setCenter:CGPointMake(width/2, height/2)];
     [self.view addSubview:self.stopWatchLabel];
     
 }
@@ -73,11 +87,9 @@
     NSTimeInterval timeInterval = [currentDate timeIntervalSinceDate:self.startDate];
     NSDate *timerDate = [NSDate dateWithTimeIntervalSince1970:timeInterval];
     
-    NSLog(@"%@", timerDate);
-    
     // Create a date formatter
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"HH:mm:ss.SSS"];
+    [dateFormatter setDateFormat:@"mm:ss"];
     [dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0.0]];
     
     // Format the elapsed time and set it to the label
@@ -85,26 +97,34 @@
     self.stopWatchLabel.text = timeString;
 }
 
+- (void) startTimer {
+    self.stopWatchRunning = YES;
+    self.startDate = [NSDate date];
+    
+    // Create the stop watch timer that fires every 10 ms
+    self.stopWatchTimer = [NSTimer scheduledTimerWithTimeInterval:1.0/10.0
+                                                           target:self
+                                                         selector:@selector(updateTimer)
+                                                         userInfo:nil
+                                                          repeats:YES];
+}
+
+- (void) stopTimer {
+    self.stopWatchRunning = NO;
+    [self.stopWatchTimer invalidate];
+    self.stopWatchTimer = nil;
+    [self updateTimer];
+}
+
 - (void)onStartPressed:(id)sender {
     if(!self.stopWatchRunning) {
-        self.stopWatchRunning = YES;
-        self.startDate = [NSDate date];
-        
-        // Create the stop watch timer that fires every 10 ms
-        self.stopWatchTimer = [NSTimer scheduledTimerWithTimeInterval:1.0/10.0
-                                                               target:self
-                                                             selector:@selector(updateTimer)
-                                                             userInfo:nil
-                                                              repeats:YES];
+        [CheckIns checkingInWithController:self];
     }
 }
 
 - (void)onStopPressed:(id)sender {
     if(self.stopWatchRunning) {
-        self.stopWatchRunning = NO;
-        [self.stopWatchTimer invalidate];
-        self.stopWatchTimer = nil;
-        [self updateTimer];
+        [CheckIns checkingOutWithController:self];
     }
 }
 
