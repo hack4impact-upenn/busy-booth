@@ -59,8 +59,6 @@
     CLLocation *dest = [[CLLocation alloc] initWithLatitude:39.949466 longitude:-75.171864];
     [self drawRoute:[self.location location] goingTo:dest];
     
-
-//    [CheckIns checkingOutWithController:self];
 }
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {

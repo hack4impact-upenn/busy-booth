@@ -23,7 +23,7 @@
     if (self) {
         self.title = @"Past Poll Times";
         self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        [self getBoothId];
+        // [self getBoothId];
     }
     return self;
 }
