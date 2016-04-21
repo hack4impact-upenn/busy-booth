@@ -39,11 +39,17 @@ typedef NS_ENUM (NSUInteger, MasterTableViewRowType) {
 @synthesize rearTableView = _rearTableView;
 
 -(void) viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    
     [self.revealViewController.frontViewController.view setUserInteractionEnabled:NO];
     [self.revealViewController.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
 }
 
 -(void) viewWillDisappear:(BOOL)animated {
+    
+    [super viewWillDisappear:animated];
+    
     [self.revealViewController.frontViewController.view setUserInteractionEnabled:YES];
 }
 

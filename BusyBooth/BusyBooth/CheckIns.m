@@ -27,27 +27,32 @@
                                         [(CheckInViewController * )currController startTimer];
                                     }
                                     
-//                                    NSString *post = [NSString stringWithFormat:@"phone=%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"curr-number"]];                                    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
-//                                    NSString *postLength = [NSString stringWithFormat:@"%lu",(unsigned long)[postData length]];
-//                                    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-//                                    
-//                                    
-//                                    [request setURL:[NSURL URLWithString:@"http://localhost:5000/start_time"]];
-//                                    [request setHTTPMethod:@"POST"];
-//                                    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
-//                                    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-//                                    [request setHTTPBody:postData];
-//                                    
-//                                    NSURLSession *session = [NSURLSession sharedSession];
-//                                    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
-//                                                                                completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
-//                                                                      {
-//                                                                          NSDictionary *loginSuccessful = [NSJSONSerialization JSONObjectWithData:data
-//                                                                                                                                          options:kNilOptions
-//                                                                                                                                            error:&error];
-//                                                                          NSLog(@"%@", loginSuccessful);
-//                                                                      }];
-//                                    [dataTask resume];
+                                    NSString *post = [NSString stringWithFormat:@"phone=%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"curr-number"]];                                    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+                                    NSString *postLength = [NSString stringWithFormat:@"%lu",(unsigned long)[postData length]];
+                                    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+                                    
+                                    [request setURL:[NSURL URLWithString:@"http://localhost:5000/start_time"]];
+                                    [request setHTTPMethod:@"POST"];
+                                    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+                                    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+                                    [request setHTTPBody:postData];
+                                    
+                                    NSURLSession *session = [NSURLSession sharedSession];
+                                    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                                                                completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
+                                                                      {
+                                                                          
+                                                                          if(data) {
+                                                                              
+                                                                              NSDictionary *loginSuccessful = [NSJSONSerialization JSONObjectWithData:data
+                                                                                                                                              options:kNilOptions
+                                                                                                                                                error:&error];
+                                                                              NSLog(@"%@", loginSuccessful);
+                                                                          } else {
+                                                                              NSLog(@"hey");
+                                                                          }
+                                                                      }];
+                                    [dataTask resume];
                                 }];
     UIAlertAction* noButton = [UIAlertAction
                                actionWithTitle:@"No"

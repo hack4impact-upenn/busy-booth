@@ -76,7 +76,7 @@ def create_account():
                 )
 
             # How to set polling booth? TO DO
-            PollingBooth.query.filter_by(id=1).first().people.append(new_user)
+            # PollingBooth.query.filter_by(id=1).first().people.append(new_user)
 
             db.session.add(new_user)
             db.session.commit()
@@ -159,12 +159,13 @@ def history_wait(booth_id):
 
         averages = []
         for i in xrange(6):
+            minute_start = past_hours[i].hour * 60 + past_hours[i].minute
 
             # if no data for that hour set average as -1
             if counts[i] == 0.0:
-                averages.append({"hour_start": past_hours[i],"time":-1})
+                averages.append({"hour_start": past_hours[i], "minute_start": minute_start, "time":-1})
             else:
-                averages.append({"hour_start": past_hours[i],"time":elapsed_sums[i]/counts[i]})
+                averages.append({"hour_start": past_hours[i], "minute_start": minute_start, "time":elapsed_sums[i]/counts[i]})
 
         return jsonify({"code": 0, "data": averages})
 
@@ -274,3 +275,25 @@ def login(phone):
                         "logged_in": False})
 
     return jsonify({"code": 1, "data": "Log in successful.", "logged_in": True})
+
+@main.route('/update/<phone>', methods=['POST'])
+def update(phone):
+
+    """
+    Updates a user's account information (first name, last name, address)
+    
+    Keyword arguments:
+    phone -- phone number of user (10 digit)
+    """
+
+    user = User.query.filter_by(phone=phone_format(phone)).first()
+    if user == None:
+        return jsonify({"code": 1, "data": "User account does not exist."})
+
+    user.first_name = request.form['fname']
+    user.last_name = request.form['lname']
+    user.address = request.form['address']
+
+    db.session.commit()
+    
+    return jsonify({"code": 1, "data": "User account updated."})
