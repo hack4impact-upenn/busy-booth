@@ -20,9 +20,21 @@
 
 @implementation LoginViewController
 
+/*-(id) init {
+    self = [super init];
+    if (self) {
+        self.title = @"Login";
+    }
+    return self;
+}*/
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = mainColor;
+    /*UIView *titleView = [[UIView alloc] init];
+    [titleView setBackgroundColor:mainColor];
+    //titleView.hidden = YES;
+    [self.navigationItem setTitleView:titleView];*/
     
     CGFloat width = self.view.frame.size.width;
     CGFloat height = self.view.frame.size.height;

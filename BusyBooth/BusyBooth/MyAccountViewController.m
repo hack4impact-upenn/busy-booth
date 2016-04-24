@@ -148,23 +148,25 @@
     [self.zipField resignFirstResponder];
     NSString *post = [NSString stringWithFormat:@"fname=%@&lname=%@&address=%@", self.firstNameField.text, self.lastNameField.text, self.zipField.text];
     NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
-    NSString *postLength = [NSString stringWithFormat:@"%lu",(unsigned long)[postData length]];
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://localhost:5000/update/%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"curr-number"]]]];
-    [request setHTTPMethod:@"POST"];
-    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
-    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-    [request setHTTPBody:postData];
-    NSURLSession *session = [NSURLSession sharedSession];
-    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
-    completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
-    {
+    if (postData != nil) {
+        NSString *postLength = [NSString stringWithFormat:@"%lu",(unsigned long)[postData length]];
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+        [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://localhost:5000/update/%@",     [[NSUserDefaults standardUserDefaults] objectForKey:@"curr-number"]]]];
+        [request setHTTPMethod:@"POST"];
+        [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+        [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+        [request setHTTPBody:postData];
+        NSURLSession *session = [NSURLSession sharedSession];
+        NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
+        {
         NSDictionary *loginSuccessful = [NSJSONSerialization JSONObjectWithData:data
         options:kNilOptions
         error:&error];
         NSLog(@"%@", loginSuccessful);
-    }];
-    [dataTask resume];
+        }];
+        [dataTask resume];
+    }
 }
 
 -(void) getInformation {
@@ -172,34 +174,36 @@
     __block NSString *firstName, *zipcode, *lastName;
     NSString *post = [NSString stringWithFormat:@"phone=%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"curr-number"]];
     NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
-    NSString *postLength = [NSString stringWithFormat:@"%lu",(unsigned long)[postData length]];
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://localhost:5000/lookup/%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"curr-number"]]]];
-    [request setHTTPMethod:@"POST"];
-    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
-    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-    [request setHTTPBody:postData];
-    NSURLSession *session = [NSURLSession sharedSession];
-    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
-    completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
-    {
-        NSDictionary *loginSuccessful = [NSJSONSerialization JSONObjectWithData:data
-        options:kNilOptions
-        error:&error];
-        NSLog(@"%@", loginSuccessful);
-        zipcode = [loginSuccessful objectForKey: @"address"];
-        firstName = [loginSuccessful objectForKey:@"first_name"];
-        lastName = [loginSuccessful objectForKey:@"last_name"];
-        NSLog(@"@% @% @%", firstName, lastName, zipcode);
+    if (postData != nil) {
+        NSString *postLength = [NSString stringWithFormat:@"%lu",(unsigned long)[postData length]];
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+        [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://localhost:5000/lookup/%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"curr-number"]]]];
+        [request setHTTPMethod:@"POST"];
+        [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+        [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+        [request setHTTPBody:postData];
+        NSURLSession *session = [NSURLSession sharedSession];
+        NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
+        {
+            NSDictionary *loginSuccessful = [NSJSONSerialization JSONObjectWithData:data
+                                                                            options:kNilOptions
+                                                                              error:&error];
+            NSLog(@"%@", loginSuccessful);
+            zipcode = [loginSuccessful objectForKey: @"address"];
+            firstName = [loginSuccessful objectForKey:@"first_name"];
+            lastName = [loginSuccessful objectForKey:@"last_name"];
+            NSLog(@"@% @% @%", firstName, lastName, zipcode);
         
-        dispatch_async(dispatch_get_main_queue(), ^{
+            dispatch_async(dispatch_get_main_queue(), ^{
         
             [self.firstNameField setText:firstName];
             [self.lastNameField setText:lastName];
             [self.zipField setText:zipcode];
-        });
-    }];
-    [dataTask resume];
+            });
+        }];
+        [dataTask resume];
+    }
 }
 
 @end

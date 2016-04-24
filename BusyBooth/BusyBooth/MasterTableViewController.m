@@ -14,6 +14,7 @@
 #import "PastPollingTableViewController.h"
 #import "SettingsTableViewController.h"
 #import "CheckInViewController.h"
+#import "LoginViewController.h"
 
 @interface MasterTableViewController () 
 
@@ -62,10 +63,18 @@ typedef NS_ENUM (NSUInteger, MasterTableViewRowType) {
     PastPollingTableViewController *pastVC = [[PastPollingTableViewController alloc] init];
     CheckInViewController *checkInVC = [[CheckInViewController alloc] init];
     SettingsTableViewController *settingsVC = [[SettingsTableViewController alloc] init];
+    LoginViewController *loginVC = [[LoginViewController alloc] init];
+    [loginVC setTitle:@"Login"];
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:IsLoggedIn] isEqualToString:@"true"]) {
+        NSLog(@"incorrect");
+        self.viewControllerArray = @[mainVC, pollVC, pastVC, checkInVC, settingsVC];
+    }
+    else {
+        NSLog(@"correct");
+        self.viewControllerArray = @[mainVC, pollVC, pastVC, checkInVC, loginVC];
+    }
     
     pollVC.masterVC = self;
-    
-    self.viewControllerArray = @[mainVC, pollVC, pastVC, checkInVC, settingsVC];
     
 //    self.iconArray = @[@"Micro-25.png", @"Folder-25.png", @"Search-25.png", @"Settings-25.png", @"Exit-25.png"];
     
