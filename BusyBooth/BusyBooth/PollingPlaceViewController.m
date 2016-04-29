@@ -71,24 +71,25 @@
                              NSForegroundColorAttributeName: [UIColor grayColor]
                              };
     NSMutableAttributedString * line1 = [[NSMutableAttributedString alloc] initWithString: @"Your Polling Place is\n" attributes:attrs1];
-    NSMutableAttributedString * line2 = [[NSMutableAttributedString alloc] initWithString: @"POLLING_PLACE_NAME\n" attributes:attrs2];
-    NSMutableAttributedString * line3 = [[NSMutableAttributedString alloc] initWithString: @"Polling Place Address Line 1\n" attributes:attrs3];
-    NSMutableAttributedString * line4 = [[NSMutableAttributedString alloc] initWithString: @"Polling Place Address Line 2\n" attributes:attrs3];
-    NSMutableAttributedString * line5 = [[NSMutableAttributedString alloc] initWithString: @"Polling Place Address Line 3\n" attributes:attrs3];
-    NSMutableAttributedString* line6 = [[NSMutableAttributedString alloc] initWithString: @"Polling Place Address Line 4" attributes:attrs3];
+    NSMutableAttributedString * line2 = [[NSMutableAttributedString alloc] initWithString: @"Vance Hall\n" attributes:attrs2];
+    NSMutableAttributedString * line3 = [[NSMutableAttributedString alloc] initWithString: @"3733 Spruce St.\n" attributes:attrs3];
+    NSMutableAttributedString * line4 = [[NSMutableAttributedString alloc] initWithString: @"Philadelphia, PA 19104\n" attributes:attrs3];
+//    NSMutableAttributedString * line5 = [[NSMutableAttributedString alloc] initWithString: @"Polling Place Address Line 3\n" attributes:attrs3];
+//    NSMutableAttributedString* line6 = [[NSMutableAttributedString alloc] initWithString: @"Polling Place Address Line 4" attributes:attrs3];
     
     NSMutableAttributedString* allLines = [[NSMutableAttributedString alloc] init];
     [allLines appendAttributedString: line1];
     [allLines appendAttributedString: line2];
     [allLines appendAttributedString: line3];
     [allLines appendAttributedString: line4];
-    [allLines appendAttributedString: line5];
-    [allLines appendAttributedString: line6];
+//    [allLines appendAttributedString: line5];
+//    [allLines appendAttributedString: line6];
     
     UILabel *addressLabel = [[UILabel alloc] initWithFrame:CGRectMake(width/5, height*2.5/7, 200, 200)];
     addressLabel.attributedText = allLines;
     //addressLabel.font = customFont;
-    addressLabel.numberOfLines = 6;
+//    addressLabel.numberOfLines = 6;
+    addressLabel.numberOfLines = 4;
     addressLabel.adjustsFontSizeToFitWidth = YES;
     addressLabel.minimumScaleFactor = 10.0f/12.0f;
     addressLabel.clipsToBounds = YES;

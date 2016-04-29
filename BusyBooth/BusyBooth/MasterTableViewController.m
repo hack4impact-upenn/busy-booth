@@ -100,7 +100,11 @@ typedef NS_ENUM (NSUInteger, MasterTableViewRowType) {
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return MasterTableViewRowTypeCount;
+    if([[[NSUserDefaults standardUserDefaults] objectForKey:@"isAuthenticated"] boolValue]) {
+        return MasterTableViewRowTypeCount;
+    } else {
+        return MasterTableViewRowTypeCount - 1;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -111,10 +115,18 @@ typedef NS_ENUM (NSUInteger, MasterTableViewRowType) {
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
     }
-    
-    if(indexPath.row < MasterTableViewRowTypeCount) {
-        UIViewController *currViewController = [self.viewControllerArray objectAtIndex:indexPath.row];
-        cell.textLabel.text = currViewController.title;
+    if([[[NSUserDefaults standardUserDefaults] objectForKey:@"isAuthenticated"] boolValue]) {
+        if(indexPath.row < MasterTableViewRowTypeCount) {
+            UIViewController *currViewController = [self.viewControllerArray objectAtIndex:indexPath.row];
+            cell.textLabel.text = currViewController.title;
+        }
+    } else {
+        if(indexPath.row == 3) {
+            cell.textLabel.text = @"Go Back";
+        } else if(indexPath.row < MasterTableViewRowTypeCount) {
+            UIViewController *currViewController = [self.viewControllerArray objectAtIndex:indexPath.row];
+            cell.textLabel.text = currViewController.title;
+        }
     }
     cell.contentView.backgroundColor = [UIColor whiteColor];
     // cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -126,22 +138,45 @@ typedef NS_ENUM (NSUInteger, MasterTableViewRowType) {
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     SWRevealViewController *revealController = self.revealViewController;
     
-    if (indexPath.row == self.currRow) {
-        [revealController setFrontViewPosition:FrontViewPositionLeft animated:YES];
-        return;
-    }
-    
-    if(indexPath.row < MasterTableViewRowTypeCount) {
-        UIViewController *newFrontController = [self.viewControllerArray objectAtIndex:indexPath.row];
+    if([[[NSUserDefaults standardUserDefaults] objectForKey:@"isAuthenticated"] boolValue]) {
+
+        if (indexPath.row == self.currRow) {
+            [revealController setFrontViewPosition:FrontViewPositionLeft animated:YES];
+            return;
+        }
         
-        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newFrontController];
-        [revealController pushFrontViewController:navigationController animated:YES];
-        
-        NSIndexPath *path = [NSIndexPath indexPathForRow:self.currRow inSection:0];
-        [tableView cellForRowAtIndexPath:path].contentView.backgroundColor = [UIColor clearColor];
-        [tableView cellForRowAtIndexPath:indexPath].contentView.backgroundColor = [UIColor lightGrayColor];
-        
-        self.currRow = indexPath.row;
+        if(indexPath.row < MasterTableViewRowTypeCount) {
+            UIViewController *newFrontController = [self.viewControllerArray objectAtIndex:indexPath.row];
+            
+            UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newFrontController];
+            [revealController pushFrontViewController:navigationController animated:YES];
+            
+            NSIndexPath *path = [NSIndexPath indexPathForRow:self.currRow inSection:0];
+            [tableView cellForRowAtIndexPath:path].contentView.backgroundColor = [UIColor clearColor];
+            [tableView cellForRowAtIndexPath:indexPath].contentView.backgroundColor = [UIColor lightGrayColor];
+            
+            self.currRow = indexPath.row;
+        }
+    } else {
+        if (indexPath.row == self.currRow) {
+            [revealController setFrontViewPosition:FrontViewPositionLeft animated:YES];
+            return;
+        } else if(indexPath.row == 3) {
+            [APPDELEGATE logOut];
+            [[NSUserDefaults standardUserDefaults] setObject:@"NO" forKey:@"isAuthenticated"];
+            [[NSUserDefaults standardUserDefaults] setObject:@"NO" forKey:IsLoggedIn];
+        } else if(indexPath.row < MasterTableViewRowTypeCount) {
+            UIViewController *newFrontController = [self.viewControllerArray objectAtIndex:indexPath.row];
+            
+            UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newFrontController];
+            [revealController pushFrontViewController:navigationController animated:YES];
+            
+            NSIndexPath *path = [NSIndexPath indexPathForRow:self.currRow inSection:0];
+            [tableView cellForRowAtIndexPath:path].contentView.backgroundColor = [UIColor clearColor];
+            [tableView cellForRowAtIndexPath:indexPath].contentView.backgroundColor = [UIColor lightGrayColor];
+            
+            self.currRow = indexPath.row;
+        }
     }
 }
 

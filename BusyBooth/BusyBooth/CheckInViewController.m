@@ -73,8 +73,9 @@
     stopButton.layer.cornerRadius = 8;
     [self.view addSubview:stopButton];
     
-    
-    self.stopWatchLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 100)];
+    self.stopWatchLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 30)];
+    //[self.stopWatchLabel setCenter:CGPointMake(width/2, height/2)];
+    self.stopWatchLabel.text = [NSString stringWithFormat:@"00:00"];
     [self.stopWatchLabel setCenter:CGPointMake(width/2, height/2)];
     [self.view addSubview:self.stopWatchLabel];
     
@@ -112,7 +113,6 @@
 - (void) stopTimer {
     self.stopWatchRunning = NO;
     [self.stopWatchTimer invalidate];
-    self.stopWatchTimer = nil;
     [self updateTimer];
 }
 

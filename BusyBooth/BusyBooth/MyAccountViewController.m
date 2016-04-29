@@ -86,7 +86,7 @@
     self.firstNameField.layer.borderWidth = 1.0f;
     self.firstNameField.layer.cornerRadius = 8.0f;
     //self.firstNameField.text = @"First Name";
-    self.firstNameField.textAlignment = UITextAlignmentCenter;
+    self.firstNameField.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:self.firstNameField];
     
     self.lastNameField = [[UITextField alloc] initWithFrame:CGRectMake(0.7*width/2, 1.85*height/7, 200, 40)];
@@ -97,7 +97,7 @@
     self.lastNameField.layer.borderWidth = 1.0f;
     self.lastNameField.layer.cornerRadius = 8.0f;
     //self.lastNameField.text = @"Last Name";
-    self.lastNameField.textAlignment = UITextAlignmentCenter;
+    self.lastNameField.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:self.lastNameField];
     
     self.zipField = [[UITextField alloc] initWithFrame:CGRectMake(0.7*width/2, 2.45*height/7, 200, 40)];
@@ -108,7 +108,7 @@
     self.zipField.layer.borderWidth = 1.0f;
     self.zipField.layer.cornerRadius = 8.0f;
     //self.zipField.text = @"Zip Code";
-    self.zipField.textAlignment = UITextAlignmentCenter;
+    self.zipField.textAlignment = NSTextAlignmentCenter;
     
     self.phoneField = [[UITextField alloc] initWithFrame:CGRectMake(0.7*width/2, 3.05*height/7, 200, 40)];
     self.phoneField.font = [UIFont fontWithName:@"Helvetica" size:15.0f];
@@ -125,7 +125,7 @@
         [phoneNumberString insertString:@"-" atIndex:9];
     }
     self.phoneField.text = phoneNumberString;
-    self.phoneField.textAlignment = UITextAlignmentCenter;
+    self.phoneField.textAlignment = NSTextAlignmentCenter;
     self.phoneField.enabled = NO;
     
     [self.view addSubview:self.phoneField];
@@ -168,8 +168,7 @@
 }
 
 -(void) getInformation {
-    //[[NSUserDefaults standardUserDefaults] setObject:@"true" forKey:@"isCheckedIn"];
-    __block NSString *firstName, *zipcode, *lastName;
+    
     NSString *post = [NSString stringWithFormat:@"phone=%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"curr-number"]];
     NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
     NSString *postLength = [NSString stringWithFormat:@"%lu",(unsigned long)[postData length]];
@@ -187,13 +186,12 @@
         options:kNilOptions
         error:&error];
         NSLog(@"%@", loginSuccessful);
-        zipcode = [loginSuccessful objectForKey: @"address"];
-        firstName = [loginSuccessful objectForKey:@"first_name"];
-        lastName = [loginSuccessful objectForKey:@"last_name"];
-        NSLog(@"@% @% @%", firstName, lastName, zipcode);
+        NSString *zipcode = [loginSuccessful objectForKey: @"address"];
+        NSString *firstName = [loginSuccessful objectForKey:@"first_name"];
+        NSString *lastName = [loginSuccessful objectForKey:@"last_name"];
+        NSLog(@"%@ %@ %@", firstName, lastName, zipcode);
         
         dispatch_async(dispatch_get_main_queue(), ^{
-        
             [self.firstNameField setText:firstName];
             [self.lastNameField setText:lastName];
             [self.zipField setText:zipcode];

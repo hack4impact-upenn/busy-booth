@@ -168,7 +168,8 @@
                                               dispatch_async(dispatch_get_main_queue(), ^{
                                                   [APPDELEGATE presentSWController];
                                               });
-                                              [[NSUserDefaults standardUserDefaults] setObject:@"true" forKey:IsLoggedIn];
+                                              [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:IsLoggedIn];
+                                              [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"isAuthenticated"];
                                               [[NSUserDefaults standardUserDefaults] setObject:self.phoneNumberField.text forKey:@"curr-number"];
                                           } else if([[loginSuccessful objectForKey:@"code"] integerValue] == 2) {
                                               dispatch_async(dispatch_get_main_queue(), ^{
