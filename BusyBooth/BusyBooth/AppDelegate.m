@@ -56,11 +56,11 @@
     [self.navController pushViewController:self.SWRevealViewController animated:YES];
 }
 
-//- (void)presentLoginViewController {
-//    
-//    LoginViewController *loginVC = [[LoginViewController alloc] init];
-//    [self.navController pushViewController:loginVC animated:YES];
-//}
+- (void)presentLoginViewController {
+    
+    LoginViewController *loginVC = [[LoginViewController alloc] init];
+    [self.navController pushViewController:loginVC animated:YES];
+}
 
 - (void)presentSignUpViewController {
     

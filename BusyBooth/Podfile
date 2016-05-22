@@ -6,6 +6,7 @@
 target 'BusyBooth' do
 
 pod 'SVProgressHUD'
+pod 'BFPaperButton'
 
 end
 

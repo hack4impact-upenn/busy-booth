@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>BFPaperButton.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-BusyBooth.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -14,15 +19,30 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>UIColor+BFPaperColors.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>5BCD2F20924B7825B1C89C4FAF94BC32</key>
+		<key>59896BC288E264C4AD31DC0950156076</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F6101B8407BA7C9B01D3C1F5547BD26D</key>
+		<key>6817EC80400A3F0369CCB927739BC24C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DFDA4F23CA704E9AB98D59FE028B32C0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FDBE66BB08E9EB83BAF70804014BA195</key>
 		<dict>
 			<key>primary</key>
 			<true/>

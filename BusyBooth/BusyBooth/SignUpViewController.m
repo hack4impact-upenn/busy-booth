@@ -221,6 +221,7 @@
                                               [[NSUserDefaults standardUserDefaults] setObject:self.DOBField.text forKey:@"dob"];
                                               [[NSUserDefaults standardUserDefaults] setObject:self.addressField.text forKey:@"address"];
                                               [[NSUserDefaults standardUserDefaults] setObject:self.zipCodeNumberField.text forKey:@"zip"];
+                                              [[NSUserDefaults standardUserDefaults] setObject:hashValue forKey:@"hash"];
                                               
                                           }
                                       }];
