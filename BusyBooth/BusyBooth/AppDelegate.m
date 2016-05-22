@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 #import "LoginViewController.h"
 #import "MasterTableViewController.h"
-#import "MainViewController.h"
+#import "PollingPlaceViewController.h"
 #import "SignUpViewController.h"
 
 @interface AppDelegate ()
@@ -17,7 +17,7 @@
 @property (nonatomic, strong) UINavigationController *navController;
 @property (nonatomic, strong) SignUpViewController *viewController;
 @property (nonatomic, strong) MasterTableViewController *masterTableViewController;
-@property (nonatomic, strong) MainViewController *mainVC;
+@property (nonatomic, strong) PollingPlaceViewController *pollVC;
 @property (nonatomic, strong) SWRevealViewController *SWRevealViewController;
 
 @end
@@ -48,8 +48,9 @@
     self.masterTableViewController = [[MasterTableViewController alloc] init];
     UINavigationController *masterNavigationController = [[UINavigationController alloc] initWithRootViewController:self.masterTableViewController];
     
-    self.mainVC = [[MainViewController alloc] init];
-    UINavigationController *mainViewNavigationController = [[UINavigationController alloc] initWithRootViewController:self.mainVC];
+    self.pollVC = [[PollingPlaceViewController alloc] init];
+    self.pollVC.masterVC = self.masterTableViewController;
+    UINavigationController *mainViewNavigationController = [[UINavigationController alloc] initWithRootViewController:self.pollVC];
     
     self.SWRevealViewController = [[SWRevealViewController alloc] initWithRearViewController:masterNavigationController frontViewController:mainViewNavigationController];
     

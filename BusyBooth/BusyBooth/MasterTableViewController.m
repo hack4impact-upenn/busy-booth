@@ -18,8 +18,8 @@
 @interface MasterTableViewController () 
 
 typedef NS_ENUM (NSUInteger, MasterTableViewRowType) {
-    MasterTableViewRowTypeHome,
     MasterTableViewPollingPlace,
+    MasterTableViewRowTypeHome,
     MasterTableViewPastPolling,
     MasterTableViewRowTypeCheckIn,
     MasterTableViewRowTypeCount,
@@ -70,7 +70,7 @@ typedef NS_ENUM (NSUInteger, MasterTableViewRowType) {
     
     pollVC.masterVC = self;
     
-    self.viewControllerArray = @[mainVC, pollVC, pastVC, checkInVC, settingsVC];
+    self.viewControllerArray = @[pollVC, mainVC, pastVC, checkInVC, settingsVC];
     
 //    self.iconArray = @[@"Micro-25.png", @"Folder-25.png", @"Search-25.png", @"Settings-25.png", @"Exit-25.png"];
     
@@ -124,7 +124,11 @@ typedef NS_ENUM (NSUInteger, MasterTableViewRowType) {
             cell.textLabel.text = currViewController.title;
         }
     }
-    cell.contentView.backgroundColor = [UIColor whiteColor];
+    if(indexPath.row == self.currRow) {
+        cell.contentView.backgroundColor = [UIColor lightGrayColor];
+    } else {
+        cell.contentView.backgroundColor = [UIColor whiteColor];
+    }
     // cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     // cell.imageView.image = [UIImage imageNamed:[self.iconArray objectAtIndex:indexPath.row]];
     
