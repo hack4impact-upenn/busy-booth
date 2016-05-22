@@ -22,7 +22,6 @@ typedef NS_ENUM (NSUInteger, MasterTableViewRowType) {
     MasterTableViewPollingPlace,
     MasterTableViewPastPolling,
     MasterTableViewRowTypeCheckIn,
-    MasterTableViewSetting,
     MasterTableViewRowTypeCount,
 };
 
@@ -100,11 +99,7 @@ typedef NS_ENUM (NSUInteger, MasterTableViewRowType) {
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if([[[NSUserDefaults standardUserDefaults] objectForKey:@"isAuthenticated"] boolValue]) {
-        return MasterTableViewRowTypeCount;
-    } else {
-        return MasterTableViewRowTypeCount - 1;
-    }
+    return MasterTableViewRowTypeCount;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -115,7 +110,8 @@ typedef NS_ENUM (NSUInteger, MasterTableViewRowType) {
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
     }
-    if([[[NSUserDefaults standardUserDefaults] objectForKey:@"isAuthenticated"] boolValue]) {
+    
+    if([[[NSUserDefaults standardUserDefaults] objectForKey:IsLoggedIn] boolValue]) {
         if(indexPath.row < MasterTableViewRowTypeCount) {
             UIViewController *currViewController = [self.viewControllerArray objectAtIndex:indexPath.row];
             cell.textLabel.text = currViewController.title;
@@ -138,14 +134,13 @@ typedef NS_ENUM (NSUInteger, MasterTableViewRowType) {
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     SWRevealViewController *revealController = self.revealViewController;
     
-    if([[[NSUserDefaults standardUserDefaults] objectForKey:@"isAuthenticated"] boolValue]) {
-
-        if (indexPath.row == self.currRow) {
-            [revealController setFrontViewPosition:FrontViewPositionLeft animated:YES];
-            return;
-        }
-        
-        if(indexPath.row < MasterTableViewRowTypeCount) {
+    if (indexPath.row == self.currRow) {
+        [revealController setFrontViewPosition:FrontViewPositionLeft animated:YES];
+        return;
+    } else if(![[[NSUserDefaults standardUserDefaults] objectForKey:IsLoggedIn] boolValue] && indexPath.row == 3) {
+        [APPDELEGATE logOut];
+        [[NSUserDefaults standardUserDefaults] setObject:@"NO" forKey:IsLoggedIn];
+    } else if(indexPath.row < MasterTableViewRowTypeCount) {
             UIViewController *newFrontController = [self.viewControllerArray objectAtIndex:indexPath.row];
             
             UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newFrontController];
@@ -156,27 +151,6 @@ typedef NS_ENUM (NSUInteger, MasterTableViewRowType) {
             [tableView cellForRowAtIndexPath:indexPath].contentView.backgroundColor = [UIColor lightGrayColor];
             
             self.currRow = indexPath.row;
-        }
-    } else {
-        if (indexPath.row == self.currRow) {
-            [revealController setFrontViewPosition:FrontViewPositionLeft animated:YES];
-            return;
-        } else if(indexPath.row == 3) {
-            [APPDELEGATE logOut];
-            [[NSUserDefaults standardUserDefaults] setObject:@"NO" forKey:@"isAuthenticated"];
-            [[NSUserDefaults standardUserDefaults] setObject:@"NO" forKey:IsLoggedIn];
-        } else if(indexPath.row < MasterTableViewRowTypeCount) {
-            UIViewController *newFrontController = [self.viewControllerArray objectAtIndex:indexPath.row];
-            
-            UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newFrontController];
-            [revealController pushFrontViewController:navigationController animated:YES];
-            
-            NSIndexPath *path = [NSIndexPath indexPathForRow:self.currRow inSection:0];
-            [tableView cellForRowAtIndexPath:path].contentView.backgroundColor = [UIColor clearColor];
-            [tableView cellForRowAtIndexPath:indexPath].contentView.backgroundColor = [UIColor lightGrayColor];
-            
-            self.currRow = indexPath.row;
-        }
     }
 }
 

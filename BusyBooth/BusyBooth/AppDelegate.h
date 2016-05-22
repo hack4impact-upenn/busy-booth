@@ -14,7 +14,7 @@
 
 - (void)presentSWController;
 - (void)presentSignUpViewController;
-- (void)presentLoginViewController;
+//- (void)presentLoginViewController;
 - (void)logOut;
 
 @end

@@ -15,7 +15,7 @@
 @interface AppDelegate ()
 
 @property (nonatomic, strong) UINavigationController *navController;
-@property (nonatomic, strong) LoginViewController *viewController;
+@property (nonatomic, strong) SignUpViewController *viewController;
 @property (nonatomic, strong) MasterTableViewController *masterTableViewController;
 @property (nonatomic, strong) MainViewController *mainVC;
 @property (nonatomic, strong) SWRevealViewController *SWRevealViewController;
@@ -28,7 +28,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    self.viewController = [[LoginViewController alloc] init];
+    self.viewController = [[SignUpViewController alloc] init];
     
     self.navController = [[UINavigationController alloc] initWithRootViewController:self.viewController];
     self.navController.navigationBarHidden = YES;
@@ -56,11 +56,11 @@
     [self.navController pushViewController:self.SWRevealViewController animated:YES];
 }
 
-- (void)presentLoginViewController {
-    
-    LoginViewController *loginVC = [[LoginViewController alloc] init];
-    [self.navController pushViewController:loginVC animated:YES];
-}
+//- (void)presentLoginViewController {
+//    
+//    LoginViewController *loginVC = [[LoginViewController alloc] init];
+//    [self.navController pushViewController:loginVC animated:YES];
+//}
 
 - (void)presentSignUpViewController {
     
@@ -69,7 +69,7 @@
 }
 
 - (void)logOut {
-    [self presentLoginViewController];
+    [self presentSignUpViewController];
     [[NSUserDefaults standardUserDefaults] setObject:@"false" forKey:IsLoggedIn];
 }
 
