@@ -62,18 +62,16 @@ def create_account():
 
     if request.method == "POST":
 
-        first_name = request.form['fname']
-        last_name = request.form['lname']
-        phone = phone_format(request.form['phone'])
-        address = request.form['address']
+        # first_name = request.form['fname']
+        # last_name = request.form['lname']
+        # phone = phone_format(request.form['phone'])
+        # address = request.form['address']
+        hashVal = request.form['hashVal']
 
-        if User.query.filter_by(phone=phone).first() == None:
+        if User.query.filter_by(hashVal=hashVal).first() == None:
             new_user = User(
-                first_name = first_name,
-                last_name = last_name,
-                phone = phone,
-                address = address
-                )
+                hashVal = hashVal
+            )
 
             # How to set polling booth? TO DO
             # PollingBooth.query.filter_by(id=1).first().people.append(new_user)
@@ -81,7 +79,7 @@ def create_account():
             db.session.add(new_user)
             db.session.commit()
 
-            return jsonify({"code": 0, "data": "Logged in %s." % first_name})
+            return jsonify({"code": 0, "data": "Logged in."})
 
         else:
             return jsonify({"code": 2, "data": "User exists."})
@@ -257,8 +255,8 @@ def lookup(phone):
 
     return jsonify(user.overview())
 
-@main.route('/login/<phone>', methods=['GET', 'POST'])
-def login(phone):
+@main.route('/login', methods=['GET', 'POST'])
+def login():
 
     """
     Sees if the phone number exists
@@ -268,13 +266,19 @@ def login(phone):
 
     """
 
-    user = User.query.filter_by(phone=phone_format(phone)).first()
+    if request.method == "POST":
 
-    if user == None:
-        return jsonify({"code": 1, "data": "User account does not exist.",
-                        "logged_in": False})
+        phone = request.form["phone"]
 
-    return jsonify({"code": 1, "data": "Log in successful.", "logged_in": True})
+        print('is something happening')
+
+        user = User.query.filter_by(phone=phone_format(phone)).first()
+
+        if user == None:
+            return jsonify({"code": 1, "data": "User account does not exist.",
+                            "logged_in": False})
+
+        return jsonify({"code": 1, "data": "Log in successful.", "logged_in": True})
 
 @main.route('/update/<phone>', methods=['POST'])
 def update(phone):
