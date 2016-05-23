@@ -6,34 +6,6 @@ import json
 import datetime
 from ..import db
 
-
-# Testing URL - ignore
-@main.route('/loggedin')
-def loggedin():
-    if current_user.is_authenticated():
-        print current_user.id
-        return "Logged in."
-    else:
-        return "Not logged in."
-
-
-# def phone_format(number):
-
-#     """
-#     Format an integer into a phone number.
-
-#     Keyword arguments:
-#     number -- 10 digit integer
-
-#     """
-
-#     digits = re.sub(r'\D', '', number)
-#     if len(digits) == 10:
-#         digits = '1' + digits
-#     digits = '+' + digits
-#     return digits
-
-
 """
 ROUTES
 
@@ -61,11 +33,6 @@ def create_account():
     """
 
     if request.method == "POST":
-
-        # first_name = request.form['fname']
-        # last_name = request.form['lname']
-        # phone = phone_format(request.form['phone'])
-        # address = request.form['address']
         hashVal = request.form['hashVal']
 
         if User.query.filter_by(hashVal=hashVal).first() == None:
@@ -73,7 +40,7 @@ def create_account():
                 hashVal = hashVal
             )
 
-            # How to set polling booth? TO DO
+            # How to set polling booth? TO DO. CANNOT BE HARD CODED.
             PollingBooth.query.filter_by(id=1).first().people.append(new_user)
 
             db.session.add(new_user)
@@ -258,49 +225,4 @@ def lookup(hashVal):
     return jsonify({"code": 0, "data": {"address": booth.address, 
                                             "zip": booth.zip_code}});
 
-# @main.route('/login', methods=['GET', 'POST'])
-# def login():
-
-#     """
-#     Sees if the phone number exists
-
-#     Keyword arguments:
-#     phone -- phone number of user (10 digit)
-
-#     """
-
-#     if request.method == "POST":
-
-#         phone = request.form["phone"]
-
-#         print('is something happening')
-
-#         user = User.query.filter_by(phone=phone_format(phone)).first()
-
-#         if user == None:
-#             return jsonify({"code": 1, "data": "User account does not exist.",
-#                             "logged_in": False})
-
-#         return jsonify({"code": 1, "data": "Log in successful.", "logged_in": True})
-
-# @main.route('/update/<phone>', methods=['POST'])
-# def update(phone):
-
-#     """
-#     Updates a user's account information (first name, last name, address)
     
-#     Keyword arguments:
-#     phone -- phone number of user (10 digit)
-#     """
-
-#     user = User.query.filter_by(phone=phone_format(phone)).first()
-#     if user == None:
-#         return jsonify({"code": 1, "data": "User account does not exist."})
-
-#     user.first_name = request.form['fname']
-#     user.last_name = request.form['lname']
-#     user.address = request.form['address']
-
-#     db.session.commit()
-    
-#     return jsonify({"code": 1, "data": "User account updated."})
