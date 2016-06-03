@@ -16,6 +16,8 @@
 @property (nonatomic, strong) UILabel *stopWatchLabel;
 @property (nonatomic) BOOL stopWatchRunning;
 
+@property (nonatomic, strong) UITextField *addTimeField;
+
 @end
 
 @implementation CheckInViewController
@@ -74,8 +76,19 @@
     [self.view addSubview:stopButton];
     
     self.stopWatchLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 30)];
-    //[self.stopWatchLabel setCenter:CGPointMake(width/2, height/2)];
     self.stopWatchLabel.text = [NSString stringWithFormat:@"00:00"];
+    
+    bool isAdmin = YES; //[[NSUserDefaults standardUserDefaults] objectForKey:@"isAdmin"];
+    if(isAdmin) {
+        UIBarButtonItem *addTimeButton = [[UIBarButtonItem alloc]
+                                            initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+                                            target:self
+                                            action:@selector(onAddPressed:)];
+        [addTimeButton setTintColor: [UIColor whiteColor]];
+        self.navigationItem.rightBarButtonItem = addTimeButton;
+    }
+    
+    self.stopWatchLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 100)];
     [self.stopWatchLabel setCenter:CGPointMake(width/2, height/2)];
     [self.view addSubview:self.stopWatchLabel];
     
@@ -122,9 +135,52 @@
     }
 }
 
+- (void)onAddPressed:(id)sender {
+    UIAlertView *addTime = [[UIAlertView alloc] initWithTitle:@"Add wait time" message:@"How many minutes is the current wait time?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"This many minutes", nil];
+    addTime.alertViewStyle = UIAlertViewStylePlainTextInput;
+    
+    _addTimeField = [addTime textFieldAtIndex:0];
+    [_addTimeField resignFirstResponder];
+    [_addTimeField setKeyboardType:UIKeyboardTypePhonePad];
+    [_addTimeField becomeFirstResponder];
+    
+    [addTime show];
+
+}
+
 - (void)onStopPressed:(id)sender {
     if(self.stopWatchRunning) {
         [CheckIns checkingOutWithController:self];
+    }
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1)
+    {
+        /* TODO: validate user with something other than phone# (i.e. this is not secure) */
+        NSString *post = [NSString stringWithFormat:@"phone=%@&time=%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"curr-number"], _addTimeField.text];                                    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+        NSString *postLength = [NSString stringWithFormat:@"%lu",(unsigned long)[postData length]];
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+        
+        [request setURL:[NSURL URLWithString:@"http://localhost:5000/add_time"]]; /* TODO: add /add_time route */
+        [request setHTTPMethod:@"POST"];
+        [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+        [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+        [request setHTTPBody:postData];
+        
+        NSURLSession *session = [NSURLSession sharedSession];
+        NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                                    completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
+                                          {
+                                              
+                                              if(data) {
+                                                  NSLog(@"Posted time");
+                                              } else {
+                                                  NSLog(@"Failed to post time");
+                                              }
+                                          }];
+        [dataTask resume];
     }
 }
 

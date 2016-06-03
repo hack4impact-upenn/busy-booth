@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CheckInViewController : UIViewController
+@interface CheckInViewController : UIViewController<UIAlertViewDelegate> 
 
 -(void) stopTimer;
 -(void) startTimer;
