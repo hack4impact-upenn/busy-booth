@@ -5,6 +5,7 @@ from ..models import User, WaitTime, PollingBooth
 import json
 import datetime
 from ..import db
+import urllib2
 
 """
 ROUTES
@@ -50,6 +51,20 @@ def create_account():
 
         else:
             return jsonify({"code": 2, "data": "User exists."})
+
+@main.route('/get_polling_booth/<address>')
+def get_polling_booth(address):
+
+    key = "AIzaSyBQB5ELmm4MbpQUJLT3xR9rfyhYFEksgvc"
+    url = "https://www.googleapis.com/civicinfo/v2/voterinfo?address={}&fields=pollingLocations&key={}".format(address, key)
+
+    html = urllib2.urlopen(url).read()
+    if html == "{}":
+        return False
+    else:
+        
+    
+
 
 
 @main.route('/av_wait/<int:booth_id>')
