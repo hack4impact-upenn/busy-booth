@@ -15,6 +15,8 @@
 @property (strong, nonatomic) UITextField *usernameField;
 @property (strong, nonatomic) UITextField *passwordField;
 @property (strong, nonatomic) UITextField *phoneNumberField;
+@property (strong, nonatomic) UITableView *autocompleteTableView;
+@property (strong, nonatomic) NSMutableArray *resultsArray;
 
 @end
 
@@ -64,28 +66,16 @@
     [self.phoneNumberField setCenter:CGPointMake(width/2, height*4/7)];
     [self.phoneNumberField setBorderStyle:UITextBorderStyleRoundedRect];
     [self.phoneNumberField setDelegate:self];
-    self.phoneNumberField.keyboardType = UIKeyboardTypePhonePad;
+    self.phoneNumberField.keyboardType = UIKeyboardTypeNumberPad;
     [self.view addSubview:self.phoneNumberField];
     
-//    self.usernameField = [[UITextField alloc] init];
-//    [self.usernameField setFrame:CGRectMake(0, 0, 240, 30)];
-//    [self.usernameField setPlaceholder:@"Username"];
-//    [self.usernameField setCenter:CGPointMake(width/2, height*4/7)];
-//    [self.usernameField setBorderStyle:UITextBorderStyleRoundedRect];
-//    [self.usernameField setDelegate:self];
-//    self.usernameField.autocapitalizationType = UITextAutocapitalizationTypeNone;
-//    self.usernameField.autocorrectionType = UITextAutocorrectionTypeNo;
-//    self.usernameField.keyboardType = UIKeyboardTypeASCIICapable;
-//    [self.view addSubview:self.usernameField];
-    
-//    self.passwordField = [[UITextField alloc] init];
-//    [self.passwordField setFrame:CGRectMake(0, 0, 240, 30)];
-//    [self.passwordField setPlaceholder:@"Password"];
-//    [self.passwordField setCenter:CGPointMake(width/2, height*9/14)];
-//    [self.passwordField setBorderStyle:UITextBorderStyleRoundedRect];
-//    [self.passwordField setSecureTextEntry:YES];
-//    [self.passwordField setDelegate:self];
-//    [self.view addSubview:self.passwordField];
+//    self.autocompleteTableView = [[UITableView alloc] initWithFrame:
+//                             CGRectMake(0, height*4/7+30, 320, 120) style:UITableViewStylePlain];
+//    self.autocompleteTableView.delegate = self;
+//    self.autocompleteTableView.dataSource = self;
+//    self.autocompleteTableView.scrollEnabled = YES;
+//    self.autocompleteTableView.hidden = YES;
+//    [self.view addSubview:self.autocompleteTableView];
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
                                    initWithTarget:self
@@ -94,6 +84,34 @@
     [self.view addGestureRecognizer:tap];
     
 }
+
+//- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+//    self.autocompleteTableView.hidden = NO;
+//    
+//    NSString *substring = [NSString stringWithString:textField.text];
+//    substring = [substring
+//                 stringByReplacingCharactersInRange:range withString:string];
+//    [self searchAutocompleteEntriesWithSubstring:substring];
+//    return YES;
+//}
+//
+//- (void)searchAutocompleteEntriesWithSubstring:(NSString *)substring {
+//    
+//    // Put anything that starts with this substring into the autocompleteUrls array
+//    // The items in this array is what will show up in the table view
+////    [autocompleteUrls removeAllObjects];
+////    for(NSString *curString in pastUrls) {
+////        NSRange substringRange = [curString rangeOfString:substring];
+////        if (substringRange.location == 0) {
+////            [autocompleteUrls addObject:curString];
+////        }
+////    }
+////    [self.autocompleteTableView reloadData];
+//}
+//
+//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+//    return [self.resultsArray count];
+//}
 
 -(void)dismissKeyboard {
     [self.passwordField resignFirstResponder];
@@ -128,49 +146,48 @@
 
 - (void)login {
     
-    // NEED DATA VALIDATION OF SUCCESSFUL LOGIN... @CATHY CHEN
+    NSString *post = [NSString stringWithFormat:@"phone=%@", self.phoneNumberField.text];
+    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+    NSString *postLength = [NSString stringWithFormat:@"%lu",(unsigned long)[postData length]];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     
-//    NSString *post = [NSString stringWithFormat:@"fname=%@&lname=%@&phone=%@&address=%@", self.firstNameField.text,
-//                      self.lastNameField.text, self.phoneNumberField.text, self.zipCodeNumberField.text];
-//    NSLog(@"%@", post);
-//    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
-//    NSString *postLength = [NSString stringWithFormat:@"%lu",(unsigned long)[postData length]];
-//    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-//    
-//    [request setURL:[NSURL URLWithString:@"http://localhost:5000/create_account"]];
-//    [request setHTTPMethod:@"POST"];
-//    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
-//    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-//    [request setHTTPBody:postData];
-//    
-//    NSURLSession *session = [NSURLSession sharedSession];
-//    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
-//                                                completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
-//                                      {
-//                                          NSDictionary *loginSuccessful = [NSJSONSerialization JSONObjectWithData:data
-//                                                                                                          options:kNilOptions
-//                                                                                                            error:&error];
-//                                          NSLog(@"%@", loginSuccessful);
-//                                          if([[loginSuccessful objectForKey:@"code"] integerValue] == 0) {
-//                                              dispatch_async(dispatch_get_main_queue(), ^{
-//                                                  [APPDELEGATE presentSWController];
-//                                              });
-//                                              [[NSUserDefaults standardUserDefaults] setObject:@"true" forKey:IsLoggedIn];
-//                                          } else if([[loginSuccessful objectForKey:@"code"] integerValue] == 2) {
-//                                              dispatch_async(dispatch_get_main_queue(), ^{
-//                                                  [SVProgressHUD showErrorWithStatus:@"This phone number is already in use"];
-//                                              });
-//                                          } else {
-//                                              dispatch_async(dispatch_get_main_queue(), ^{
-//                                                  [SVProgressHUD showErrorWithStatus:@"Signup Failed. Try Again Later"];
-//                                              });
-//                                          }
-//                                      }];
-//    [dataTask resume];
+    [request setURL:[NSURL URLWithString:@"http://localhost:5000/login"]];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [request setHTTPBody:postData];
+    
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                                completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
+                                      {
+                                          if(data) {
+                                              NSDictionary *loginSuccessful = [NSJSONSerialization JSONObjectWithData:data
+                                                                                                              options:kNilOptions
+                                                                                                                error:&error];
+                                              if([[loginSuccessful objectForKey:@"logged_in"] boolValue]) {
+                                                  dispatch_async(dispatch_get_main_queue(), ^{
+                                                      [APPDELEGATE presentSWController];
+                                                  });
+                                                  [[NSUserDefaults standardUserDefaults] setObject:@"true" forKey:IsLoggedIn];
+                                                  [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"isAuthenticated"];
+                                                  [[NSUserDefaults standardUserDefaults] setObject:self.phoneNumberField.text forKey:@"curr-number"];
+                                              } else {
+                                                  dispatch_async(dispatch_get_main_queue(), ^{
+                                                      [SVProgressHUD showErrorWithStatus:@"This does not match our records. Try Again."];
+                                                  });
+                                              }
+                                          } else {
+                                              dispatch_async(dispatch_get_main_queue(), ^{
+                                                  [SVProgressHUD showErrorWithStatus:@"An error occurred. Check if you are connected to the internet."];
+                                              });
+                                          }
+                                      }];
+    [dataTask resume];
 
-    [APPDELEGATE presentSWController];
-    [[NSUserDefaults standardUserDefaults] setObject:@"true" forKey:IsLoggedIn];
-    [[NSUserDefaults standardUserDefaults] setObject:self.phoneNumberField.text forKey:@"curr-number"];
+//    [APPDELEGATE presentSWController];
+//    [[NSUserDefaults standardUserDefaults] setObject:@"true" forKey:IsLoggedIn];
+//    [[NSUserDefaults standardUserDefaults] setObject:self.phoneNumberField.text forKey:@"curr-number"];
 }
 
 - (void)noLogin {

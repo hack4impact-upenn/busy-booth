@@ -5,34 +5,7 @@ from ..models import User, WaitTime, PollingBooth
 import json
 import datetime
 from ..import db
-
-
-# Testing URL - ignore
-@main.route('/loggedin')
-def loggedin():
-    if current_user.is_authenticated():
-        print current_user.id
-        return "Logged in."
-    else:
-        return "Not logged in."
-
-
-def phone_format(number):
-
-    """
-    Format an integer into a phone number.
-
-    Keyword arguments:
-    number -- 10 digit integer
-
-    """
-
-    digits = re.sub(r'\D', '', number)
-    if len(digits) == 10:
-        digits = '1' + digits
-    digits = '+' + digits
-    return digits
-
+import urllib2
 
 """
 ROUTES
@@ -61,30 +34,37 @@ def create_account():
     """
 
     if request.method == "POST":
+        hashVal = request.form['hashVal']
 
-        first_name = request.form['fname']
-        last_name = request.form['lname']
-        phone = phone_format(request.form['phone'])
-        address = request.form['address']
-
-        if User.query.filter_by(phone=phone).first() == None:
+        if User.query.filter_by(hashVal=hashVal).first() == None:
             new_user = User(
-                first_name = first_name,
-                last_name = last_name,
-                phone = phone,
-                address = address
-                )
+                hashVal = hashVal
+            )
 
-            # How to set polling booth? TO DO
-            # PollingBooth.query.filter_by(id=1).first().people.append(new_user)
+            # How to set polling booth? TO DO. CANNOT BE HARD CODED.
+            PollingBooth.query.filter_by(id=1).first().people.append(new_user)
 
             db.session.add(new_user)
             db.session.commit()
 
-            return jsonify({"code": 0, "data": "Logged in %s." % first_name})
+            return jsonify({"code": 0, "data": "Logged in."})
 
         else:
             return jsonify({"code": 2, "data": "User exists."})
+
+@main.route('/get_polling_booth/<address>')
+def get_polling_booth(address):
+
+    key = "AIzaSyBQB5ELmm4MbpQUJLT3xR9rfyhYFEksgvc"
+    url = "https://www.googleapis.com/civicinfo/v2/voterinfo?address={}&fields=pollingLocations&key={}".format(address, key)
+
+    html = urllib2.urlopen(url).read()
+    if html == "{}":
+        return False
+    else:
+        
+    
+
 
 
 @main.route('/av_wait/<int:booth_id>')
@@ -239,61 +219,25 @@ def polling_places():
     return jsonify({"code": 0, "data":[{"id":x.id, "name":x.name, "address":x.address, "zipcode":x.zip_code} for x in polling_places]})
 
 
-@main.route('/lookup/<phone>', methods=['GET', 'POST'])
-def lookup(phone):
+@main.route('/lookup/<hashVal>', methods=['GET', 'POST'])
+def lookup(hashVal):
 
     """
-    Gets the users information from the phonenumber
+    Gets the users information from the hash
 
     Keyword arguments:
-    phone -- phone number of user (10 digit)
+    hash -- hash of user
 
     """
 
-    user = User.query.filter_by(phone=phone_format(phone)).first()
+    user = User.query.filter_by(hashVal=hashVal).first()
 
     if user == None:
         return jsonify({"code": 1, "data": "User account does not exist."})
 
-    return jsonify(user.overview())
+    booth = PollingBooth.query.filter_by(id=user.polling_booth).first()
 
-@main.route('/login/<phone>', methods=['GET', 'POST'])
-def login(phone):
+    return jsonify({"code": 0, "data": {"address": booth.address, 
+                                            "zip": booth.zip_code}});
 
-    """
-    Sees if the phone number exists
-
-    Keyword arguments:
-    phone -- phone number of user (10 digit)
-
-    """
-
-    user = User.query.filter_by(phone=phone_format(phone)).first()
-
-    if user == None:
-        return jsonify({"code": 1, "data": "User account does not exist.",
-                        "logged_in": False})
-
-    return jsonify({"code": 1, "data": "Log in successful.", "logged_in": True})
-
-@main.route('/update/<phone>', methods=['POST'])
-def update(phone):
-
-    """
-    Updates a user's account information (first name, last name, address)
     
-    Keyword arguments:
-    phone -- phone number of user (10 digit)
-    """
-
-    user = User.query.filter_by(phone=phone_format(phone)).first()
-    if user == None:
-        return jsonify({"code": 1, "data": "User account does not exist."})
-
-    user.first_name = request.form['fname']
-    user.last_name = request.form['lname']
-    user.address = request.form['address']
-
-    db.session.commit()
-    
-    return jsonify({"code": 1, "data": "User account updated."})

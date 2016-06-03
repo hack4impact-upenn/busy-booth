@@ -62,22 +62,26 @@ def setup_initial_users():
     tc = TestingConfig()
 
 
-    user1 = User(
-        first_name = "Cathy",
-        last_name = "Chen",
-        phone = "+19178213080",
-        address = "4044 Sansom Street"
-        )
+    # user1 = User(
+    #     first_name = "Cathy",
+    #     last_name = "Chen",
+    #     phone = "+19178213080",
+    #     address = "4044 Sansom Street"
+    #     )
 
-    user2 = User(
-        first_name = "Krishna",
-        last_name = "Bharathala",
-        phone = "+12159230239",
-        address = "4056 Irving Street"
-        )
+    # user2 = User(
+    #     first_name = "Krishna",
+    #     last_name = "Bharathala",
+    #     phone = "+12159230239",
+    #     address = "4056 Irving Street"
+    #     )
+
+    user1 = User(
+          hashVal = "b5643ab2471945086d522395aefa28c7c388ed25fdc13301ac06b3df134938a8"
+          )
 
     db.session.add(user1)
-    db.session.add(user2)
+    #db.session.add(user2)
     db.session.commit()
 
 
@@ -86,48 +90,51 @@ def setup_waitingtimes():
 
     print "inside waiting times"
 
-    user1 = User.query.filter_by(first_name="Cathy").first()
-    user2 = User.query.filter_by(first_name="Krishna").first()
+    # user1 = User.query.filter_by(first_name="Cathy").first()
+    # user2 = User.query.filter_by(first_name="Krishna").first()
+
+    user1 = User.query.filter_by(hashVal="b5643ab2471945086d522395aefa28c7c388ed25fdc13301ac06b3df134938a8").first()
 
     print "after user search"
     print User.query.all()
 
     time1 = WaitTime()
-    time2 = WaitTime()
+    #time2 = WaitTime()
 
     user1.waittime = time1
-    user2.waittime = time2
+    # user2.waittime = time2
 
-    time.sleep(30)
+    time.sleep(15)
     time1.finished()
-    time.sleep(30)
-    time2.finished()
+    # time.sleep(15)
+    # time2.finished()
 
 
     db.session.add(time1)
-    db.session.add(time2)
+    #db.session.add(time2)
     db.session.commit()
-
-    
 
 
 @manager.command
 def setup_polling_booths():
 
     booth1 = PollingBooth(
-        name = "Alex's Booth",
-        address = "4044 Sansom Street",
-        zip_code = 19104
-        )
+        name = "Mission San Jose High School",
+        address = "41717 Palm Avenue",
+        zip_code = 94539
+    )
 
-    user1 = User.query.filter_by(first_name="Cathy").first()
-    user2 = User.query.filter_by(first_name="Krishna").first()
+    # user1 = User.query.filter_by(first_name="Cathy").first()
+    # user2 = User.query.filter_by(first_name="Krishna").first()
+    
+    user1 = User.query.filter_by(hashVal="b5643ab2471945086d522395aefa28c7c388ed25fdc13301ac06b3df134938a8").first()
+
     booth1.people.append(user1)
-    booth1.people.append(user2)
+    #booth1.people.append(user2)
 
     times = WaitTime.query.all()
     booth1.wait_times.append(times[0])
-    booth1.wait_times.append(times[1])
+    #booth1.wait_times.append(times[1])
 
     db.session.add(booth1)
     db.session.commit()

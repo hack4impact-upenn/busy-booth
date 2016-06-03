@@ -75,6 +75,8 @@
     stopButton.layer.cornerRadius = 8;
     [self.view addSubview:stopButton];
     
+    self.stopWatchLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 30)];
+    self.stopWatchLabel.text = [NSString stringWithFormat:@"00:00"];
     
     bool isAdmin = YES; //[[NSUserDefaults standardUserDefaults] objectForKey:@"isAdmin"];
     if(isAdmin) {
@@ -124,7 +126,6 @@
 - (void) stopTimer {
     self.stopWatchRunning = NO;
     [self.stopWatchTimer invalidate];
-    self.stopWatchTimer = nil;
     [self updateTimer];
 }
 

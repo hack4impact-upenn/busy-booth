@@ -102,6 +102,8 @@ typedef NS_ENUM (NSUInteger, SettingsTableViewRowType) {
         [self.navigationController pushViewController:accountVC animated:YES];
     } else if(indexPath.row == SettingsTableViewRowTypeLogOut){
         [APPDELEGATE logOut];
+        [[NSUserDefaults standardUserDefaults] setObject:@"NO" forKey:@"isAuthenticated"];
+        [[NSUserDefaults standardUserDefaults] setObject:@"NO" forKey:IsLoggedIn];
     } else {
         NSLog(@"Shouldn't ever get here");
     }

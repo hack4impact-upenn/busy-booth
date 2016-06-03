@@ -9,15 +9,15 @@
 #import "AppDelegate.h"
 #import "LoginViewController.h"
 #import "MasterTableViewController.h"
-#import "MainViewController.h"
+#import "PollingPlaceViewController.h"
 #import "SignUpViewController.h"
 
 @interface AppDelegate ()
 
 @property (nonatomic, strong) UINavigationController *navController;
-@property (nonatomic, strong) LoginViewController *viewController;
+@property (nonatomic, strong) SignUpViewController *viewController;
 @property (nonatomic, strong) MasterTableViewController *masterTableViewController;
-@property (nonatomic, strong) MainViewController *mainVC;
+@property (nonatomic, strong) PollingPlaceViewController *pollVC;
 @property (nonatomic, strong) SWRevealViewController *SWRevealViewController;
 
 @end
@@ -28,7 +28,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    self.viewController = [[LoginViewController alloc] init];
+    self.viewController = [[SignUpViewController alloc] init];
     
     self.navController = [[UINavigationController alloc] initWithRootViewController:self.viewController];
     self.navController.navigationBarHidden = YES;
@@ -48,8 +48,9 @@
     self.masterTableViewController = [[MasterTableViewController alloc] init];
     UINavigationController *masterNavigationController = [[UINavigationController alloc] initWithRootViewController:self.masterTableViewController];
     
-    self.mainVC = [[MainViewController alloc] init];
-    UINavigationController *mainViewNavigationController = [[UINavigationController alloc] initWithRootViewController:self.mainVC];
+    self.pollVC = [[PollingPlaceViewController alloc] init];
+    self.pollVC.masterVC = self.masterTableViewController;
+    UINavigationController *mainViewNavigationController = [[UINavigationController alloc] initWithRootViewController:self.pollVC];
     
     self.SWRevealViewController = [[SWRevealViewController alloc] initWithRearViewController:masterNavigationController frontViewController:mainViewNavigationController];
     
@@ -69,7 +70,7 @@
 }
 
 - (void)logOut {
-    [self presentLoginViewController];
+    [self presentSignUpViewController];
     [[NSUserDefaults standardUserDefaults] setObject:@"false" forKey:IsLoggedIn];
 }
 

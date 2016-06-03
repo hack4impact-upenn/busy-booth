@@ -47,7 +47,7 @@
         
         self.gaugeView = [[UIImageView alloc] initWithImage:[self gaugeImage]];
         self.gaugeView.frame = CGRectOffset(self.gaugeView.frame, (self.frame.size.width - self.gaugeView.frame.size.width)/2, 5);
-        [self addSubview:self.gaugeView];
+        //[self addSubview:self.gaugeView];
 
         
         self.descriptionLabel.text = [NSString stringWithFormat:@"%@", [self timeString]];

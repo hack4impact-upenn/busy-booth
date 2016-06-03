@@ -18,11 +18,10 @@
 @interface MasterTableViewController () 
 
 typedef NS_ENUM (NSUInteger, MasterTableViewRowType) {
-    MasterTableViewRowTypeHome,
     MasterTableViewPollingPlace,
+    MasterTableViewRowTypeHome,
     MasterTableViewPastPolling,
     MasterTableViewRowTypeCheckIn,
-    MasterTableViewSetting,
     MasterTableViewRowTypeCount,
 };
 
@@ -71,7 +70,7 @@ typedef NS_ENUM (NSUInteger, MasterTableViewRowType) {
     
     pollVC.masterVC = self;
     
-    self.viewControllerArray = @[mainVC, pollVC, pastVC, checkInVC, settingsVC];
+    self.viewControllerArray = @[pollVC, mainVC, pastVC, checkInVC, settingsVC];
     
 //    self.iconArray = @[@"Micro-25.png", @"Folder-25.png", @"Search-25.png", @"Settings-25.png", @"Exit-25.png"];
     
@@ -112,11 +111,24 @@ typedef NS_ENUM (NSUInteger, MasterTableViewRowType) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
     }
     
-    if(indexPath.row < MasterTableViewRowTypeCount) {
-        UIViewController *currViewController = [self.viewControllerArray objectAtIndex:indexPath.row];
-        cell.textLabel.text = currViewController.title;
+    if([[[NSUserDefaults standardUserDefaults] objectForKey:IsLoggedIn] boolValue]) {
+        if(indexPath.row < MasterTableViewRowTypeCount) {
+            UIViewController *currViewController = [self.viewControllerArray objectAtIndex:indexPath.row];
+            cell.textLabel.text = currViewController.title;
+        }
+    } else {
+        if(indexPath.row == 3) {
+            cell.textLabel.text = @"Go Back";
+        } else if(indexPath.row < MasterTableViewRowTypeCount) {
+            UIViewController *currViewController = [self.viewControllerArray objectAtIndex:indexPath.row];
+            cell.textLabel.text = currViewController.title;
+        }
     }
-    cell.contentView.backgroundColor = [UIColor whiteColor];
+    if(indexPath.row == self.currRow) {
+        cell.contentView.backgroundColor = [UIColor lightGrayColor];
+    } else {
+        cell.contentView.backgroundColor = [UIColor whiteColor];
+    }
     // cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     // cell.imageView.image = [UIImage imageNamed:[self.iconArray objectAtIndex:indexPath.row]];
     
@@ -129,19 +141,20 @@ typedef NS_ENUM (NSUInteger, MasterTableViewRowType) {
     if (indexPath.row == self.currRow) {
         [revealController setFrontViewPosition:FrontViewPositionLeft animated:YES];
         return;
-    }
-    
-    if(indexPath.row < MasterTableViewRowTypeCount) {
-        UIViewController *newFrontController = [self.viewControllerArray objectAtIndex:indexPath.row];
-        
-        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newFrontController];
-        [revealController pushFrontViewController:navigationController animated:YES];
-        
-        NSIndexPath *path = [NSIndexPath indexPathForRow:self.currRow inSection:0];
-        [tableView cellForRowAtIndexPath:path].contentView.backgroundColor = [UIColor clearColor];
-        [tableView cellForRowAtIndexPath:indexPath].contentView.backgroundColor = [UIColor lightGrayColor];
-        
-        self.currRow = indexPath.row;
+    } else if(![[[NSUserDefaults standardUserDefaults] objectForKey:IsLoggedIn] boolValue] && indexPath.row == 3) {
+        [APPDELEGATE logOut];
+        [[NSUserDefaults standardUserDefaults] setObject:@"NO" forKey:IsLoggedIn];
+    } else if(indexPath.row < MasterTableViewRowTypeCount) {
+            UIViewController *newFrontController = [self.viewControllerArray objectAtIndex:indexPath.row];
+            
+            UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newFrontController];
+            [revealController pushFrontViewController:navigationController animated:YES];
+            
+            NSIndexPath *path = [NSIndexPath indexPathForRow:self.currRow inSection:0];
+            [tableView cellForRowAtIndexPath:path].contentView.backgroundColor = [UIColor clearColor];
+            [tableView cellForRowAtIndexPath:indexPath].contentView.backgroundColor = [UIColor lightGrayColor];
+            
+            self.currRow = indexPath.row;
     }
 }
 
