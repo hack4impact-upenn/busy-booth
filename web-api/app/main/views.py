@@ -1,11 +1,15 @@
 from . import main
-from flask import request, jsonify
+from flask import request, jsonify, redirect, url_for, Flask, send_from_directory, flash, render_template
 import re
 from ..models import User, WaitTime, PollingBooth
 import json
 import datetime
 from ..import db
 import urllib2
+import os
+import csv
+import hashlib
+
 
 """
 ROUTES
@@ -13,20 +17,62 @@ ROUTES
 Return format: {"code": X, "data": Y}
 
 ---------------------
-X - 0, 1, 2
+X - 0, 1
 0: all is well
-1: user does not exist (redirect to create account)
-2: other error
+1: error
 
 """
 
-@main.route('/')
-def index():
-    return jsonify({"code": 0, "data": "Running"})
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1] == 'csv'
+
+@main.route('/', methods=['GET', 'POST'])
+def read_file():
+
+    """
+    Reads the uploaded documents and stores the hashes in our database.
+
+    """
+    if request.method == 'POST':
+        if 'file' not in request.files:
+            flash('No file part')
+            return redirect(request.url)
+        file = request.files['file']
+        if file.filename == '':
+            flash('No selected file')
+            return redirect(request.url)
+        if file and allowed_file(file.filename):
+            flash('Reading File...')
+            process_file(file)
+            return render_template('done.html')
+        else:
+            flash('Invalid file type')
+    return render_template('main.html')
+
+def process_file(file):
+    reader = csv.DictReader(file)
+    for line in reader:
+        street_number = line['Address'].split()[0]
+        stringToHash = line['First Name']+line['Last Name']+line['DOB']+street_number
+        hashVal = hashlib.sha256(stringToHash).hexdigest()
+
+        if User.query.filter_by(hashVal=hashVal).first() == None:
+            new_user = User(
+                hashVal = hashVal
+            )
+
+            # # How to set polling booth? TO DO. CANNOT BE HARD CODED.
+            # PollingBooth.query.filter_by(id=1).first().people.append(new_user)
+
+            db.session.add(new_user)
+            db.session.commit()
+    
 
 
-@main.route('/create_account', methods=['GET', 'POST'])
-def create_account():
+
+@main.route('/validate_user', methods=['GET', 'POST'])
+def validate_user():
 
     """
     Create new user.
@@ -35,37 +81,22 @@ def create_account():
 
     if request.method == "POST":
         hashVal = request.form['hashVal']
-
         if User.query.filter_by(hashVal=hashVal).first() == None:
-            new_user = User(
-                hashVal = hashVal
-            )
-
-            # How to set polling booth? TO DO. CANNOT BE HARD CODED.
-            PollingBooth.query.filter_by(id=1).first().people.append(new_user)
-
-            db.session.add(new_user)
-            db.session.commit()
-
+            return jsonify({"code": 1, "data": "Cannot find individual"})
+        else:
             return jsonify({"code": 0, "data": "Logged in."})
 
-        else:
-            return jsonify({"code": 2, "data": "User exists."})
+# @main.route('/get_polling_booth/<address>')
+# def get_polling_booth(address):
 
-@main.route('/get_polling_booth/<address>')
-def get_polling_booth(address):
+#     key = "AIzaSyBQB5ELmm4MbpQUJLT3xR9rfyhYFEksgvc"
+#     url = "https://www.googleapis.com/civicinfo/v2/voterinfo?address={}&fields=pollingLocations&key={}".format(address, key)
 
-    key = "AIzaSyBQB5ELmm4MbpQUJLT3xR9rfyhYFEksgvc"
-    url = "https://www.googleapis.com/civicinfo/v2/voterinfo?address={}&fields=pollingLocations&key={}".format(address, key)
-
-    html = urllib2.urlopen(url).read()
-    if html == "{}":
-        return False
-    else:
+#     html = urllib2.urlopen(url).read()
+#     if html == "{}":
+#         return False
+#     else:
         
-    
-
-
 
 @main.route('/av_wait/<int:booth_id>')
 def av_wait(booth_id):
