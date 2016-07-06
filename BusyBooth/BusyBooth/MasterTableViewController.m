@@ -151,7 +151,8 @@ typedef NS_ENUM(NSUInteger, MasterTableViewRowType) {
 
     NSIndexPath *path = [NSIndexPath indexPathForRow:self.currRow inSection:0];
     [tableView cellForRowAtIndexPath:path].contentView.backgroundColor = [UIColor clearColor];
-    [tableView cellForRowAtIndexPath:indexPath].contentView.backgroundColor = [UIColor lightGrayColor];
+    [tableView cellForRowAtIndexPath:indexPath].contentView.backgroundColor =
+        [UIColor lightGrayColor];
 
     self.currRow = indexPath.row;
   }

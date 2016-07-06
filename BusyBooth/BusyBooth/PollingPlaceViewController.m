@@ -15,8 +15,8 @@
 @property(nonatomic, strong) CLLocationManager *locationManager;
 @property(nonatomic) int loops;
 @property(nonatomic) int heading;
-
 @property(nonatomic, strong) UILabel *addressLabel;
+
 @end
 
 @implementation PollingPlaceViewController
@@ -29,8 +29,8 @@
   return self;
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-  [super viewWillAppear:animated];
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
 
   self.view.backgroundColor = [UIColor colorWithRed:240.0 / 256 green:240.0 / 256
                                                blue:242.0 / 256 alpha:1.0];
@@ -71,7 +71,7 @@
   self.addressLabel.textAlignment = NSTextAlignmentCenter;
   [self.view addSubview:self.addressLabel];
 
-  [self updateAddressLabel];
+  // [self updateAddressLabel];
 
   UIButton *viewWaitTimeButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
   [viewWaitTimeButton setFrame:CGRectMake(0, 0, 275, 40)];

@@ -12,13 +12,13 @@
 
 @interface SignUpViewController ()
 
-@property(strong, nonatomic) UITextField *firstNameField;
-@property(strong, nonatomic) UITextField *lastNameField;
-@property(strong, nonatomic) UITextField *DOBField;
-@property(strong, nonatomic) UITextField *addressField;
-@property(strong, nonatomic) UITextField *zipCodeNumberField;
+@property (strong, nonatomic) UITextField *firstNameField;
+@property (strong, nonatomic) UITextField *lastNameField;
+@property (strong, nonatomic) UITextField *DOBField;
+@property (strong, nonatomic) UITextField *addressField;
+@property (strong, nonatomic) UITextField *zipCodeNumberField;
 
-@property(strong, nonatomic) UIDatePicker *datePicker;
+@property (strong, nonatomic) UIDatePicker *datePicker;
 
 @end
 
@@ -123,11 +123,11 @@
   [self.view addGestureRecognizer:tap];
 }
 
-- (void)dismissKeyboard {
-  [self.firstNameField resignFirstResponder];
-  [self.lastNameField resignFirstResponder];
-  [self.DOBField resignFirstResponder];
-  [self.addressField resignFirstResponder];
+-(void)dismissKeyboard {
+    [self.firstNameField resignFirstResponder];
+    [self.lastNameField resignFirstResponder];
+    [self.DOBField resignFirstResponder];
+    [self.addressField resignFirstResponder];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -166,6 +166,7 @@
                             lastName:(NSString *)lName
                                  DOB:(NSString *)DOB
                              address:(NSString *)address {
+    
   NSString *number = [[address componentsSeparatedByString:@" "] firstObject];
   const char *str = [[NSString stringWithFormat:@"%@%@%@%@", fName, lName, DOB, number] UTF8String];
   unsigned char result[CC_SHA256_DIGEST_LENGTH];
@@ -233,7 +234,7 @@
 }
 
 - (void)noLogin {
-  [APPDELEGATE presentSWController];
+    [APPDELEGATE presentSWController];
 }
 
 @end
