@@ -1,6 +1,6 @@
 //
 //  MasterTableViewController.h
-//  Anypic
+//  BusyBooth
 //
 //  Created by Krishna Bharathala on 9/4/15.
 //
@@ -10,9 +10,9 @@
 
 @interface MasterTableViewController : UITableViewController
 
-@property (nonatomic, retain) UITableView *rearTableView;
+@property(nonatomic, retain) UITableView *rearTableView;
 
-- (void) presentTimes;
-- (void) presentMapView;
+- (void)presentTimes;
+- (void)presentMapView;
 
 @end

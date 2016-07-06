@@ -6,12 +6,13 @@
 //  Copyright © 2016 Krishna Bharathala. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
+#import <UIKit/UIKit.h>
 #import "MasterTableViewController.h"
 
-@interface PollingPlaceViewController : UIViewController <UINavigationControllerDelegate, CLLocationManagerDelegate>
+@interface PollingPlaceViewController : UIViewController <UINavigationControllerDelegate,
+                                                          CLLocationManagerDelegate>
 
-@property (nonatomic, weak) MasterTableViewController* masterVC;
+@property(nonatomic, weak) MasterTableViewController* masterVC;
 
 @end

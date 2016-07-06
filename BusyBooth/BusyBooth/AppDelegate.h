@@ -13,8 +13,6 @@
 @property (strong, nonatomic) UIWindow *window;
 
 - (void)presentSWController;
-- (void)presentSignUpViewController;
-- (void)presentLoginViewController;
 - (void)logOut;
 
 @end

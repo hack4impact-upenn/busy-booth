@@ -6,13 +6,12 @@
 //  Copyright © 2015 Krishna Bharathala. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
+#import <MapKit/MapKit.h>
+#import <UIKit/UIKit.h>
 
-@interface MainViewController : UIViewController <MKMapViewDelegate, CLLocationManagerDelegate>
+@interface MainViewController : UIViewController<MKMapViewDelegate, CLLocationManagerDelegate>
 
-@property (strong, nonatomic) CLLocationManager *locationManager;
-
+@property(strong, nonatomic) CLLocationManager *locationManager;
 
 @end
