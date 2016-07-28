@@ -1,0 +1,16 @@
+PODS:
+  - BFPaperButton (2.0.27):
+    - UIColor+BFPaperColors
+  - SVProgressHUD (1.1.3)
+  - UIColor+BFPaperColors (1.7.2)
+
+DEPENDENCIES:
+  - BFPaperButton
+  - SVProgressHUD
+
+SPEC CHECKSUMS:
+  BFPaperButton: 3938d9b1a430dcdbe7f3eb1d17f4d92c67828097
+  SVProgressHUD: 748080e4f36e603f6c02aec292664239df5279c1
+  UIColor+BFPaperColors: 03101fe6c10ed00c6daae7c26553f1de41500853
+
+COCOAPODS: 0.39.0

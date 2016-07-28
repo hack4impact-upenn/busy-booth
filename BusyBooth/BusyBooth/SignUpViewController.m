@@ -181,9 +181,12 @@
 }
 
 - (void)signup {
+  NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+  [dateFormat setDateFormat:@"MM/dd/yyyy"];
+  NSString *dob = [dateFormat stringFromDate:self.datePicker.date];
   NSString *hashValue = [self sha256HashForFirstName:self.firstNameField.text
                                             lastName:self.lastNameField.text
-                                                 DOB:self.DOBField.text
+                                                 DOB:dob
                                              address:self.addressField.text];
 
   NSString *post = [NSString stringWithFormat:@"hashVal=%@", hashValue];
@@ -211,6 +214,12 @@
             });
 
           } else {
+              NSString *address = [[loginSuccessful objectForKey:@"data"] objectForKey:@"address"];
+              NSString *boothZip = [[loginSuccessful objectForKey:@"data"] objectForKey:@"zip"];
+              
+              [[NSUserDefaults standardUserDefaults] setObject:address forKey:@"boothAddress"];
+              [[NSUserDefaults standardUserDefaults] setObject:boothZip forKey:@"boothZip"];
+              
             dispatch_async(dispatch_get_main_queue(), ^{
               [SVProgressHUD showSuccessWithStatus: @"Registered Successfully! Proceeding to app."];
               [APPDELEGATE presentSWController];

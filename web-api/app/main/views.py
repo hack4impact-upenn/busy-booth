@@ -23,17 +23,14 @@ X - 0, 1
 
 """
 
+# sets which files are allowed by the website.
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1] == 'csv'
 
+# Reads the uploaded documents and stores the hashes in our database.
 @main.route('/', methods=['GET', 'POST'])
 def read_file():
-
-    """
-    Reads the uploaded documents and stores the hashes in our database.
-
-    """
     if request.method == 'POST':
         if 'file' not in request.files:
             flash('No file part')
@@ -50,17 +47,15 @@ def read_file():
             flash('Invalid file type')
     return render_template('main.html')
 
+# Processes the file that they uploaded
 def process_file(file):
-
-    """
-    Processes the file that they uploaded
-
-    """
     reader = csv.DictReader(file)
     for line in reader:
         street_number = line['Address'].split()[0]
         stringToHash = line['First Name']+line['Last Name']+line['DOB']+street_number
         hashVal = hashlib.sha256(stringToHash).hexdigest()
+        print(stringToHash)
+        print(hashVal)
 
         boothAddress = line['Polling Booth']
         boothZip = line['Polling Zip']
@@ -84,20 +79,16 @@ def process_file(file):
             db.session.add(new_user)
             db.session.commit()
 
-
+# Validating the user. Returns the polling booth information if user exists.
 @main.route('/validate_user', methods=['GET', 'POST'])
 def validate_user():
-
-    """
-    Validating the user. Returns the polling booth information if user exists.
-
-    """
-
     if request.method == "POST":
         hashVal = request.form['hashVal']
-        if User.query.filter_by(hashVal=hashVal).first() == None:
+        user = User.query.filter_by(hashVal=hashVal).first()
+        if  user == None:
             return jsonify({"code": 1, "data": "Cannot find individual"})
         else:
+            booth = PollingBooth.query.filter_by(id=user.polling_booth).first()
             return jsonify({"code": 0, "data": {"address": booth.address, 
                                                 "zip": booth.zip_code}});
         

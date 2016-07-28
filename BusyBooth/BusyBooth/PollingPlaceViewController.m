@@ -71,7 +71,7 @@
   self.addressLabel.textAlignment = NSTextAlignmentCenter;
   [self.view addSubview:self.addressLabel];
 
-  // [self updateAddressLabel];
+  [self updateAddressLabel];
 
   UIButton *viewWaitTimeButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
   [viewWaitTimeButton setFrame:CGRectMake(0, 0, 275, 40)];
@@ -101,30 +101,9 @@
 
 
 - (void)updateAddressLabel {
-  NSString *url =
-    [NSString stringWithFormat:@"http://localhost:5000/lookup/%@",
-        [[NSUserDefaults standardUserDefaults] objectForKey:@"hash"]];
-
-  NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-  [request setHTTPMethod:@"GET"];
-  [request setURL:[NSURL URLWithString:url]];
-
-  NSError *error;
-  NSHTTPURLResponse *responseCode;
-  NSData *responseData = [NSURLConnection sendSynchronousRequest:request
-                                               returningResponse:&responseCode
-                                                           error:&error];
-  if ([responseCode statusCode] != 200) {
-    NSLog(@"Error getting %@, HTTP status code %li", url, (long)[responseCode statusCode]);
-    return;
-  }
-
-  NSDictionary *json = [NSJSONSerialization JSONObjectWithData:responseData
-                                                       options:kNilOptions
-                                                         error:&error];
-
-  NSString *address = [[json objectForKey:@"data"] objectForKey:@"address"];
-  int zip = [[[json objectForKey:@"data"] objectForKey:@"zip"] intValue];
+    
+  NSString *address = [[NSUserDefaults standardUserDefaults] objectForKey:@"boothAddress"];
+  int zip = [[[NSUserDefaults standardUserDefaults] objectForKey:@"boothZip"] intValue];
 
   CLGeocoder *geocoder = [[CLGeocoder alloc] init];
   [geocoder geocodeAddressString:[NSString stringWithFormat:@"%@ %i", address, zip]
