@@ -7,11 +7,9 @@ class User(db.Model):
     polling_booth = db.Column(db.Integer, db.ForeignKey('pollingbooth.id'))
     waittime = db.relationship('WaitTime', uselist=False, backref='users')
 
-    def __init__(self, hashVal):
+    def __init__(self, hashVal, polling_booth):
         self.hashVal = hashVal
-
-    def __repr__(self):
-        return '<User \'%s\'>' % self.hashVal
+        self.polling_booth = polling_booth
 
     def overview(self):
         return {

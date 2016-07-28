@@ -51,31 +51,45 @@ def read_file():
     return render_template('main.html')
 
 def process_file(file):
+
+    """
+    Processes the file that they uploaded
+
+    """
     reader = csv.DictReader(file)
     for line in reader:
         street_number = line['Address'].split()[0]
         stringToHash = line['First Name']+line['Last Name']+line['DOB']+street_number
         hashVal = hashlib.sha256(stringToHash).hexdigest()
 
+        boothAddress = line['Polling Booth']
+        boothZip = line['Polling Zip']
+
+        # Creating the new_booth if it needs to be created.
+        new_booth = PollingBooth.query.filter_by(address=boothAddress).first()
+        if new_booth == None:
+            new_booth = PollingBooth(
+                address = boothAddress,
+                zip_code = boothZip
+            )
+            db.session.add(new_booth)
+            db.session.commit()
+
+        # Creating the new_user if it needs to be created.
         if User.query.filter_by(hashVal=hashVal).first() == None:
             new_user = User(
-                hashVal = hashVal
+                hashVal = hashVal,
+                polling_booth = new_booth.id
             )
-
-            # # How to set polling booth? TO DO. CANNOT BE HARD CODED.
-            # PollingBooth.query.filter_by(id=1).first().people.append(new_user)
-
             db.session.add(new_user)
             db.session.commit()
-    
-
 
 
 @main.route('/validate_user', methods=['GET', 'POST'])
 def validate_user():
 
     """
-    Create new user.
+    Validating the user. Returns the polling booth information if user exists.
 
     """
 
@@ -84,20 +98,9 @@ def validate_user():
         if User.query.filter_by(hashVal=hashVal).first() == None:
             return jsonify({"code": 1, "data": "Cannot find individual"})
         else:
-            return jsonify({"code": 0, "data": "Logged in."})
-
-# @main.route('/get_polling_booth/<address>')
-# def get_polling_booth(address):
-
-#     key = "AIzaSyBQB5ELmm4MbpQUJLT3xR9rfyhYFEksgvc"
-#     url = "https://www.googleapis.com/civicinfo/v2/voterinfo?address={}&fields=pollingLocations&key={}".format(address, key)
-
-#     html = urllib2.urlopen(url).read()
-#     if html == "{}":
-#         return False
-#     else:
+            return jsonify({"code": 0, "data": {"address": booth.address, 
+                                                "zip": booth.zip_code}});
         
-
 @main.route('/av_wait/<int:booth_id>')
 def av_wait(booth_id):
 
